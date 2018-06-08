@@ -10,7 +10,7 @@ import Foundation
 
 class CharacterFunctions {
     
-    static func fetchCharacter(characterModel: CharacterModel) {
+    static func createCharacter(characterModel: CharacterModel) {
         
     }
     

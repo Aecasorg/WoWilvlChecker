@@ -8,9 +8,9 @@
 
 import Foundation
 
-class CharacterModel {
+struct CharacterModel: Codable {
     
-    let charName, charRealm, charSpec: String
+    let charName, charRealm, charSpec, charAvatar: String
     let charClass, charilvl, charEnchants, charGems: Int
     
     init(charName: String, charRealm: String, charClass: Int) {
@@ -21,6 +21,7 @@ class CharacterModel {
         self.charilvl = 0
         self.charEnchants = 0
         self.charGems = 0
+        self.charAvatar = ""
     }
     
 }
