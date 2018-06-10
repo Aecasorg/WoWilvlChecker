@@ -14,6 +14,9 @@ class ViewController: UIViewController {
     let blizzardURL = "https://eu.api.battle.net/wow/character/azjol-nerub/annebelle?locale=en_GB&apikey="
     let apiKey = "pgje56uws25hmdw426agmrkjcz4zbhuc"
     
+//    var data: Data
+//    let decoder = JSONDecoder()
+    
     @IBAction func alamoResponseButtonPressed(_ sender: Any) {
         getCharacterData(url: blizzardURL + apiKey)
     }
@@ -21,6 +24,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
     }
 
@@ -35,12 +40,11 @@ class ViewController: UIViewController {
             if response.result.isSuccess {
 
                 print("Success!")
-                if let json = response.result.value {
-                    print("JSON: \(json)")
+                if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                    print("Data: \(utf8Text)") // original server data as UTF8 string
+                    self.printData(data: data)
                 }
 
-//                let weatherJSON: JSON = JSON(response.result.value!)
-//                self.updateWeatherData(json: weatherJSON)
                 
             } else {
 
@@ -51,6 +55,36 @@ class ViewController: UIViewController {
 
         }
 
+    }
+    
+    func printData(data: Data) {
+        
+        let decoder = JSONDecoder()
+        
+        do {
+            let decoded = try decoder.decode(CharacterModel.self, from: data)
+            print(decoded)
+            print("Character Name: " + decoded.charName)
+            print("Character Realm: " + decoded.charRealm)
+            print("Character Avatar: " + decoded.charAvatar)
+        } catch {
+            print("Failed to decode JSON")
+        }
+        
+    }
+
+}
+
+struct CharacterModel: Codable {
+    
+    var charName, charRealm, charAvatar: String
+//    let charName, charRealm, charSpec, charAvatar: String
+//    let charClass, charilvl, charEnchants, charGems: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case charName = "name"
+        case charRealm = "realm"
+        case charAvatar = "thumbnail"
     }
 
 }

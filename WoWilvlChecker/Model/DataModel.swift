@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Data {
+class DataModel {
     
     static var charModels = [CharacterModel]()
     
