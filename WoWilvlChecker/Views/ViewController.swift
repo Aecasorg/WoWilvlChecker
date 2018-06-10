@@ -11,21 +11,21 @@ import Alamofire
 
 class ViewController: UIViewController {
 
-    let blizzardURL = "https://eu.api.battle.net/wow/character/azjol-nerub/annebelle?locale=en_GB&apikey="
-    let apiKey = "pgje56uws25hmdw426agmrkjcz4zbhuc"
-    
-//    var data: Data
-//    let decoder = JSONDecoder()
+    var apiKey = "pgje56uws25hmdw426agmrkjcz4zbhuc"
+    var name = "annebelle"
+    var realm = "azjol-nerub"
+    var fields = "items"
+    var blizzardURL = ""
     
     @IBAction func alamoResponseButtonPressed(_ sender: Any) {
-        getCharacterData(url: blizzardURL + apiKey)
+        getCharacterData(url: blizzardURL)
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        blizzardURL = urlCreator(name: name, realm: realm, fields: fields)
         
     }
 
@@ -49,12 +49,17 @@ class ViewController: UIViewController {
             } else {
 
                 print("Error \(String(describing: response.result.error))")
-//                self.cityLabel.text = "Connection Issues"
 
             }
 
         }
 
+    }
+    
+    func urlCreator(name: String, realm: String, fields: String) -> String {
+        
+        return "https://eu.api.battle.net/wow/character/\(realm)/\(name)?fields=\(fields)&locale=en_GB&apikey=\(apiKey)"
+        
     }
     
     func printData(data: Data) {
@@ -76,8 +81,8 @@ class ViewController: UIViewController {
 }
 
 struct CharacterModel: Codable {
-    
-    var charName, charRealm, charAvatar: String
+
+    let charName, charRealm, charAvatar: String
 //    let charName, charRealm, charSpec, charAvatar: String
 //    let charClass, charilvl, charEnchants, charGems: Int
     
