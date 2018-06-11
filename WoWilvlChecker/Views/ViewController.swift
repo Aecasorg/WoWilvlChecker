@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     var blizzardURL = ""
     
     @IBAction func alamoResponseButtonPressed(_ sender: Any) {
+        blizzardURL = urlCreator(name: name, realm: realm, fields: fields)
         getCharacterData(url: blizzardURL)
     }
     
@@ -25,7 +26,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        blizzardURL = urlCreator(name: name, realm: realm, fields: fields)
+        
         
     }
 
@@ -72,6 +73,7 @@ class ViewController: UIViewController {
             print("Character Name: " + decoded.charName)
             print("Character Realm: " + decoded.charRealm)
             print("Character Avatar: " + decoded.charAvatar)
+            print("Character ilvl: \(decoded.charilvl)")
         } catch {
             print("Failed to decode JSON")
         }
@@ -83,6 +85,7 @@ class ViewController: UIViewController {
 struct CharacterModel: Codable {
 
     let charName, charRealm, charAvatar: String
+    let charilvl: Int?
 //    let charName, charRealm, charSpec, charAvatar: String
 //    let charClass, charilvl, charEnchants, charGems: Int
     
@@ -90,6 +93,31 @@ struct CharacterModel: Codable {
         case charName = "name"
         case charRealm = "realm"
         case charAvatar = "thumbnail"
+        case items
+    }
+    
+    enum ItemsCodingKeys: String, CodingKey {
+        case charilvl = "averageItemLevelEquipped"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        charName = try container.decode(String.self, forKey: .charName)
+        charRealm = try container.decode(String.self, forKey: .charRealm)
+        charAvatar = try container.decode(String.self, forKey: .charAvatar)
+        let items = try container.nestedContainer(keyedBy: ItemsCodingKeys.self, forKey: .items)
+        charilvl = try items.decode(Int.self, forKey: .charilvl)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(charName, forKey: .charName)
+        try container.encode(charRealm, forKey: .charRealm)
+        try container.encode(charAvatar, forKey: .charAvatar)
+        
+        var items = container.nestedContainer(keyedBy: ItemsCodingKeys.self, forKey: .items)
+        try items.encode(charilvl, forKey: .charilvl)
     }
 
 }
