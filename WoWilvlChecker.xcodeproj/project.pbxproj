@@ -8,13 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		38E25C7C406888906A036F07 /* Pods_WoWilvlChecker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51F4C028928C690B51E32189 /* Pods_WoWilvlChecker.framework */; };
+		AF402B7F20D1595700DD18D7 /* CharacterModelTalents.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF402B7E20D1595700DD18D7 /* CharacterModelTalents.swift */; };
+		AF402B8120D15ADC00DD18D7 /* CharacterModelAudit.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF402B8020D15ADC00DD18D7 /* CharacterModelAudit.swift */; };
 		AF57DBE620CBA6F2001250ED /* CharacterModel+Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF57DBE520CBA6F2001250ED /* CharacterModel+Functions.swift */; };
 		AF8318D120C50DE700539567 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8318D020C50DE700539567 /* AppDelegate.swift */; };
 		AF8318D320C50DE700539567 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8318D220C50DE700539567 /* ViewController.swift */; };
 		AF8318D620C50DE700539567 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF8318D420C50DE700539567 /* Main.storyboard */; };
 		AF8318D820C50DEA00539567 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF8318D720C50DEA00539567 /* Assets.xcassets */; };
 		AF8318DB20C50DEA00539567 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF8318D920C50DEA00539567 /* LaunchScreen.storyboard */; };
-		AF8318E320C5189300539567 /* CharacterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8318E220C5189300539567 /* CharacterModel.swift */; };
+		AF8318E320C5189300539567 /* CharacterModelItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8318E220C5189300539567 /* CharacterModelItems.swift */; };
 		AFD33A8B20C6623300D5D6EC /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD33A8A20C6623300D5D6EC /* DataModel.swift */; };
 		AFD33A8D20C6624D00D5D6EC /* CharacterFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD33A8C20C6624D00D5D6EC /* CharacterFunctions.swift */; };
 /* End PBXBuildFile section */
@@ -23,6 +25,8 @@
 		35B3FFA8EABEF12AF921C92F /* Pods-WoWilvlChecker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WoWilvlChecker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WoWilvlChecker/Pods-WoWilvlChecker.debug.xcconfig"; sourceTree = "<group>"; };
 		51F4C028928C690B51E32189 /* Pods_WoWilvlChecker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WoWilvlChecker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A999A1B58935A5581C710C36 /* Pods-WoWilvlChecker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WoWilvlChecker.release.xcconfig"; path = "Pods/Target Support Files/Pods-WoWilvlChecker/Pods-WoWilvlChecker.release.xcconfig"; sourceTree = "<group>"; };
+		AF402B7E20D1595700DD18D7 /* CharacterModelTalents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterModelTalents.swift; sourceTree = "<group>"; };
+		AF402B8020D15ADC00DD18D7 /* CharacterModelAudit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterModelAudit.swift; sourceTree = "<group>"; };
 		AF57DBE520CBA6F2001250ED /* CharacterModel+Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterModel+Functions.swift"; sourceTree = "<group>"; };
 		AF8318CD20C50DE700539567 /* WoWilvlChecker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WoWilvlChecker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF8318D020C50DE700539567 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -31,7 +35,7 @@
 		AF8318D720C50DEA00539567 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AF8318DA20C50DEA00539567 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF8318DC20C50DEA00539567 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AF8318E220C5189300539567 /* CharacterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterModel.swift; sourceTree = "<group>"; };
+		AF8318E220C5189300539567 /* CharacterModelItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterModelItems.swift; sourceTree = "<group>"; };
 		AFD33A8A20C6623300D5D6EC /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		AFD33A8C20C6624D00D5D6EC /* CharacterFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterFunctions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -99,9 +103,11 @@
 		AFD33A8F20C6627000D5D6EC /* Character */ = {
 			isa = PBXGroup;
 			children = (
-				AF8318E220C5189300539567 /* CharacterModel.swift */,
+				AF8318E220C5189300539567 /* CharacterModelItems.swift */,
 				AFD33A8C20C6624D00D5D6EC /* CharacterFunctions.swift */,
 				AF57DBE520CBA6F2001250ED /* CharacterModel+Functions.swift */,
+				AF402B7E20D1595700DD18D7 /* CharacterModelTalents.swift */,
+				AF402B8020D15ADC00DD18D7 /* CharacterModelAudit.swift */,
 			);
 			path = Character;
 			sourceTree = "<group>";
@@ -245,9 +251,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFD33A8D20C6624D00D5D6EC /* CharacterFunctions.swift in Sources */,
+				AF402B8120D15ADC00DD18D7 /* CharacterModelAudit.swift in Sources */,
 				AF57DBE620CBA6F2001250ED /* CharacterModel+Functions.swift in Sources */,
 				AF8318D320C50DE700539567 /* ViewController.swift in Sources */,
-				AF8318E320C5189300539567 /* CharacterModel.swift in Sources */,
+				AF8318E320C5189300539567 /* CharacterModelItems.swift in Sources */,
+				AF402B7F20D1595700DD18D7 /* CharacterModelTalents.swift in Sources */,
 				AF8318D120C50DE700539567 /* AppDelegate.swift in Sources */,
 				AFD33A8B20C6623300D5D6EC /* DataModel.swift in Sources */,
 			);

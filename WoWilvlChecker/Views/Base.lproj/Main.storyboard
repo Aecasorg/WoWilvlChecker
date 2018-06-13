@@ -18,9 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hQh-jv-A7w">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hQh-jv-A7w">
                                 <rect key="frame" x="0.0" y="89" width="375" height="578"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="117" id="MnJ-xV-vPv">
@@ -30,20 +29,25 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="116.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Character details" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWN-kg-4LP">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Character details" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWN-kg-4LP">
                                                     <rect key="frame" x="15" y="11" width="345" height="95"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="eWN-kg-4LP" firstAttribute="centerY" secondItem="13O-GG-xX3" secondAttribute="centerY" id="6JD-vo-oid"/>
+                                                <constraint firstItem="eWN-kg-4LP" firstAttribute="bottom" secondItem="13O-GG-xX3" secondAttribute="bottomMargin" id="dAg-zn-zub"/>
+                                                <constraint firstItem="eWN-kg-4LP" firstAttribute="leading" secondItem="13O-GG-xX3" secondAttribute="leadingMargin" constant="-1" id="tId-wA-fJ9"/>
+                                                <constraint firstItem="eWN-kg-4LP" firstAttribute="centerX" secondItem="13O-GG-xX3" secondAttribute="centerX" id="uIw-xV-wLm"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CrV-7I-GTQ">
-                                <rect key="frame" x="107.5" y="30" width="160" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CrV-7I-GTQ">
+                                <rect key="frame" x="107" y="51" width="160" height="30"/>
                                 <state key="normal" title="Alamo response button"/>
                                 <connections>
                                     <action selector="alamoResponseButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="n2L-6e-lvr"/>
@@ -52,7 +56,11 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="CrV-7I-GTQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="31" id="8uE-MA-gXa"/>
                             <constraint firstItem="CrV-7I-GTQ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="CQw-kt-z2L"/>
+                            <constraint firstItem="hQh-jv-A7w" firstAttribute="top" secondItem="CrV-7I-GTQ" secondAttribute="bottom" constant="8" symbolic="YES" id="FMy-MP-ccT"/>
+                            <constraint firstItem="CrV-7I-GTQ" firstAttribute="centerX" secondItem="hQh-jv-A7w" secondAttribute="centerX" id="ZlH-mT-Xak"/>
+                            <constraint firstItem="CrV-7I-GTQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="107" id="yQY-pj-2en"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

@@ -10,7 +10,7 @@ import Foundation
 
 class CharacterFunctions {
     
-    static func createCharacter(characterModel: CharacterModel) {
+    static func createCharacter(characterModel: CharacterModelItems) {
         
     }
     
@@ -29,11 +29,11 @@ class CharacterFunctions {
         }
     }
     
-    static func updateCharacter(characterModel: CharacterModel) {
+    static func updateCharacter(characterModel: CharacterModelItems) {
         
     }
     
-    static func deleteCharacter(characterModel: CharacterModel) {
+    static func deleteCharacter(characterModel: CharacterModelItems) {
         
     }
     

@@ -12,14 +12,14 @@ import Alamofire
 class ViewController: UIViewController {
 
     var apiKey = "pgje56uws25hmdw426agmrkjcz4zbhuc"
-    var name = "annebelle"
+    var name = "liira"
     var realm = "azjol-nerub"
-    var fields = "items"
-    var blizzardURL = ""
+    var fields = "audit"
     
     @IBAction func alamoResponseButtonPressed(_ sender: Any) {
-        blizzardURL = urlCreator(name: name, realm: realm, fields: fields)
+        let blizzardURL = urlCreator(name: name, realm: realm, fields: fields)
         getCharacterData(url: blizzardURL)
+        
     }
     
     
@@ -43,7 +43,9 @@ class ViewController: UIViewController {
                 print("Success!")
                 if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
                     print("Data: \(utf8Text)") // original server data as UTF8 string
-                    self.printData(data: data)
+//                    self.printData(data: data)
+//                    self.printDataTalents(data: data)
+                    self.printDataAudit(data: data)
                 }
 
                 
@@ -68,8 +70,9 @@ class ViewController: UIViewController {
         let decoder = JSONDecoder()
         
         do {
-            let decoded = try decoder.decode(CharacterModel.self, from: data)
+            let decoded = try decoder.decode(CharacterModelItems.self, from: data)
             print(decoded)
+            print("Character last modified: \(decoded.lastModified)")
             print("Character Name: " + decoded.charName)
             print("Character Realm: " + decoded.charRealm)
             print("Character Avatar: " + decoded.charAvatar)
@@ -79,46 +82,162 @@ class ViewController: UIViewController {
         }
         
     }
+    
+    func printDataTalents(data: Data) {
+        
+        let decoder = JSONDecoder()
+        
+        do {
+            let decoded = try decoder.decode(CharacterModelTalents.self, from: data)
+            print(decoded)
+            print("Character last modified: \(decoded.lastModified)")
+            print("Character Name: " + decoded.name)
+            print("Character Realm: " + decoded.realm)
+            print("Character Avatar: " + decoded.thumbnail)
+            if decoded.talents[0].selected! {
+                print("Character talents: \(decoded.talents[0].spec?.name)")
+                print("Character role: \(decoded.talents[0].spec?.role)")
+            } else if decoded.talents[1].selected! {
+                print("Character talents: \(decoded.talents[1].spec?.name)")
+                print("Character role: \(decoded.talents[1].spec?.role)")
+            } else if decoded.talents[2].selected! {
+                print("Character talents: \(decoded.talents[2].spec?.name)")
+                print("Character role: \(decoded.talents[2].spec?.role)")
+            } else {
+                print("Character talents: \(decoded.talents[3].spec?.name)")
+                print("Character role: \(decoded.talents[3].spec?.role)")
+            }
+        } catch {
+            print("Failed to decode JSON")
+        }
+        
+    }
+    
+    func printDataAudit(data: Data) {
+        
+        let decoder = JSONDecoder()
+        
+        do {
+            let decoded = try decoder.decode(CharacterModelAudit.self, from: data)
+            print(decoded)
+            print("Character last modified: \(decoded.lastModified)")
+            print("Character Name: " + decoded.name)
+            print("Character Realm: " + decoded.realm)
+            print("Character Avatar: " + decoded.thumbnail)
+            print("Character empty sockets: \(decoded.audit.emptySockets)")
+            print("Character unenchanted items: \(decoded.audit.unenchantedItems)")
+        } catch {
+            print("Failed to decode JSON")
+        }
+        
+    }
 
 }
 
-struct CharacterModel: Codable {
+//struct CharacterModelItems: Codable {
+//
+//    struct Items: Codable {
+//        var averageItemLevelEquipped: Int
+//
+//    }
+//
+//    var items: Items
+//    var charName, charRealm, charAvatar: String
+//    var lastModified: Int
+//
+//}
 
-    let charName, charRealm, charAvatar: String
-    let charilvl: Int?
-//    let charName, charRealm, charSpec, charAvatar: String
-//    let charClass, charilvl, charEnchants, charGems: Int
-    
-    enum CodingKeys: String, CodingKey {
-        case charName = "name"
-        case charRealm = "realm"
-        case charAvatar = "thumbnail"
-        case items
-    }
-    
-    enum ItemsCodingKeys: String, CodingKey {
-        case charilvl = "averageItemLevelEquipped"
-    }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        
-        charName = try container.decode(String.self, forKey: .charName)
-        charRealm = try container.decode(String.self, forKey: .charRealm)
-        charAvatar = try container.decode(String.self, forKey: .charAvatar)
-        let items = try container.nestedContainer(keyedBy: ItemsCodingKeys.self, forKey: .items)
-        charilvl = try items.decode(Int.self, forKey: .charilvl)
-    }
-    
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(charName, forKey: .charName)
-        try container.encode(charRealm, forKey: .charRealm)
-        try container.encode(charAvatar, forKey: .charAvatar)
-        
-        var items = container.nestedContainer(keyedBy: ItemsCodingKeys.self, forKey: .items)
-        try items.encode(charilvl, forKey: .charilvl)
-    }
+// MARK: - Character Model Item Level Parser
+//struct CharacterModelItems: Codable {
+//
+//    var charName, charRealm, charAvatar: String
+//    var lastModified: Int
+//    var charilvl: Int
+////    let charName, charRealm, charSpec, charAvatar: String
+////    let charClass, charilvl, charEnchants, charGems: Int
+//
+//    enum CodingKeys: String, CodingKey {
+//        case lastModified
+//        case charName = "name"
+//        case charRealm = "realm"
+//        case charAvatar = "thumbnail"
+//        case items
+//    }
+//
+//    enum ItemsCodingKeys: String, CodingKey {
+//        case charilvl = "averageItemLevelEquipped"
+//    }
+//
+//    init(from decoder: Decoder) throws {
+//        let container = try decoder.container(keyedBy: CodingKeys.self)
+//
+//        lastModified = try container.decode(Int.self, forKey: .lastModified)
+//        charName = try container.decode(String.self, forKey: .charName)
+//        charRealm = try container.decode(String.self, forKey: .charRealm)
+//        charAvatar = try container.decode(String.self, forKey: .charAvatar)
+//        let items = try container.nestedContainer(keyedBy: ItemsCodingKeys.self, forKey: .items)
+//        charilvl = try items.decode(Int.self, forKey: .charilvl)
+//    }
+//
+//    func encode(to encoder: Encoder) throws {
+//        var container = encoder.container(keyedBy: CodingKeys.self)
+//        try container.encode(lastModified, forKey: .lastModified)
+//        try container.encode(charName, forKey: .charName)
+//        try container.encode(charRealm, forKey: .charRealm)
+//        try container.encode(charAvatar, forKey: .charAvatar)
+//        
+//        var items = container.nestedContainer(keyedBy: ItemsCodingKeys.self, forKey: .items)
+//        try items.encode(charilvl, forKey: .charilvl)
+//    }
+//
+//}
 
-}
+// MARK: - Character Model Talents Parser
+//struct CharacterModelTalents: Codable {
+//    let lastModified: Int
+//    let name, realm, battlegroup: String
+//    let characterDataClass, race, gender, level: Int
+//    let achievementPoints: Int
+//    let thumbnail, calcClass: String
+//    let faction: Int
+//    let talents: [CharacterDataTalent]
+//    let totalHonorableKills: Int
+//    
+//    enum CodingKeys: String, CodingKey {
+//        case lastModified, name, realm, battlegroup
+//        case characterDataClass = "class"
+//        case race, gender, level, achievementPoints, thumbnail, calcClass, faction, talents, totalHonorableKills
+//    }
+//}
+//
+//struct CharacterDataTalent: Codable {
+//    let talents: [TalentTalent]
+//    let spec: Spec?
+//    let calcTalent, calcSpec: String
+//    let selected: Bool?
+//}
+//
+//struct Spec: Codable {
+//    let name: String
+//    let role: String
+//    let backgroundImage: String
+//    let icon: String
+//    let description: String
+//    let order: Int
+//}
+//
+//struct TalentTalent: Codable {
+//    let tier, column: Int
+//    let spell: Spell
+//    let spec: Spec?
+//}
+//
+//struct Spell: Codable {
+//    let id: Int
+//    let name, icon, description: String
+//    let castTime: String
+//    let cooldown, range, powerCost: String?
+//}
 
+
+// MARK: - Character Model Audit Parser
