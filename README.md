@@ -12,3 +12,7 @@ I would like an app that does the following:
 * Possibly setting a filter that warns if there's something lacking, i.e. low ilvl, no gems or enchants.
 * Stored characters so that their progress can be followed. 
 * Fast lookup and refresh
+
+## Challenges
+* Extract and combine the data from 3 large json data fetches - items, talents & audit
+* Pick out only relevant information from extracted data which have a large historical debt (10 years) where many parameters are not relevant any more to the current version of the game. 
