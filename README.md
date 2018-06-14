@@ -15,4 +15,4 @@ I would like an app that does the following:
 
 ## Challenges
 * Extract and combine the data from 3 large json data fetches - items, talents & audit
-* Pick out only relevant information from extracted data which have a large historical debt (10 years) where many parameters are not relevant any more to the current version of the game. 
+* Pick out only relevant information from extracted data which have a large historical debt (10 years) where many parameters are not relevant any more to the current version of the game and are sometimes even inaccurate (e.g. enchants in audit).
