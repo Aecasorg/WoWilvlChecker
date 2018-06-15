@@ -96,7 +96,7 @@ class ViewController: UIViewController {
                 print("No finger1 enchant!")
             }
             
-            if let finger2 = decoded.items.finger1.tooltipParams.enchant {
+            if let finger2 = decoded.items.finger2.tooltipParams.enchant {
                 print("Finger2 enchant: \(finger2)")
             } else {
                 print("No finger2 enchant!")
