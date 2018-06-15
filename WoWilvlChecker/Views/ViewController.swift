@@ -12,9 +12,9 @@ import Alamofire
 class ViewController: UIViewController {
 
     var apiKey = "pgje56uws25hmdw426agmrkjcz4zbhuc"
-    var name = "liira"
+    var name = "annebelle"
     var realm = "azjol-nerub"
-    var fields = "audit"
+    var fields = "items"
     
     @IBAction func alamoResponseButtonPressed(_ sender: Any) {
         let blizzardURL = urlCreator(name: name, realm: realm, fields: fields)
@@ -43,9 +43,9 @@ class ViewController: UIViewController {
                 print("Success!")
                 if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
                     print("Data: \(utf8Text)") // original server data as UTF8 string
-//                    self.printData(data: data)
+                    self.printData(data: data)
 //                    self.printDataTalents(data: data)
-                    self.printDataAudit(data: data)
+//                    self.printDataAudit(data: data)
                 }
 
                 
@@ -73,10 +73,35 @@ class ViewController: UIViewController {
             let decoded = try decoder.decode(CharacterModelItems.self, from: data)
             print(decoded)
             print("Character last modified: \(decoded.lastModified)")
-            print("Character Name: " + decoded.charName)
-            print("Character Realm: " + decoded.charRealm)
-            print("Character Avatar: " + decoded.charAvatar)
-            print("Character ilvl: \(decoded.charilvl)")
+            print("Character Name: " + decoded.name)
+            print("Character Realm: " + decoded.realm)
+            print("Character Avatar: " + decoded.thumbnail)
+            print("Character ilvl: \(decoded.items.averageItemLevelEquipped)")
+            
+            if let neck = decoded.items.neck.tooltipParams.enchant {
+                print("Neck enchant: \(neck)")
+            } else {
+                print("No neck enchant!")
+            }
+            
+            if let back = decoded.items.back.tooltipParams.enchant {
+                print("Back enchant: \(back)")
+            } else {
+                print("No back enchant!")
+            }
+            
+            if let finger1 = decoded.items.finger1.tooltipParams.enchant {
+                print("Finger1 enchant: \(finger1)")
+            } else {
+                print("No finger1 enchant!")
+            }
+            
+            if let finger2 = decoded.items.finger1.tooltipParams.enchant {
+                print("Finger2 enchant: \(finger2)")
+            } else {
+                print("No finger2 enchant!")
+            }
+            
         } catch {
             print("Failed to decode JSON")
         }

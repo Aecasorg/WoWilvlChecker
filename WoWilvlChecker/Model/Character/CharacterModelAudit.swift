@@ -90,9 +90,9 @@ struct MissingExtraSockets: Codable {
 //    }
 //}
 
-struct BonusSummary: Codable {
-    let defaultBonusLists, chanceBonusLists, bonusChances: [JSONAny]
-}
+//struct BonusSummary: Codable {
+//    let defaultBonusLists, chanceBonusLists, bonusChances: [JSONAny]
+//}
 
 struct ItemSource: Codable {
     let sourceID: Int
