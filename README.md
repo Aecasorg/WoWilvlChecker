@@ -23,6 +23,5 @@ Early prototype.
 <img src="https://i.imgur.com/1SsAbat.jpg">
 
 ### Changes needed:
-* Search will need to be improved. I.e. to include realm choice. 
-* Add thumbnail/avatar of character. 
+* Search will need to be improved. I.e. to include realm choice.  
 * Update character/s button. Maybe slide to update? Slide right to update chosen character, down to update all characters, left to delete?
