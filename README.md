@@ -16,3 +16,13 @@ I would like an app that does the following:
 ## Challenges
 * Extract and combine the data from 3 large json data fetches - items, talents & audit
 * Pick out only relevant information from extracted data which have a large historical debt (10 years) where many parameters are not relevant any more to the current version of the game and are sometimes even inaccurate (e.g. enchants in audit).
+
+## Prototype
+Early prototype.
+
+<img src="https://i.imgur.com/DfiUOx1.jpg">
+
+### Changes needed:
+* Search will need to be improved. I.e. to include realm choice. 
+* Add thumbnail/avatar of character. 
+* Update character/s button. Maybe slide to update? Slide right to update chosen character, down to update all characters, left to delete?
