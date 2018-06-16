@@ -12,9 +12,9 @@ import Alamofire
 class ViewController: UIViewController {
 
     var apiKey = "pgje56uws25hmdw426agmrkjcz4zbhuc"
-    var name = "annebelle"
+    var name = "avalentica"
     var realm = "azjol-nerub"
-    var fields = "items"
+    var fields = "talents"
     
     @IBAction func alamoResponseButtonPressed(_ sender: Any) {
         let blizzardURL = urlCreator(name: name, realm: realm, fields: fields)
@@ -42,9 +42,9 @@ class ViewController: UIViewController {
 
                 print("Success!")
                 if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-                    print("Data: \(utf8Text)") // original server data as UTF8 string
-                    self.printData(data: data)
-//                    self.printDataTalents(data: data)
+//                    print("Data: \(utf8Text)") // original server data as UTF8 string
+//                    self.printData(data: data)
+                    self.printDataTalents(data: data)
 //                    self.printDataAudit(data: data)
                 }
 
@@ -114,23 +114,25 @@ class ViewController: UIViewController {
         
         do {
             let decoded = try decoder.decode(CharacterModelTalents.self, from: data)
-            print(decoded)
+//            print(decoded)
             print("Character last modified: \(decoded.lastModified)")
             print("Character Name: " + decoded.name)
             print("Character Realm: " + decoded.realm)
             print("Character Avatar: " + decoded.thumbnail)
-            if decoded.talents[0].selected! {
-                print("Character talents: \(decoded.talents[0].spec?.name)")
-                print("Character role: \(decoded.talents[0].spec?.role)")
-            } else if decoded.talents[1].selected! {
-                print("Character talents: \(decoded.talents[1].spec?.name)")
-                print("Character role: \(decoded.talents[1].spec?.role)")
-            } else if decoded.talents[2].selected! {
-                print("Character talents: \(decoded.talents[2].spec?.name)")
-                print("Character role: \(decoded.talents[2].spec?.role)")
+            if decoded.talents[0].selected ?? false {
+                print("Character talents: \(decoded.talents[0].spec!.name)")
+                print("Character role: \(decoded.talents[0].spec!.role)")
+            } else if decoded.talents[1].selected ?? false {
+                print("Character talents: \(decoded.talents[1].spec!.name)")
+                print("Character role: \(decoded.talents[1].spec!.role)")
+            } else if decoded.talents[2].selected ?? false {
+                print("Character talents: \(decoded.talents[2].spec!.name)")
+                print("Character role: \(decoded.talents[2].spec!.role)")
+            } else if decoded.talents[3].selected ?? false {
+                print("Character talents: \(decoded.talents[3].spec!.name)")
+                print("Character role: \(decoded.talents[3].spec!.role)")
             } else {
-                print("Character talents: \(decoded.talents[3].spec?.name)")
-                print("Character role: \(decoded.talents[3].spec?.role)")
+                print("Spec missing!")
             }
         } catch {
             print("Failed to decode JSON")
