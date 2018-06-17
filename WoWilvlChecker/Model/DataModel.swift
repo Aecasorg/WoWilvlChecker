@@ -10,6 +10,6 @@ import Foundation
 
 class DataModel {
     
-    static var charModels = [CharacterModelItems]()
+    static var charModels = [CharacterModel]()
     
 }

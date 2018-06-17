@@ -56,6 +56,7 @@ import Foundation
 struct CharacterModelItems: Codable {
     let lastModified: Int
     let name, realm, battlegroup: String
+    let `class`: Int
 //    let characterModelItemsClass, race, gender, level: Int
 //    let achievementPoints: Int
     let thumbnail, calcClass: String
