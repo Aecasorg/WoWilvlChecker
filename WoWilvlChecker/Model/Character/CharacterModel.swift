@@ -8,20 +8,25 @@
 
 import Foundation
 
-struct CharacterModel {
+class CharacterModel {
     
-    let lastModified: Int
+    var lastModified: Int = 0
     let name: String
     let realm: String
-    let `class`: Int
-    let thumbnail: String
-    let averageItemLevelEquipped: Int
-    let neckEnchant: Bool
-    let backEnchant: Bool
-    let finger1Enchant: Bool
-    let finger2Enchant: Bool
-    let spec: String
-    let role: String
-    let emptySockets: Int
+    var `class`: Int = 0
+    var thumbnail: String = ""
+    var averageItemLevelEquipped: Int = 0
+    var neckEnchant: Bool = false
+    var backEnchant: Bool = false
+    var finger1Enchant: Bool = false
+    var finger2Enchant: Bool = false
+    var spec: String = ""
+    var role: String = ""
+    var emptySockets: Int = 0
+    
+    init(name: String, realm: String) {
+        self.name = name
+        self.realm = realm
+    }
     
 }
