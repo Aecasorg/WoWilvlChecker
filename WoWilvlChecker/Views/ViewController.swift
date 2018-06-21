@@ -7,16 +7,20 @@
 //
 
 import UIKit
+import RealmSwift
 import Alamofire
 
 class ViewController: UIViewController {
 
+    let realm = try! Realm()
+    
     var apiKey = "pgje56uws25hmdw426agmrkjcz4zbhuc"
     var name = "belangel"
-    var realm = "azjol-nerub"
+    var charRealm = "azjol-nerub"
 //    var fields = "talents"
     
-    var chars: [CharacterModel] = []
+    var chars: Results<CharacterModel>?
+    var newChar = CharacterModel()
 
     
     
@@ -25,6 +29,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        loadChars()
+        
 //        searchInput.showsScopeBar = true
 //        searchInput.delegate
     }
@@ -32,12 +38,13 @@ class ViewController: UIViewController {
     @IBAction func alamoResponseButtonPressed(_ sender: Any) {
         print("*******************************")
         if let searchText = searchInput.text {
-            var blizzardURL = urlCreator(name: searchText, realm: realm, fields: "items")
+            var blizzardURL = urlCreator(name: searchText, realm: charRealm, fields: "items")
             getCharacterData(url: blizzardURL, dataChoice: 0) {(success) -> Void in
-                blizzardURL = self.urlCreator(name: searchText, realm: self.realm, fields: "talents")
+                blizzardURL = self.urlCreator(name: searchText, realm: self.charRealm, fields: "talents")
                 self.getCharacterData(url: blizzardURL, dataChoice: 1) {(success) -> Void in
-                    blizzardURL = self.urlCreator(name: searchText, realm: self.realm, fields: "audit")
-                    self.getCharacterData(url: blizzardURL, dataChoice: 2, completion: {_ in })
+                    blizzardURL = self.urlCreator(name: searchText, realm: self.charRealm, fields: "audit")
+                    self.getCharacterData(url: blizzardURL, dataChoice: 2, completion: {(success) -> Void in
+                        self.save(character: self.newChar)})
                 }
             }
             
@@ -61,6 +68,7 @@ class ViewController: UIViewController {
                 
                 if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
 //                    print("Data: \(utf8Text)") // original server data as UTF8 string
+//                    var newChar = CharacterModel()
                     if dataChoice == 0 {
                         self.printData(data: data)
                     } else if dataChoice == 1 {
@@ -68,6 +76,7 @@ class ViewController: UIViewController {
                     } else {
                         self.printDataAudit(data: data)
                     }
+                    
                 }
                 
                 completion(true)
@@ -97,46 +106,47 @@ class ViewController: UIViewController {
             let decoded = try decoder.decode(CharacterModelItems.self, from: data)
 //            print(decoded)
             
-            let character = CharacterModel(name: decoded.name, realm: decoded.realm)
+//            let newChar = CharacterModel()
+            newChar.charName = decoded.name
+            newChar.charRealm = decoded.realm
             print("Character Name: " + decoded.name)
             print("Character Realm: " + decoded.realm)
             print("Character last modified: \(decoded.lastModified)")
-            character.lastModified = decoded.lastModified
+            newChar.lastModified = decoded.lastModified
             print("Character Class: \(classConverter(class: decoded.class))")
-            character.class = decoded.class
+            newChar.charClass = decoded.class
             print("Character Avatar: " + decoded.thumbnail)
-            character.thumbnail = decoded.thumbnail
+            newChar.thumbnail = decoded.thumbnail
             print("Character ilvl: \(decoded.items.averageItemLevelEquipped)")
-            character.averageItemLevelEquipped = decoded.items.averageItemLevelEquipped
+            newChar.averageItemLevelEquipped = decoded.items.averageItemLevelEquipped
             
             if let neck = decoded.items.neck.tooltipParams.enchant {
                 print("Neck enchant: \(neck)")
-                character.neckEnchant = true
+                newChar.neckEnchant = true
             } else {
                 print("No neck enchant!")
             }
             
             if let back = decoded.items.back.tooltipParams.enchant {
                 print("Back enchant: \(back)")
-                character.backEnchant = true
+                newChar.backEnchant = true
             } else {
                 print("No back enchant!")
             }
             
             if let finger1 = decoded.items.finger1.tooltipParams.enchant {
                 print("Ring1 enchant: \(finger1)")
-                character.finger1Enchant = true
+                newChar.finger1Enchant = true
             } else {
                 print("No Ring1 enchant!")
             }
             
             if let finger2 = decoded.items.finger2.tooltipParams.enchant {
                 print("Ring2 enchant: \(finger2)")
-                character.finger2Enchant = true
+                newChar.finger2Enchant = true
             } else {
                 print("No Ring2 enchant!")
             }
-            chars.append(character)
             
         } catch {
             print("Failed to decode JSON")
@@ -157,24 +167,24 @@ class ViewController: UIViewController {
 //            print("Character Avatar: " + decoded.thumbnail)
             if decoded.talents[0].selected ?? false {
                 print("Character talents: \(decoded.talents[0].spec!.name)")
-                chars.last?.spec = decoded.talents[0].spec!.name
+                newChar.spec = decoded.talents[0].spec!.name
                 print("Character role: \(decoded.talents[0].spec!.role)")
-                chars.last?.role = decoded.talents[0].spec!.role
+                newChar.role = decoded.talents[0].spec!.role
             } else if decoded.talents[1].selected ?? false {
                 print("Character talents: \(decoded.talents[1].spec!.name)")
-                chars.last?.spec = decoded.talents[1].spec!.name
+                newChar.spec = decoded.talents[1].spec!.name
                 print("Character role: \(decoded.talents[1].spec!.role)")
-                chars.last?.role = decoded.talents[1].spec!.role
+                newChar.role = decoded.talents[1].spec!.role
             } else if decoded.talents[2].selected ?? false {
                 print("Character talents: \(decoded.talents[2].spec!.name)")
-                chars.last?.spec = decoded.talents[2].spec!.name
+                newChar.spec = decoded.talents[2].spec!.name
                 print("Character role: \(decoded.talents[2].spec!.role)")
-                chars.last?.role = decoded.talents[2].spec!.role
+                newChar.role = decoded.talents[2].spec!.role
             } else if decoded.talents[3].selected ?? false {
                 print("Character talents: \(decoded.talents[3].spec!.name)")
-                chars.last?.spec = decoded.talents[3].spec!.name
+                newChar.spec = decoded.talents[3].spec!.name
                 print("Character role: \(decoded.talents[3].spec!.role)")
-                chars.last?.role = decoded.talents[3].spec!.role
+                newChar.role = decoded.talents[3].spec!.role
             } else {
                 print("Spec missing!")
             }
@@ -196,7 +206,7 @@ class ViewController: UIViewController {
 //            print("Character Realm: " + decoded.realm)
 //            print("Character Avatar: " + decoded.thumbnail)
             print("Character empty sockets: \(decoded.audit.emptySockets)")
-            chars.last?.emptySockets = decoded.audit.emptySockets
+            newChar.emptySockets = decoded.audit.emptySockets
 //            print("Character unenchanted items: \(decoded.audit.unenchantedItems)")
         } catch {
             print("Failed to decode JSON")
@@ -237,17 +247,42 @@ class ViewController: UIViewController {
     
     func printLastDataFetch() {
         print("*****************")
-        print("Name: \(chars.last?.name ?? "None")")
-        print("Realm: \(chars.last?.realm ?? "None")")
-        print("ilvl: \(chars.last?.averageItemLevelEquipped ?? 0)")
-        print("Class: \(classConverter(class: (chars.last?.class)!) )")
-        print("Spec: \(chars.last?.spec ?? "None")")
-        print("Role: \(chars.last?.role ?? "None")")
-        print("Neck enchant?: \(chars.last?.neckEnchant ?? false)")
-        print("Back enchant?: \(chars.last?.backEnchant ?? false)")
-        print("Ring1 enchant?: \(chars.last?.finger1Enchant ?? false)")
-        print("Ring2 enchant?: \(chars.last?.finger2Enchant ?? false)")
-        print("Gems missing?: \(chars.last?.emptySockets ?? 0)")
+        print("Name: \(chars?.last?.charName ?? "None")")
+        print("Realm: \(chars?.last?.charRealm ?? "None")")
+        print("ilvl: \(chars?.last?.averageItemLevelEquipped ?? 0)")
+        print("Class: \(classConverter(class: (chars!.last?.charClass)!) )")
+        print("Spec: \(chars?.last?.spec ?? "None")")
+        print("Role: \(chars?.last?.role ?? "None")")
+        print("Neck enchant?: \(chars?.last?.neckEnchant ?? false)")
+        print("Back enchant?: \(chars?.last?.backEnchant ?? false)")
+        print("Ring1 enchant?: \(chars?.last?.finger1Enchant ?? false)")
+        print("Ring2 enchant?: \(chars?.last?.finger2Enchant ?? false)")
+        print("Gems missing?: \(chars?.last?.emptySockets ?? 0)")
+    }
+    
+    //MARK: - Data Manipulation Methods
+    
+    func save(character: CharacterModel) {
+        
+        do {
+            
+            try realm.write {
+                realm.add(character)
+            }
+        } catch {
+            print("Error saving character \(error)")
+        }
+        
+//        self.tableView.reloadData()
+        
+    }
+    
+    func loadChars() {
+        
+        chars = realm.objects(CharacterModel.self)
+        
+//        tableView.reloadData()
+        
     }
 
 }

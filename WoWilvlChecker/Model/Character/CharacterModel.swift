@@ -7,26 +7,27 @@
 //
 
 import Foundation
+import RealmSwift
 
-class CharacterModel {
+class CharacterModel: Object {
     
-    var lastModified: Int = 0
-    let name: String
-    let realm: String
-    var `class`: Int = 0
-    var thumbnail: String = ""
-    var averageItemLevelEquipped: Int = 0
-    var neckEnchant: Bool = false
-    var backEnchant: Bool = false
-    var finger1Enchant: Bool = false
-    var finger2Enchant: Bool = false
-    var spec: String = ""
-    var role: String = ""
-    var emptySockets: Int = 0
+    @objc dynamic var lastModified: Int = 0
+    @objc dynamic var charName: String = ""
+    @objc dynamic var charRealm: String = ""
+    @objc dynamic var charClass: Int = 0
+    @objc dynamic var thumbnail: String = ""
+    @objc dynamic var averageItemLevelEquipped: Int = 0
+    @objc dynamic var neckEnchant: Bool = false
+    @objc dynamic var backEnchant: Bool = false
+    @objc dynamic var finger1Enchant: Bool = false
+    @objc dynamic var finger2Enchant: Bool = false
+    @objc dynamic var spec: String = ""
+    @objc dynamic var role: String = ""
+    @objc dynamic var emptySockets: Int = 0
     
-    init(name: String, realm: String) {
-        self.name = name
-        self.realm = realm
-    }
+//    init(name: String, realm: String) {
+//        self.charName = name
+//        self.charRealm = realm
+//    }
     
 }
