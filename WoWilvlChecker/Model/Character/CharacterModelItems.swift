@@ -55,11 +55,14 @@ import Foundation
 
 struct CharacterModelItems: Codable {
     let lastModified: Int
-    let name, realm, battlegroup: String
+    let name: String
+    let realm: String
+//    let battlegroup: String
     let `class`: Int
 //    let characterModelItemsClass, race, gender, level: Int
 //    let achievementPoints: Int
-    let thumbnail, calcClass: String
+    let thumbnail: String
+//    let calcClass: String
 //    let faction: Int
     let items: Items
 //    let totalHonorableKills: Int

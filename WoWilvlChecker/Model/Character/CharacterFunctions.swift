@@ -18,7 +18,7 @@ class CharacterFunctions {
         
         DispatchQueue.global(qos: .userInteractive).async {
 //            if Data.charModels.count == 0 {
-//                Data.charModels.append(CharacterModel(charName: "Annebelle", charRealm: "Azjol-Nerub", charClass: 10))
+//                Data.charModels.append(CharacterModel(charName: "Aeca", charRealm: "Azjol-Nerub", charClass: 10))
 //                Data.charModels.append(CharacterModel(charName: "Liira", charRealm: "Azjol-Nerub", charClass: 3))
 //                Data.charModels.append(CharacterModel(charName: "Belangel", charRealm: "Azjol-Nerub", charClass: 2))
 //            }

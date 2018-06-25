@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		38E25C7C406888906A036F07 /* Pods_WoWilvlChecker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51F4C028928C690B51E32189 /* Pods_WoWilvlChecker.framework */; };
+		85DA02BA1EF848553A3DCC0B /* Pods_WoWilvlChecker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A176304B93302B675A06566 /* Pods_WoWilvlChecker.framework */; };
 		AF1493A520D64A4E001EA714 /* CharacterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1493A420D64A4E001EA714 /* CharacterModel.swift */; };
 		AF402B7F20D1595700DD18D7 /* CharacterModelTalents.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF402B7E20D1595700DD18D7 /* CharacterModelTalents.swift */; };
 		AF402B8120D15ADC00DD18D7 /* CharacterModelAudit.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF402B8020D15ADC00DD18D7 /* CharacterModelAudit.swift */; };
+		AF584EC020DCCA7D00AD1FA2 /* SwipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF584EBF20DCCA7C00AD1FA2 /* SwipeTableViewController.swift */; };
+		AF584EC220DE21B200AD1FA2 /* CharacterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF584EC120DE21B200AD1FA2 /* CharacterTableViewCell.swift */; };
 		AF8318D120C50DE700539567 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8318D020C50DE700539567 /* AppDelegate.swift */; };
 		AF8318D320C50DE700539567 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8318D220C50DE700539567 /* ViewController.swift */; };
 		AF8318D620C50DE700539567 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF8318D420C50DE700539567 /* Main.storyboard */; };
@@ -19,15 +21,17 @@
 		AF8318E320C5189300539567 /* CharacterModelItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8318E220C5189300539567 /* CharacterModelItems.swift */; };
 		AFD33A8B20C6623300D5D6EC /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD33A8A20C6623300D5D6EC /* DataModel.swift */; };
 		AFD33A8D20C6624D00D5D6EC /* CharacterFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD33A8C20C6624D00D5D6EC /* CharacterFunctions.swift */; };
+		AFFA835020E0C6FF00922717 /* CharacterModelTemp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFA834F20E0C6FF00922717 /* CharacterModelTemp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		35B3FFA8EABEF12AF921C92F /* Pods-WoWilvlChecker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WoWilvlChecker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WoWilvlChecker/Pods-WoWilvlChecker.debug.xcconfig"; sourceTree = "<group>"; };
-		51F4C028928C690B51E32189 /* Pods_WoWilvlChecker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WoWilvlChecker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A999A1B58935A5581C710C36 /* Pods-WoWilvlChecker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WoWilvlChecker.release.xcconfig"; path = "Pods/Target Support Files/Pods-WoWilvlChecker/Pods-WoWilvlChecker.release.xcconfig"; sourceTree = "<group>"; };
+		3A176304B93302B675A06566 /* Pods_WoWilvlChecker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WoWilvlChecker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9FE5FF33D4902682D092887E /* Pods-WoWilvlChecker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WoWilvlChecker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WoWilvlChecker/Pods-WoWilvlChecker.debug.xcconfig"; sourceTree = "<group>"; };
 		AF1493A420D64A4E001EA714 /* CharacterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterModel.swift; sourceTree = "<group>"; };
 		AF402B7E20D1595700DD18D7 /* CharacterModelTalents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterModelTalents.swift; sourceTree = "<group>"; };
 		AF402B8020D15ADC00DD18D7 /* CharacterModelAudit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterModelAudit.swift; sourceTree = "<group>"; };
+		AF584EBF20DCCA7C00AD1FA2 /* SwipeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeTableViewController.swift; sourceTree = "<group>"; };
+		AF584EC120DE21B200AD1FA2 /* CharacterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterTableViewCell.swift; sourceTree = "<group>"; };
 		AF8318CD20C50DE700539567 /* WoWilvlChecker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WoWilvlChecker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF8318D020C50DE700539567 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AF8318D220C50DE700539567 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -38,6 +42,8 @@
 		AF8318E220C5189300539567 /* CharacterModelItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterModelItems.swift; sourceTree = "<group>"; };
 		AFD33A8A20C6623300D5D6EC /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		AFD33A8C20C6624D00D5D6EC /* CharacterFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterFunctions.swift; sourceTree = "<group>"; };
+		AFFA834F20E0C6FF00922717 /* CharacterModelTemp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterModelTemp.swift; sourceTree = "<group>"; };
+		FCD8B1F3E3E466D1AFADD234 /* Pods-WoWilvlChecker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WoWilvlChecker.release.xcconfig"; path = "Pods/Target Support Files/Pods-WoWilvlChecker/Pods-WoWilvlChecker.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,20 +51,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38E25C7C406888906A036F07 /* Pods_WoWilvlChecker.framework in Frameworks */,
+				85DA02BA1EF848553A3DCC0B /* Pods_WoWilvlChecker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		015A07751EC7EBDD0389ED61 /* Pods */ = {
+		24D47F9B0AD3A2AFA86FD3D7 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				35B3FFA8EABEF12AF921C92F /* Pods-WoWilvlChecker.debug.xcconfig */,
-				A999A1B58935A5581C710C36 /* Pods-WoWilvlChecker.release.xcconfig */,
+				9FE5FF33D4902682D092887E /* Pods-WoWilvlChecker.debug.xcconfig */,
+				FCD8B1F3E3E466D1AFADD234 /* Pods-WoWilvlChecker.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		9AEFF0DAAF347447433B6FD5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3A176304B93302B675A06566 /* Pods_WoWilvlChecker.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		AF8318C420C50DE700539567 = {
@@ -66,8 +80,8 @@
 			children = (
 				AF8318CF20C50DE700539567 /* WoWilvlChecker */,
 				AF8318CE20C50DE700539567 /* Products */,
-				015A07751EC7EBDD0389ED61 /* Pods */,
-				B7BD843A6A2109005A895A77 /* Frameworks */,
+				24D47F9B0AD3A2AFA86FD3D7 /* Pods */,
+				9AEFF0DAAF347447433B6FD5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -108,6 +122,7 @@
 				AF402B7E20D1595700DD18D7 /* CharacterModelTalents.swift */,
 				AF402B8020D15ADC00DD18D7 /* CharacterModelAudit.swift */,
 				AFD33A8C20C6624D00D5D6EC /* CharacterFunctions.swift */,
+				AFFA834F20E0C6FF00922717 /* CharacterModelTemp.swift */,
 			);
 			path = Character;
 			sourceTree = "<group>";
@@ -115,8 +130,10 @@
 		AFD33A9020C6628A00D5D6EC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				AF584EBF20DCCA7C00AD1FA2 /* SwipeTableViewController.swift */,
 				AF8318D220C50DE700539567 /* ViewController.swift */,
 				AF8318D420C50DE700539567 /* Main.storyboard */,
+				AF584EC120DE21B200AD1FA2 /* CharacterTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -130,14 +147,6 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		B7BD843A6A2109005A895A77 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				51F4C028928C690B51E32189 /* Pods_WoWilvlChecker.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -145,11 +154,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AF8318DF20C50DEA00539567 /* Build configuration list for PBXNativeTarget "WoWilvlChecker" */;
 			buildPhases = (
-				CFEA4AE2E18657208AB7BC3D /* [CP] Check Pods Manifest.lock */,
+				03CC90C2ADE7D689E5C60ECB /* [CP] Check Pods Manifest.lock */,
 				AF8318C920C50DE700539567 /* Sources */,
 				AF8318CA20C50DE700539567 /* Frameworks */,
 				AF8318CB20C50DE700539567 /* Resources */,
-				D6AF12599A115B0FD2E05246 /* [CP] Embed Pods Frameworks */,
+				2FB6927B74B379BF00984E72 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -207,7 +216,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		CFEA4AE2E18657208AB7BC3D /* [CP] Check Pods Manifest.lock */ = {
+		03CC90C2ADE7D689E5C60ECB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -225,7 +234,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D6AF12599A115B0FD2E05246 /* [CP] Embed Pods Frameworks */ = {
+		2FB6927B74B379BF00984E72 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -258,8 +267,11 @@
 				AF402B8120D15ADC00DD18D7 /* CharacterModelAudit.swift in Sources */,
 				AF8318D320C50DE700539567 /* ViewController.swift in Sources */,
 				AF8318E320C5189300539567 /* CharacterModelItems.swift in Sources */,
+				AF584EC020DCCA7D00AD1FA2 /* SwipeTableViewController.swift in Sources */,
 				AF402B7F20D1595700DD18D7 /* CharacterModelTalents.swift in Sources */,
 				AF1493A520D64A4E001EA714 /* CharacterModel.swift in Sources */,
+				AFFA835020E0C6FF00922717 /* CharacterModelTemp.swift in Sources */,
+				AF584EC220DE21B200AD1FA2 /* CharacterTableViewCell.swift in Sources */,
 				AF8318D120C50DE700539567 /* AppDelegate.swift in Sources */,
 				AFD33A8B20C6623300D5D6EC /* DataModel.swift in Sources */,
 			);
@@ -403,7 +415,7 @@
 		};
 		AF8318E020C50DEA00539567 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 35B3FFA8EABEF12AF921C92F /* Pods-WoWilvlChecker.debug.xcconfig */;
+			baseConfigurationReference = 9FE5FF33D4902682D092887E /* Pods-WoWilvlChecker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -422,7 +434,7 @@
 		};
 		AF8318E120C50DEA00539567 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A999A1B58935A5581C710C36 /* Pods-WoWilvlChecker.release.xcconfig */;
+			baseConfigurationReference = FCD8B1F3E3E466D1AFADD234 /* Pods-WoWilvlChecker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
