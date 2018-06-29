@@ -11,6 +11,7 @@ import UIKit
 class CharacterTableViewCell: UITableViewCell {
 
     @IBOutlet weak var characterDataLabel: UILabel!
+    @IBOutlet weak var characterThumbnail: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
