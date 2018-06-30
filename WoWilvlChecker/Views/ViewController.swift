@@ -17,7 +17,6 @@ class ViewController: UIViewController {
     var apiKey = "pgje56uws25hmdw426agmrkjcz4zbhuc"
     var name = "belangel"
     var charRealm = "azjol-nerub"
-//    var fields = "talents"
     
     var chars: Results<CharacterModel>?
     var tempChar = CharacterModelTemp()
@@ -37,7 +36,7 @@ class ViewController: UIViewController {
     
     // MARK: - Buttons
     
-    @IBAction func alamoResponseButtonPressed(_ sender: Any) {
+    @IBAction func searchCharacterButtonPressed(_ sender: Any) {
         print("*******************************")
         if let searchText = searchInput.text {
             
@@ -274,6 +273,37 @@ class ViewController: UIViewController {
         }
     }
     
+    func classColor(class: Int) -> Int {
+        switch `class` {
+        case 1:
+            return 0xC79C6E
+        case 2:
+            return 0xF58CBA
+        case 3:
+            return 0xABD473
+        case 4:
+            return 0xFFF569
+        case 5:
+            return 0xFFFFFF
+        case 6:
+            return 0xC41F3B
+        case 7:
+            return 0x0070DE
+        case 8:
+            return 0x69CCF0
+        case 9:
+            return 0x9482C9
+        case 10:
+            return 0x00FF96
+        case 11:
+            return 0xFF7D0A
+        case 12:
+            return 0xA330C9
+        default:
+            return 0x000000
+        }
+    }
+    
     func printLastDataFetch() {
         print("*****************")
         print("Name: \(chars?.last?.charName ?? "None")")
@@ -341,6 +371,9 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
             cell.characterDataLabel.text = "\(char.charName) - iLevel: \(char.averageItemLevelEquipped)\n\(classConverter(class: (char.charClass))) - \(char.spec) (\(char.role))\nMissing gems: \(char.emptySockets)\nEnchants: \(char.backEnchant)"
             
             cell.characterThumbnail.downloadedFrom(link: "http://render-eu.worldofwarcraft.com/character/\(char.thumbnail)")
+
+            cell.characterBackground.backgroundColor = UIColor(hex: classColor(class: char.charClass))
+            
             
 //            guard let categoryColour = UIColor(hexString: charsList.bgColour) else { fatalError() }
 //
@@ -382,4 +415,23 @@ extension UIImageView {
         guard let url = URL(string: link) else { return }
         downloadedFrom(url: url, contentMode: mode)
     }
+    
+    func addRoundedCorners() {
+        layer.cornerRadius = 10
+    }
 }
+
+extension UIColor {
+    
+    convenience init(hex: Int) {
+        let components = (
+            R: CGFloat((hex >> 16) & 0xff) / 255,
+            G: CGFloat((hex >> 08) & 0xff) / 255,
+            B: CGFloat((hex >> 00) & 0xff) / 255
+        )
+        
+        self.init(red: components.R, green: components.G, blue: components.B, alpha: 1)
+    }
+    
+}
+

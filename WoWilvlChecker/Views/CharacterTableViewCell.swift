@@ -12,10 +12,15 @@ class CharacterTableViewCell: UITableViewCell {
 
     @IBOutlet weak var characterDataLabel: UILabel!
     @IBOutlet weak var characterThumbnail: UIImageView!
+    @IBOutlet weak var characterBackground: UIView!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        characterBackground.layer.cornerRadius = 10
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
