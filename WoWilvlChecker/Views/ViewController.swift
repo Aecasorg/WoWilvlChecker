@@ -340,47 +340,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
             
             cell.characterDataLabel.text = "\(char.charName) - iLevel: \(char.averageItemLevelEquipped)\n\(classConverter(class: (char.charClass))) - \(char.spec) (\(char.role))\nMissing gems: \(char.emptySockets)\nEnchants: \(char.backEnchant)"
             
-            
-            let charThumbnailURL = URL(string: "http://render-eu.worldofwarcraft.com/character/\(char.thumbnail)")!
-            
-            // Creating a session object with the default configuration.
-            // You can read more about it here https://developer.apple.com/reference/foundation/urlsessionconfiguration
-            let session = URLSession(configuration: .default)
-            
-            // Define a download task. The download task will download the contents of the URL as a Data object and then you can do what you wish with that data.
-            let downloadPicTask = session.dataTask(with: charThumbnailURL) { (data, response, error) in
-                // The download has finished.
-                if let e = error {
-                    print("Error downloading cat picture: \(e)")
-                } else {
-                    // No errors found.
-                    // It would be weird if we didn't have a response, so check for that too.
-                    if let res = response as? HTTPURLResponse {
-                        print("Downloaded cat picture with response code \(res.statusCode)")
-                        if let imageData = data {
-                            // Finally convert that Data into an image and do what you wish with it.
-                            cell.characterThumbnail.image = UIImage(data: imageData)
-                            // Do something with your image.
-                        } else {
-                            print("Couldn't get image: Image is nil")
-                        }
-                    } else {
-                        print("Couldn't get response code for some reason")
-                    }
-                }
-            }
-            
-            downloadPicTask.resume()
-            
-            
-//            do {
-//                let url = URL(string: "http://render-eu.worldofwarcraft.com/character/\(char.thumbnail)")
-//                let data = try Data(contentsOf: url!)
-//                cell.characterThumbnail.image = UIImage(data: data)
-//            }
-//            catch{
-//                print(error)
-//            }
+            cell.characterThumbnail.downloadedFrom(link: "http://render-eu.worldofwarcraft.com/character/\(char.thumbnail)")
             
 //            guard let categoryColour = UIColor(hexString: charsList.bgColour) else { fatalError() }
 //
@@ -401,4 +361,25 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
 //
 //    }
     
+}
+
+extension UIImageView {
+    func downloadedFrom(url: URL, contentMode mode: UIViewContentMode = .scaleAspectFit) {
+        contentMode = mode
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard
+                let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
+                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
+                let data = data, error == nil,
+                let image = UIImage(data: data)
+                else { return }
+            DispatchQueue.main.async() {
+                self.image = image
+            }
+            }.resume()
+    }
+    func downloadedFrom(link: String, contentMode mode: UIViewContentMode = .scaleAspectFit) {
+        guard let url = URL(string: link) else { return }
+        downloadedFrom(url: url, contentMode: mode)
+    }
 }
