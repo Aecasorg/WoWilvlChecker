@@ -368,7 +368,17 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         
         if let char = chars?[indexPath.row] {
             
-            cell.characterDataLabel.text = "\(char.charName) - iLevel: \(char.averageItemLevelEquipped)\n\(classConverter(class: (char.charClass))) - \(char.spec) (\(char.role))\nMissing gems: \(char.emptySockets)\nEnchants: \(char.backEnchant)"
+            let formattedString = NSMutableAttributedString()
+            
+            formattedString
+                .normal("\(char.charName) - iLevel: ")
+                .bold("\(char.averageItemLevelEquipped)")
+                .normal("\n\(classConverter(class: (char.charClass))) - \(char.spec) (\(char.role))\nMissing gems: \(char.emptySockets)\nEnchants: \(char.backEnchant)")
+            
+            cell.characterDataLabel.attributedText = formattedString
+            
+            cell.characterThumbnail.layer.cornerRadius = 20
+            cell.characterThumbnail.layer.masksToBounds = true
             
             cell.characterThumbnail.downloadedFrom(link: "http://render-eu.worldofwarcraft.com/character/\(char.thumbnail)")
 
@@ -435,3 +445,19 @@ extension UIColor {
     
 }
 
+extension NSMutableAttributedString {
+    @discardableResult func bold(_ text: String) -> NSMutableAttributedString {
+        let attrs: [NSAttributedStringKey: Any] = [.font: UIFont.boldSystemFont(ofSize: 15)]
+        let boldString = NSMutableAttributedString(string:text, attributes: attrs)
+        append(boldString)
+        
+        return self
+    }
+    
+    @discardableResult func normal(_ text: String) -> NSMutableAttributedString {
+        let normal = NSAttributedString(string: text)
+        append(normal)
+        
+        return self
+    }
+}

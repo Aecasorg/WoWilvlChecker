@@ -19,7 +19,7 @@ class CharacterTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
-        characterBackground.layer.cornerRadius = 10
+        characterBackground.layer.cornerRadius = 20
         
     }
 
