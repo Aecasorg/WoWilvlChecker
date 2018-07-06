@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 import Alamofire
+import SwipeCellKit
 
 class ViewController: UIViewController {
 
@@ -350,6 +351,20 @@ class ViewController: UIViewController {
         charsTableView.reloadData()
         
     }
+    
+    //MARK: - Delete Data From Swipe
+    
+    func updateModel(at indexPath: IndexPath) {
+        if let charForDeletion = self.chars?[indexPath.row] {
+            do {
+                try self.realm.write {
+                    self.realm.delete(charForDeletion)
+                }
+            } catch {
+                print("Error deleting category \(error)")
+            }
+        }
+    }
 
 }
 
@@ -357,9 +372,9 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
     //MARK: - TableView Datasource Methods
     
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        return 1
-//    }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -372,6 +387,9 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         
 //        let cell = super.tableView(tableView, cellForRowAt: indexPath)
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CharacterTableViewCell
+        
+        cell.delegate = self as? SwipeTableViewCellDelegate
+        print(cell.delegate)
         
         if let char = chars?[indexPath.row] {
             
@@ -412,6 +430,35 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
 //    }
     
 }
+
+extension SwipeTableViewCellDelegate {
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .right else { return nil }
+
+        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+            // handle action by updating model with deletion
+            self.updateModel(at: indexPath)
+        }
+
+        // customize the action appearance
+        deleteAction.image = UIImage(named: "delete-icon")
+
+        return [deleteAction]
+    }
+    
+    func updateModel(at indexPath: IndexPath) {
+        // Update our data model
+    }
+    
+//    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
+//        var options = SwipeOptions()
+//        options.expansionStyle = .destructive
+//        return options
+//    }
+    
+}
+
 
 extension UIImageView {
     func downloadedFrom(url: URL, contentMode mode: UIViewContentMode = .scaleAspectFit) {
