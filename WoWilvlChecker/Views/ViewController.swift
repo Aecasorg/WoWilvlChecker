@@ -368,7 +368,7 @@ class ViewController: UIViewController {
 
 }
 
-extension ViewController: UITableViewDataSource, UITableViewDelegate {
+extension ViewController: UITableViewDataSource, UITableViewDelegate, SwipeTableViewCellDelegate {
     
     //MARK: - TableView Datasource Methods
     
@@ -388,7 +388,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
 //        let cell = super.tableView(tableView, cellForRowAt: indexPath)
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CharacterTableViewCell
         
-        cell.delegate = self as? SwipeTableViewCellDelegate
+        cell.delegate = self
         print(cell.delegate)
         
         if let char = chars?[indexPath.row] {
@@ -451,11 +451,11 @@ extension SwipeTableViewCellDelegate {
         // Update our data model
     }
     
-//    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
-//        var options = SwipeOptions()
-//        options.expansionStyle = .destructive
-//        return options
-//    }
+    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
+        var options = SwipeOptions()
+        options.expansionStyle = .destructive
+        return options
+    }
     
 }
 
