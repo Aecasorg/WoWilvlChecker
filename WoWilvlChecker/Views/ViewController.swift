@@ -354,16 +354,17 @@ class ViewController: UIViewController {
     
     //MARK: - Delete Data From Swipe
     
-    func updateModel(at indexPath: IndexPath) {
-        if let charForDeletion = self.chars?[indexPath.row] {
-            do {
-                try self.realm.write {
-                    self.realm.delete(charForDeletion)
-                }
-            } catch {
-                print("Error deleting category \(error)")
-            }
-        }
+    func deleteChar(at indexPath: IndexPath) {
+        print("Deleting index...")
+//        if let charForDeletion = self.chars?[indexPath.row] {
+//            do {
+//                try self.realm.write {
+//                    self.realm.delete(charForDeletion)
+//                }
+//            } catch {
+//                print("Error deleting category \(error)")
+//            }
+//        }
     }
 
 }
@@ -389,7 +390,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, SwipeTable
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CharacterTableViewCell
         
         cell.delegate = self
-        print(cell.delegate)
         
         if let char = chars?[indexPath.row] {
             
@@ -429,10 +429,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, SwipeTable
 //
 //    }
     
-}
-
-extension SwipeTableViewCellDelegate {
-    
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
         guard orientation == .right else { return nil }
 
@@ -449,6 +445,16 @@ extension SwipeTableViewCellDelegate {
     
     func updateModel(at indexPath: IndexPath) {
         // Update our data model
+        print("Deleting index...")
+                if let charForDeletion = self.chars?[indexPath.row] {
+                    do {
+                        try self.realm.write {
+                            self.realm.delete(charForDeletion)
+                        }
+                    } catch {
+                        print("Error deleting category \(error)")
+                    }
+                }
     }
     
     func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
