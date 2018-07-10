@@ -25,3 +25,6 @@ Early prototype.
 ### Changes needed:
 * Search will need to be improved. I.e. to include realm choice.  
 * Update character/s button. Maybe slide to update? Slide right to update chosen character, down to update all characters, left to delete?
+
+## Credits
+<div>Icons made by <a href="https://www.flaticon.com/authors/google" title="reload">reload</a> from <a href="https://www.flaticon.com/"     title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"     title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
