@@ -351,23 +351,10 @@ class ViewController: UIViewController {
         charsTableView.reloadData()
         
     }
-    
-    //MARK: - Delete Data From Swipe
-    
-    func deleteChar(at indexPath: IndexPath) {
-        print("Deleting index...")
-//        if let charForDeletion = self.chars?[indexPath.row] {
-//            do {
-//                try self.realm.write {
-//                    self.realm.delete(charForDeletion)
-//                }
-//            } catch {
-//                print("Error deleting category \(error)")
-//            }
-//        }
-    }
 
 }
+
+// MARK: - Extensions
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate, SwipeTableViewCellDelegate {
     
@@ -409,13 +396,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, SwipeTable
 
             cell.characterBackground.backgroundColor = UIColor(hex: classColor(class: char.charClass))
             
-            
-//            guard let categoryColour = UIColor(hexString: charsList.bgColour) else { fatalError() }
-//
-//            cell.backgroundColor = categoryColour
-//
-//            cell.textLabel?.textColor = ContrastColorOf(categoryColour, returnFlat: true)
-            
         }
         
         return cell
@@ -423,39 +403,41 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, SwipeTable
     
     //MARK: - TableView Delegate Methods
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//
-//        performSegue(withIdentifier: "goToItems", sender: self)
-//
-//    }
-    
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
-        guard orientation == .right else { return nil }
+//        guard orientation == .right else { return nil }
 
+        // Delete character (swipe from right)
         let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
-            // handle action by updating model with deletion
-            self.updateModel(at: indexPath)
+            
+            self.deleteCharacter(at: indexPath)
+        }
+        
+        deleteAction.image = UIImage(named: "delete-icon")
+        
+        // Update character (swipe from left)
+        let updateAction = SwipeAction(style: .destructive, title: "Refresh") { action, indexPath in
+            
+            self.updateCharacter(at: indexPath)
         }
 
-        // customize the action appearance
-        deleteAction.image = UIImage(named: "delete-icon")
+        updateAction.image = UIImage(named: "reload-icon")
 
-        return [deleteAction]
+        return orientation == .right ? [deleteAction] : [updateAction]
     }
     
-    func updateModel(at indexPath: IndexPath) {
-        // Update our data model
-        print("Deleting index...")
-                if let charForDeletion = self.chars?[indexPath.row] {
-                    do {
-                        try self.realm.write {
-                            self.realm.delete(charForDeletion)
-                        }
-                    } catch {
-                        print("Error deleting category \(error)")
-                    }
-                }
-    }
+//    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+//        guard orientation == .left else { return nil }
+//
+//        let updateAction = SwipeAction(style: .destructive, title: "Update") { action, indexPath in
+//            // handle action by updating model with deletion
+//            self.updateCharacter(at: indexPath)
+//        }
+//
+//        // customize the action appearance
+//        updateAction.image = UIImage(named: "reload-icon")
+//
+//        return [updateAction]
+//    }
     
     func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
         var options = SwipeOptions()
@@ -463,9 +445,27 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, SwipeTable
         return options
     }
     
+    // Delete character when swiping
+    func deleteCharacter(at indexPath: IndexPath) {
+        // Update our data model
+        print("Deleting index...")
+        if let charForDeletion = self.chars?[indexPath.row] {
+            do {
+                try self.realm.write {
+                    self.realm.delete(charForDeletion)
+                }
+            } catch {
+                print("Error deleting category \(error)")
+            }
+        }
+    }
+    
+    func updateCharacter(at indexPath: IndexPath) {
+        // Compares lastmodified and then pulls info if different
+    }
 }
 
-
+// Deals with downloading thumbnail image
 extension UIImageView {
     func downloadedFrom(url: URL, contentMode mode: UIViewContentMode = .scaleAspectFit) {
         contentMode = mode
@@ -486,11 +486,9 @@ extension UIImageView {
         downloadedFrom(url: url, contentMode: mode)
     }
     
-    func addRoundedCorners() {
-        layer.cornerRadius = 10
-    }
 }
 
+// Deals with converting hex colours for character class backgrounds
 extension UIColor {
     
     convenience init(hex: Int) {
@@ -505,6 +503,7 @@ extension UIColor {
     
 }
 
+// Deals with including bold text with within label text
 extension NSMutableAttributedString {
     @discardableResult func bold(_ text: String) -> NSMutableAttributedString {
         let attrs: [NSAttributedStringKey: Any] = [.font: UIFont.boldSystemFont(ofSize: 15)]
