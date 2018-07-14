@@ -11,7 +11,7 @@ import RealmSwift
 import Alamofire
 import SwipeCellKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UISearchBarDelegate {
 
     let realm = try! Realm()
     
@@ -30,6 +30,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        searchInput.delegate = self
+        
         loadChars()
         
         charsTableView.dataSource = self
@@ -38,14 +40,19 @@ class ViewController: UIViewController {
         
     }
     
+    
+    
     // MARK: - Buttons
     
-    @IBAction func searchCharacterButtonPressed(_ sender: Any) {
-        print("*******************************")
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar)  {
+        
         if let searchCharName = searchInput.text {
             
             downloadChar(charName: searchCharName, saveChar: true)
         }
+        
+        searchBar.resignFirstResponder()
+        
     }
     
     func downloadChar(charName: String, saveChar: Bool) {
@@ -82,10 +89,6 @@ class ViewController: UIViewController {
                 })
             }
         }
-    }
-    
-    @IBAction func printCharButtonPressed(_ sender: Any) {
-        printLastDataFetch()
     }
 
     //MARK: - Networking
@@ -316,21 +319,6 @@ class ViewController: UIViewController {
         default:
             return 0x000000
         }
-    }
-    
-    func printLastDataFetch() {
-        print("*****************")
-        print("Name: \(chars?.last?.charName ?? "None")")
-        print("Realm: \(chars?.last?.charRealm ?? "None")")
-        print("ilvl: \(chars?.last?.averageItemLevelEquipped ?? 0)")
-        print("Class: \(classConverter(class: (chars!.last?.charClass)!) )")
-        print("Spec: \(chars?.last?.spec ?? "None")")
-        print("Role: \(chars?.last?.role ?? "None")")
-        print("Neck enchant?: \(chars?.last?.neckEnchant ?? false)")
-        print("Back enchant?: \(chars?.last?.backEnchant ?? false)")
-        print("Ring1 enchant?: \(chars?.last?.finger1Enchant ?? false)")
-        print("Ring2 enchant?: \(chars?.last?.finger2Enchant ?? false)")
-        print("Gems missing?: \(chars?.last?.emptySockets ?? 0)")
     }
     
     //MARK: - Data Manipulation Methods
