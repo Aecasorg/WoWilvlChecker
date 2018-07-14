@@ -34,46 +34,52 @@ class ViewController: UIViewController {
         
         charsTableView.dataSource = self
         
+        self.hideKeyboardWhenTappedAround()
+        
     }
     
     // MARK: - Buttons
     
     @IBAction func searchCharacterButtonPressed(_ sender: Any) {
         print("*******************************")
-        if let searchText = searchInput.text {
+        if let searchCharName = searchInput.text {
             
-            apiCheck = true
+            downloadChar(charName: searchCharName, saveChar: true)
+        }
+    }
+    
+    func downloadChar(charName: String, saveChar: Bool) {
+        apiCheck = true
+        
+        var blizzardURL = urlCreator(name: charName, realm: charRealm, fields: "items")
+        getCharacterData(url: blizzardURL, dataChoice: 0) {(success) -> Void in
             
-            var blizzardURL = urlCreator(name: searchText, realm: charRealm, fields: "items")
-            getCharacterData(url: blizzardURL, dataChoice: 0) {(success) -> Void in
+            blizzardURL = self.urlCreator(name: charName, realm: self.charRealm, fields: "talents")
+            self.getCharacterData(url: blizzardURL, dataChoice: 1) {(success) -> Void in
                 
-                blizzardURL = self.urlCreator(name: searchText, realm: self.charRealm, fields: "talents")
-                self.getCharacterData(url: blizzardURL, dataChoice: 1) {(success) -> Void in
+                blizzardURL = self.urlCreator(name: charName, realm: self.charRealm, fields: "audit")
+                self.getCharacterData(url: blizzardURL, dataChoice: 2, completion: {(success) -> Void in
                     
-                    blizzardURL = self.urlCreator(name: searchText, realm: self.charRealm, fields: "audit")
-                    self.getCharacterData(url: blizzardURL, dataChoice: 2, completion: {(success) -> Void in
+                    if self.apiCheck {
+                        let newChar = CharacterModel()
                         
-                        if self.apiCheck {
-                            let newChar = CharacterModel()
-                            
-                            newChar.charName = self.tempChar.charName
-                            newChar.charRealm = self.tempChar.charRealm
-                            newChar.lastModified = self.tempChar.lastModified
-                            newChar.charClass = self.tempChar.charClass
-                            newChar.thumbnail = self.tempChar.thumbnail
-                            newChar.averageItemLevelEquipped = self.tempChar.averageItemLevelEquipped
-                            newChar.neckEnchant = self.tempChar.neckEnchant
-                            newChar.backEnchant = self.tempChar.backEnchant
-                            newChar.finger1Enchant = self.tempChar.finger1Enchant
-                            newChar.finger2Enchant = self.tempChar.finger2Enchant
-                            newChar.spec = self.tempChar.spec
-                            newChar.role = self.tempChar.role
-                            newChar.emptySockets = self.tempChar.emptySockets
-                            
-                            self.save(character: newChar)
-                        }
-                    })
-                }
+                        newChar.charName = self.tempChar.charName
+                        newChar.charRealm = self.tempChar.charRealm
+                        newChar.lastModified = self.tempChar.lastModified
+                        newChar.charClass = self.tempChar.charClass
+                        newChar.thumbnail = self.tempChar.thumbnail
+                        newChar.averageItemLevelEquipped = self.tempChar.averageItemLevelEquipped
+                        newChar.neckEnchant = self.tempChar.neckEnchant
+                        newChar.backEnchant = self.tempChar.backEnchant
+                        newChar.finger1Enchant = self.tempChar.finger1Enchant
+                        newChar.finger2Enchant = self.tempChar.finger2Enchant
+                        newChar.spec = self.tempChar.spec
+                        newChar.role = self.tempChar.role
+                        newChar.emptySockets = self.tempChar.emptySockets
+                        
+                        self.save(character: newChar)
+                    }
+                })
             }
         }
     }
@@ -462,6 +468,10 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, SwipeTable
     
     func updateCharacter(at indexPath: IndexPath) {
         // Compares lastmodified and then pulls info if different
+        var existingLastModified = chars![indexPath.row].lastModified
+        
+        
+        
     }
 }
 
@@ -518,5 +528,18 @@ extension NSMutableAttributedString {
         append(normal)
         
         return self
+    }
+}
+
+// Dismisses keyboard when tapped anywhere else on screen
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
