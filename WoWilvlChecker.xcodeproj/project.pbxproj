@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9E6BFABD427B340FB810B746 /* Pods_WoWilvlChecker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 697CD8DFF039D0E99BE0DB0A /* Pods_WoWilvlChecker.framework */; };
 		AF1493A520D64A4E001EA714 /* CharacterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1493A420D64A4E001EA714 /* CharacterModel.swift */; };
 		AF402B7F20D1595700DD18D7 /* CharacterModelTalents.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF402B7E20D1595700DD18D7 /* CharacterModelTalents.swift */; };
 		AF402B8120D15ADC00DD18D7 /* CharacterModelAudit.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF402B8020D15ADC00DD18D7 /* CharacterModelAudit.swift */; };
@@ -21,11 +20,13 @@
 		AFD33A8B20C6623300D5D6EC /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD33A8A20C6623300D5D6EC /* DataModel.swift */; };
 		AFD33A8D20C6624D00D5D6EC /* CharacterFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD33A8C20C6624D00D5D6EC /* CharacterFunctions.swift */; };
 		AFFA835020E0C6FF00922717 /* CharacterModelTemp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFA834F20E0C6FF00922717 /* CharacterModelTemp.swift */; };
+		CC1645D8DB3D74BD921B6186 /* Pods_WoWilvlChecker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 487315FA012EE7A10B07F1D4 /* Pods_WoWilvlChecker.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		697CD8DFF039D0E99BE0DB0A /* Pods_WoWilvlChecker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WoWilvlChecker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		91BD8B4E37DB9A3F72659956 /* Pods-WoWilvlChecker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WoWilvlChecker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WoWilvlChecker/Pods-WoWilvlChecker.debug.xcconfig"; sourceTree = "<group>"; };
+		1CCD64AA32B53DFD18E5BC4C /* Pods-WoWilvlChecker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WoWilvlChecker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WoWilvlChecker/Pods-WoWilvlChecker.debug.xcconfig"; sourceTree = "<group>"; };
+		487315FA012EE7A10B07F1D4 /* Pods_WoWilvlChecker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WoWilvlChecker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5CF4F053930675D2FD8913F3 /* Pods-WoWilvlChecker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WoWilvlChecker.release.xcconfig"; path = "Pods/Target Support Files/Pods-WoWilvlChecker/Pods-WoWilvlChecker.release.xcconfig"; sourceTree = "<group>"; };
 		AF1493A420D64A4E001EA714 /* CharacterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterModel.swift; sourceTree = "<group>"; };
 		AF402B7E20D1595700DD18D7 /* CharacterModelTalents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterModelTalents.swift; sourceTree = "<group>"; };
 		AF402B8020D15ADC00DD18D7 /* CharacterModelAudit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterModelAudit.swift; sourceTree = "<group>"; };
@@ -41,7 +42,6 @@
 		AFD33A8A20C6623300D5D6EC /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		AFD33A8C20C6624D00D5D6EC /* CharacterFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterFunctions.swift; sourceTree = "<group>"; };
 		AFFA834F20E0C6FF00922717 /* CharacterModelTemp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterModelTemp.swift; sourceTree = "<group>"; };
-		E36FE91D3D7702F1743416CD /* Pods-WoWilvlChecker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WoWilvlChecker.release.xcconfig"; path = "Pods/Target Support Files/Pods-WoWilvlChecker/Pods-WoWilvlChecker.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,20 +49,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9E6BFABD427B340FB810B746 /* Pods_WoWilvlChecker.framework in Frameworks */,
+				CC1645D8DB3D74BD921B6186 /* Pods_WoWilvlChecker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2DBB76CEF18FBD4534C0249F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1CCD64AA32B53DFD18E5BC4C /* Pods-WoWilvlChecker.debug.xcconfig */,
+				5CF4F053930675D2FD8913F3 /* Pods-WoWilvlChecker.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		7B631EBA86B958C3D665A0DF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				487315FA012EE7A10B07F1D4 /* Pods_WoWilvlChecker.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		AF8318C420C50DE700539567 = {
 			isa = PBXGroup;
 			children = (
 				AF8318CF20C50DE700539567 /* WoWilvlChecker */,
 				AF8318CE20C50DE700539567 /* Products */,
-				BAE13BCB69A452E323FF5318 /* Pods */,
-				E6E73896F2FF3E35753A9450 /* Frameworks */,
+				2DBB76CEF18FBD4534C0249F /* Pods */,
+				7B631EBA86B958C3D665A0DF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -127,23 +144,6 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		BAE13BCB69A452E323FF5318 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				91BD8B4E37DB9A3F72659956 /* Pods-WoWilvlChecker.debug.xcconfig */,
-				E36FE91D3D7702F1743416CD /* Pods-WoWilvlChecker.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		E6E73896F2FF3E35753A9450 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				697CD8DFF039D0E99BE0DB0A /* Pods_WoWilvlChecker.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -151,11 +151,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AF8318DF20C50DEA00539567 /* Build configuration list for PBXNativeTarget "WoWilvlChecker" */;
 			buildPhases = (
-				718BAA0E789BDDA201BB2453 /* [CP] Check Pods Manifest.lock */,
+				401248295C4F59EB60BE772F /* [CP] Check Pods Manifest.lock */,
 				AF8318C920C50DE700539567 /* Sources */,
 				AF8318CA20C50DE700539567 /* Frameworks */,
 				AF8318CB20C50DE700539567 /* Resources */,
-				F279ABDC389A73919C94B012 /* [CP] Embed Pods Frameworks */,
+				313622F3AD5B2ACA2B01CD9C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -213,25 +213,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		718BAA0E789BDDA201BB2453 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-WoWilvlChecker-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F279ABDC389A73919C94B012 /* [CP] Embed Pods Frameworks */ = {
+		313622F3AD5B2ACA2B01CD9C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -253,6 +235,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WoWilvlChecker/Pods-WoWilvlChecker-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		401248295C4F59EB60BE772F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WoWilvlChecker-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -413,7 +413,7 @@
 		};
 		AF8318E020C50DEA00539567 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 91BD8B4E37DB9A3F72659956 /* Pods-WoWilvlChecker.debug.xcconfig */;
+			baseConfigurationReference = 1CCD64AA32B53DFD18E5BC4C /* Pods-WoWilvlChecker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -433,7 +433,7 @@
 		};
 		AF8318E120C50DEA00539567 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E36FE91D3D7702F1743416CD /* Pods-WoWilvlChecker.release.xcconfig */;
+			baseConfigurationReference = 5CF4F053930675D2FD8913F3 /* Pods-WoWilvlChecker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

@@ -23,6 +23,10 @@ class ViewController: UIViewController, UISearchBarDelegate {
     var chars: Results<CharacterModel>?
     var tempChar = CharacterModelTemp()
     
+    // used to temporarily store lastModified data field and indexPath on stored character
+    var existingLastModified = 0
+    var indexPathToBeUpdated: IndexPath = []
+    
     @IBOutlet weak var charsTableView: UITableView!
     
     @IBOutlet weak var searchInput: UISearchBar!
@@ -84,11 +88,16 @@ class ViewController: UIViewController, UISearchBarDelegate {
                         newChar.role = self.tempChar.role
                         newChar.emptySockets = self.tempChar.emptySockets
                         
-                        self.save(character: newChar)
+                        saveChar ? self.save(character: newChar) : self.update(character: newChar)
                     }
                 })
             }
         }
+    }
+    
+    // NOTE: Placeholder function...
+    func update(character: CharacterModel) {
+    
     }
 
     //MARK: - Networking
@@ -456,9 +465,9 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, SwipeTable
     
     func updateCharacter(at indexPath: IndexPath) {
         // Compares lastmodified and then pulls info if different
-        var existingLastModified = chars![indexPath.row].lastModified
-        
-        
+        existingLastModified = chars![indexPath.row].lastModified
+        indexPathToBeUpdated = indexPath
+        downloadChar(charName: chars![indexPath.row].charName, saveChar: false)
         
     }
 }

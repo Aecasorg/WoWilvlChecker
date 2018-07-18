@@ -11,6 +11,7 @@ import RealmSwift
 
 class CharacterModel: Object {
     
+    @objc dynamic var charID = UUID().uuidString
     @objc dynamic var lastModified: Int = 0
     @objc dynamic var charName: String = ""
     @objc dynamic var charRealm: String = ""
@@ -25,9 +26,8 @@ class CharacterModel: Object {
     @objc dynamic var role: String = ""
     @objc dynamic var emptySockets: Int = 0
     
-//    init(name: String, realm: String) {
-//        self.charName = name
-//        self.charRealm = realm
-//    }
+    override static func primaryKey() -> String? {
+        return "charID"
+    }
     
 }

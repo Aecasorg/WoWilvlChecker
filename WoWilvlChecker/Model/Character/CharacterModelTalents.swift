@@ -26,9 +26,9 @@ struct CharacterModelTalents: Codable {
 }
 
 struct CharacterDataTalent: Codable {
-    let talents: [TalentTalent]
+//    let talents: [TalentTalent]
     let spec: Spec?
-    let calcTalent, calcSpec: String
+//    let calcTalent, calcSpec: String
     let selected: Bool?
 }
 
@@ -41,15 +41,15 @@ struct Spec: Codable {
     let order: Int
 }
 
-struct TalentTalent: Codable {
-    let tier, column: Int
-    let spell: Spell
-    let spec: Spec?
-}
+//struct TalentTalent: Codable {
+//    let tier, column: Int
+//    let spell: Spell
+//    let spec: Spec?
+//}
 
-struct Spell: Codable {
-    let id: Int
-    let name, icon, description: String
-    let castTime: String
-    let cooldown, range, powerCost: String?
-}
+//struct Spell: Codable {
+//    let id: Int
+//    let name, icon, description: String
+//    let castTime: String
+//    let cooldown, range, powerCost: String?
+//}
