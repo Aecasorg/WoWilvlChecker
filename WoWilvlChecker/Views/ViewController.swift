@@ -24,8 +24,8 @@ class ViewController: UIViewController, UISearchBarDelegate {
     var tempChar = CharacterModelTemp()
     
     // used to temporarily store lastModified data field and indexPath on stored character
-    var existingLastModified = 0
-    var indexPathToBeUpdated: IndexPath = []
+//    var existingLastModified = 0
+//    var indexPathToBeUpdated: IndexPath = []
     
     @IBOutlet weak var charsTableView: UITableView!
     
@@ -52,14 +52,14 @@ class ViewController: UIViewController, UISearchBarDelegate {
         
         if let searchCharName = searchInput.text {
             
-            downloadChar(charName: searchCharName, saveChar: true)
+            downloadChar(charName: searchCharName)
         }
         
         searchBar.resignFirstResponder()
         
     }
     
-    func downloadChar(charName: String, saveChar: Bool) {
+    func downloadChar(charName: String) {
         apiCheck = true
         
         var blizzardURL = urlCreator(name: charName, realm: charRealm, fields: "items")
@@ -73,6 +73,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
                     
                     if self.apiCheck {
                         let newChar = CharacterModel()
+                        
                         
                         newChar.charName = self.tempChar.charName
                         newChar.charRealm = self.tempChar.charRealm
@@ -88,16 +89,54 @@ class ViewController: UIViewController, UISearchBarDelegate {
                         newChar.role = self.tempChar.role
                         newChar.emptySockets = self.tempChar.emptySockets
                         
-                        saveChar ? self.save(character: newChar) : self.update(character: newChar)
+                        self.save(character: newChar)
                     }
                 })
             }
         }
     }
     
-    // NOTE: Placeholder function...
-    func update(character: CharacterModel) {
+    func updateChar(charName: String, charID: String, indexPath: IndexPath) {
+        apiCheck = true
+        
+        var blizzardURL = urlCreator(name: charName, realm: charRealm, fields: "items")
+        getCharacterData(url: blizzardURL, dataChoice: 0) {(success) -> Void in
+            
+            blizzardURL = self.urlCreator(name: charName, realm: self.charRealm, fields: "talents")
+            self.getCharacterData(url: blizzardURL, dataChoice: 1) {(success) -> Void in
+                
+                blizzardURL = self.urlCreator(name: charName, realm: self.charRealm, fields: "audit")
+                self.getCharacterData(url: blizzardURL, dataChoice: 2, completion: {(success) -> Void in
+                    
+                    if self.apiCheck {
+                        let newChar = CharacterModel()
+                        
+                        newChar.charID = charID
+                        newChar.charName = self.tempChar.charName
+                        newChar.charRealm = self.tempChar.charRealm
+                        newChar.lastModified = self.tempChar.lastModified
+                        newChar.charClass = self.tempChar.charClass
+                        newChar.thumbnail = self.tempChar.thumbnail
+                        newChar.averageItemLevelEquipped = self.tempChar.averageItemLevelEquipped
+                        newChar.neckEnchant = self.tempChar.neckEnchant
+                        newChar.backEnchant = self.tempChar.backEnchant
+                        newChar.finger1Enchant = self.tempChar.finger1Enchant
+                        newChar.finger2Enchant = self.tempChar.finger2Enchant
+                        newChar.spec = self.tempChar.spec
+                        newChar.role = self.tempChar.role
+                        newChar.emptySockets = self.tempChar.emptySockets
+                        
+                        self.update(character: newChar, indexPath: indexPath)
+                    }
+                })
+            }
+        }
+    }
     
+    func urlCreator(name: String, realm: String, fields: String) -> String {
+        
+        return "https://eu.api.battle.net/wow/character/\(realm)/\(name)?fields=\(fields)&locale=en_GB&apikey=\(apiKey)"
+        
     }
 
     //MARK: - Networking
@@ -108,7 +147,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
         Alamofire.request(url).responseJSON { response in
             if response.result.isSuccess {
                 
-                print("Success!")
+                print("---- Success in getting data! ----")
                 
                 if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
 //                    print("Data: \(utf8Text)") // original server data as UTF8 string
@@ -132,12 +171,6 @@ class ViewController: UIViewController, UISearchBarDelegate {
 
         }
 
-    }
-    
-    func urlCreator(name: String, realm: String, fields: String) -> String {
-        
-        return "https://eu.api.battle.net/wow/character/\(realm)/\(name)?fields=\(fields)&locale=en_GB&apikey=\(apiKey)"
-        
     }
     
     // MARK: - Data extraction
@@ -354,6 +387,23 @@ class ViewController: UIViewController, UISearchBarDelegate {
         charsTableView.reloadData()
         
     }
+    
+    func update(character: CharacterModel, indexPath: IndexPath) {
+        
+        do {
+            
+            try realm.write {
+                realm.add(character, update: true)
+            }
+        } catch {
+            print("Error updating character \(error)")
+        }
+        
+//        self.charsTableView.reloadRows(at: [indexPath], with: .automatic)
+        print("Rows after upadte: \(chars?.count)")
+        charsTableView.reloadData()
+        
+    }
 
 }
 
@@ -420,27 +470,14 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, SwipeTable
         // Update character (swipe from left)
         let updateAction = SwipeAction(style: .destructive, title: "Refresh") { action, indexPath in
             
-            self.updateCharacter(at: indexPath)
+//            self.updateCharacter(at: indexPath)
+            self.updateChar(charName: self.chars![indexPath.row].charName, charID: self.chars![indexPath.row].charID, indexPath: indexPath)
         }
 
         updateAction.image = UIImage(named: "reload-icon")
 
         return orientation == .right ? [deleteAction] : [updateAction]
     }
-    
-//    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
-//        guard orientation == .left else { return nil }
-//
-//        let updateAction = SwipeAction(style: .destructive, title: "Update") { action, indexPath in
-//            // handle action by updating model with deletion
-//            self.updateCharacter(at: indexPath)
-//        }
-//
-//        // customize the action appearance
-//        updateAction.image = UIImage(named: "reload-icon")
-//
-//        return [updateAction]
-//    }
     
     func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
         var options = SwipeOptions()
@@ -463,13 +500,10 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, SwipeTable
         }
     }
     
-    func updateCharacter(at indexPath: IndexPath) {
-        // Compares lastmodified and then pulls info if different
-        existingLastModified = chars![indexPath.row].lastModified
-        indexPathToBeUpdated = indexPath
-        downloadChar(charName: chars![indexPath.row].charName, saveChar: false)
-        
-    }
+//    func updateCharacter(at indexPath: IndexPath) {
+//        updateChar(charName: chars![indexPath.row].charName, charID: chars![indexPath.row].charID, indexPath: indexPath)
+//
+//    }
 }
 
 // Deals with downloading thumbnail image

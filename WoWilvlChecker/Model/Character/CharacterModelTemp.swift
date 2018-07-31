@@ -24,9 +24,4 @@ class CharacterModelTemp {
     var role: String = ""
     var emptySockets: Int = 0
 
-//    init(name: String, realm: String) {
-//        self.charName = name
-//        self.charRealm = realm
-//    }
-
 }
