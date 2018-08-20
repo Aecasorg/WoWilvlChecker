@@ -44,8 +44,6 @@ class ViewController: UIViewController, UISearchBarDelegate {
         
     }
     
-    
-    
     // MARK: - Buttons
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar)  {
