@@ -6,8 +6,8 @@ target 'WoWilvlChecker' do
   use_frameworks!
 
   # Pods for WoWilvlChecker
-    pod 'Alamofire'
+    pod 'Alamofire', '~> 4.7'
     pod 'RealmSwift'
-    pod 'SwipeCellKit'
+    pod 'SwipeCellKit', :git => 'https://github.com/SwipeCellKit/SwipeCellKit.git', :branch => 'swift_4.2'
 
 end

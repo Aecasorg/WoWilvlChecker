@@ -10,14 +10,23 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - RealmSwift
-  - SwipeCellKit
+  - SwipeCellKit (from `https://github.com/SwipeCellKit/SwipeCellKit.git`, branch `swift_4.2`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - Realm
     - RealmSwift
-    - SwipeCellKit
+
+EXTERNAL SOURCES:
+  SwipeCellKit:
+    :branch: swift_4.2
+    :git: https://github.com/SwipeCellKit/SwipeCellKit.git
+
+CHECKOUT OPTIONS:
+  SwipeCellKit:
+    :commit: fd5d0667556d6e41d35096a6adb900fc8172a023
+    :git: https://github.com/SwipeCellKit/SwipeCellKit.git
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
@@ -25,6 +34,6 @@ SPEC CHECKSUMS:
   RealmSwift: 1fe08b4ebaeeaacf17f9ba0343f7b25c9fc31fa6
   SwipeCellKit: cee9906e6d3a36e22ad1a852fba7f8fa0839d113
 
-PODFILE CHECKSUM: cc3e42942e0eb9eae6d89b4191211dc384318a9e
+PODFILE CHECKSUM: 7cac38e8a0cf568ff844c095b8deac929c4c6dde
 
 COCOAPODS: 1.5.3
