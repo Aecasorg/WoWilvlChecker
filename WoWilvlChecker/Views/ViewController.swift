@@ -479,7 +479,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, SwipeTable
     
     func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
         var options = SwipeOptions()
-        options.expansionStyle = .destructive
+        options.expansionStyle = .destructive(automaticallyDelete: false)
         return options
     }
     
