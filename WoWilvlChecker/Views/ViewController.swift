@@ -23,6 +23,9 @@ class ViewController: UIViewController, UISearchBarDelegate {
     var chars: Results<CharacterModel>?
     var tempChar = CharacterModelTemp()
     
+    // property to bypass .destructive issue when swiping to update
+    var deleteSwipe = false
+    
     // used to temporarily store lastModified data field and indexPath on stored character
 //    var existingLastModified = 0
 //    var indexPathToBeUpdated: IndexPath = []
@@ -460,7 +463,9 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, SwipeTable
         // Delete character (swipe from right)
         let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
             
+            self.deleteSwipe = true
             self.deleteCharacter(at: indexPath)
+            action.fulfill(with: .delete)
         }
         
         deleteAction.image = UIImage(named: "delete-icon")
@@ -468,7 +473,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, SwipeTable
         // Update character (swipe from left)
         let updateAction = SwipeAction(style: .destructive, title: "Refresh") { action, indexPath in
             
-//            self.updateCharacter(at: indexPath)
+            self.deleteSwipe = false
             self.updateChar(charName: self.chars![indexPath.row].charName, charID: self.chars![indexPath.row].charID, indexPath: indexPath)
         }
 
@@ -497,11 +502,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, SwipeTable
             }
         }
     }
-    
-//    func updateCharacter(at indexPath: IndexPath) {
-//        updateChar(charName: chars![indexPath.row].charName, charID: chars![indexPath.row].charID, indexPath: indexPath)
-//
-//    }
+
 }
 
 // Deals with downloading thumbnail image
