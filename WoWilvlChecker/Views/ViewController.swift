@@ -23,9 +23,6 @@ class ViewController: UIViewController, UISearchBarDelegate {
     var chars: Results<CharacterModel>?
     var tempChar = CharacterModelTemp()
     
-    // property to bypass .destructive issue when swiping to update
-    var deleteSwipe = false
-    
     // used to temporarily store lastModified data field and indexPath on stored character
 //    var existingLastModified = 0
 //    var indexPathToBeUpdated: IndexPath = []
@@ -99,6 +96,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
     
     func updateChar(charName: String, charID: String, indexPath: IndexPath) {
         apiCheck = true
+        print("**** Updating: \(charName) at \(indexPath) ****")
         
         var blizzardURL = urlCreator(name: charName, realm: charRealm, fields: "items")
         getCharacterData(url: blizzardURL, dataChoice: 0) {(success) -> Void in
@@ -432,7 +430,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, SwipeTable
         
         cell.delegate = self
         
-        if let char = chars?[indexPath.row] {
+        if let char = chars?.reversed()[indexPath.row] {
             
             let formattedString = NSMutableAttributedString()
             
@@ -463,7 +461,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, SwipeTable
         // Delete character (swipe from right)
         let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
             
-            self.deleteSwipe = true
             self.deleteCharacter(at: indexPath)
             action.fulfill(with: .delete)
         }
@@ -473,8 +470,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, SwipeTable
         // Update character (swipe from left)
         let updateAction = SwipeAction(style: .destructive, title: "Refresh") { action, indexPath in
             
-            self.deleteSwipe = false
-            self.updateChar(charName: self.chars![indexPath.row].charName, charID: self.chars![indexPath.row].charID, indexPath: indexPath)
+            self.updateChar(charName: self.chars!.reversed()[indexPath.row].charName, charID: self.chars!.reversed()[indexPath.row].charID, indexPath: indexPath)
         }
 
         updateAction.image = UIImage(named: "reload-icon")
@@ -492,7 +488,9 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, SwipeTable
     func deleteCharacter(at indexPath: IndexPath) {
         // Update our data model
         print("Deleting index...")
-        if let charForDeletion = self.chars?[indexPath.row] {
+        
+        if let charForDeletion = self.chars?.reversed()[indexPath.row] {
+            print("**** Deleting: \(charForDeletion.charName)")
             do {
                 try self.realm.write {
                     self.realm.delete(charForDeletion)
@@ -502,7 +500,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, SwipeTable
             }
         }
     }
-
 }
 
 // Deals with downloading thumbnail image
