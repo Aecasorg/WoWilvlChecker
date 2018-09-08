@@ -87,7 +87,7 @@ struct Items: Codable {
     let finger1: Finger1
     let finger2: Finger2
 //    let trinket1, trinket2: Trinket
-//    let mainHand: MainHand
+    let mainHand: MainHand
 }
 
 struct Neck: Codable {
@@ -265,11 +265,11 @@ struct Finger2Appearance: Codable {
 //    let enchant, timewalkerLevel: Int?
 //}
 
-//struct MainHand: Codable {
+struct MainHand: Codable {
 //    let id: Int
 //    let name, icon: String
 //    let quality, itemLevel: Int
-//    let tooltipParams: MainHandTooltipParams
+    let tooltipParams: MainHandTooltipParams
 //    let stats: [Stat]
 //    let armor: Int
 //    let weaponInfo: WeaponInfo
@@ -287,7 +287,7 @@ struct Finger2Appearance: Codable {
 ////        case artifactAppearanceID = "artifactAppearanceId"
 ////        case artifactTraits, relics, appearance
 ////    }
-//}
+}
 
 //struct ArtifactTrait: Codable {
 //    let id, rank: Int
@@ -304,10 +304,11 @@ struct Finger2Appearance: Codable {
 ////    }
 //}
 
-//struct MainHandTooltipParams: Codable {
+struct MainHandTooltipParams: Codable {
 //    let gem0, gem1, gem2, transmogItem: Int
 //    let timewalkerLevel: Int
-//}
+    let enchant: Int?
+}
 
 //struct WeaponInfo: Codable {
 //    let damage: Damage

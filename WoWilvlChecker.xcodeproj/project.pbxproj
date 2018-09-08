@@ -18,7 +18,6 @@
 		AF8318DB20C50DEA00539567 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF8318D920C50DEA00539567 /* LaunchScreen.storyboard */; };
 		AF8318E320C5189300539567 /* CharacterModelItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8318E220C5189300539567 /* CharacterModelItems.swift */; };
 		AFD33A8B20C6623300D5D6EC /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD33A8A20C6623300D5D6EC /* DataModel.swift */; };
-		AFD33A8D20C6624D00D5D6EC /* CharacterFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD33A8C20C6624D00D5D6EC /* CharacterFunctions.swift */; };
 		AFFA835020E0C6FF00922717 /* CharacterModelTemp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFA834F20E0C6FF00922717 /* CharacterModelTemp.swift */; };
 		CC1645D8DB3D74BD921B6186 /* Pods_WoWilvlChecker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 487315FA012EE7A10B07F1D4 /* Pods_WoWilvlChecker.framework */; };
 /* End PBXBuildFile section */
@@ -40,7 +39,6 @@
 		AF8318DC20C50DEA00539567 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF8318E220C5189300539567 /* CharacterModelItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterModelItems.swift; sourceTree = "<group>"; };
 		AFD33A8A20C6623300D5D6EC /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
-		AFD33A8C20C6624D00D5D6EC /* CharacterFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterFunctions.swift; sourceTree = "<group>"; };
 		AFFA834F20E0C6FF00922717 /* CharacterModelTemp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterModelTemp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,7 +117,6 @@
 				AF8318E220C5189300539567 /* CharacterModelItems.swift */,
 				AF402B7E20D1595700DD18D7 /* CharacterModelTalents.swift */,
 				AF402B8020D15ADC00DD18D7 /* CharacterModelAudit.swift */,
-				AFD33A8C20C6624D00D5D6EC /* CharacterFunctions.swift */,
 				AFFA834F20E0C6FF00922717 /* CharacterModelTemp.swift */,
 			);
 			path = Character;
@@ -263,7 +260,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AFD33A8D20C6624D00D5D6EC /* CharacterFunctions.swift in Sources */,
 				AF402B8120D15ADC00DD18D7 /* CharacterModelAudit.swift in Sources */,
 				AF8318D320C50DE700539567 /* ViewController.swift in Sources */,
 				AF8318E320C5189300539567 /* CharacterModelItems.swift in Sources */,

@@ -16,12 +16,14 @@ class CharacterModelTemp {
     var charClass: Int = 0
     var thumbnail: String = ""
     var averageItemLevelEquipped: Int = 0
-    var neckEnchant: Bool = false
-    var backEnchant: Bool = false
+//    var neckEnchant: Bool = false
+//    var backEnchant: Bool = false
     var finger1Enchant: Bool = false
     var finger2Enchant: Bool = false
+    var mainHandEnchant: Bool = false
     var spec: String = ""
     var role: String = ""
     var emptySockets: Int = 0
+    var numberOfEnchants: Int = 0
 
 }

@@ -57,6 +57,12 @@ class ViewController: UIViewController, UISearchBarDelegate {
         
     }
     
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        if searchBar == searchInput {
+            print("SearchBar touched!")
+        }
+    }
+    
     func downloadChar(charName: String) {
         apiCheck = true
         
@@ -79,13 +85,15 @@ class ViewController: UIViewController, UISearchBarDelegate {
                         newChar.charClass = self.tempChar.charClass
                         newChar.thumbnail = self.tempChar.thumbnail
                         newChar.averageItemLevelEquipped = self.tempChar.averageItemLevelEquipped
-                        newChar.neckEnchant = self.tempChar.neckEnchant
-                        newChar.backEnchant = self.tempChar.backEnchant
+//                        newChar.neckEnchant = self.tempChar.neckEnchant
+//                        newChar.backEnchant = self.tempChar.backEnchant
                         newChar.finger1Enchant = self.tempChar.finger1Enchant
                         newChar.finger2Enchant = self.tempChar.finger2Enchant
+                        newChar.mainHandEnchant = self.tempChar.mainHandEnchant
                         newChar.spec = self.tempChar.spec
                         newChar.role = self.tempChar.role
                         newChar.emptySockets = self.tempChar.emptySockets
+                        newChar.numberOfEnchants = self.tempChar.numberOfEnchants
                         
                         self.save(character: newChar)
                     }
@@ -117,13 +125,15 @@ class ViewController: UIViewController, UISearchBarDelegate {
                         newChar.charClass = self.tempChar.charClass
                         newChar.thumbnail = self.tempChar.thumbnail
                         newChar.averageItemLevelEquipped = self.tempChar.averageItemLevelEquipped
-                        newChar.neckEnchant = self.tempChar.neckEnchant
-                        newChar.backEnchant = self.tempChar.backEnchant
+//                        newChar.neckEnchant = self.tempChar.neckEnchant
+//                        newChar.backEnchant = self.tempChar.backEnchant
                         newChar.finger1Enchant = self.tempChar.finger1Enchant
                         newChar.finger2Enchant = self.tempChar.finger2Enchant
+                        newChar.mainHandEnchant = self.tempChar.mainHandEnchant
                         newChar.spec = self.tempChar.spec
                         newChar.role = self.tempChar.role
                         newChar.emptySockets = self.tempChar.emptySockets
+                        newChar.numberOfEnchants = self.tempChar.numberOfEnchants
                         
                         self.update(character: newChar, indexPath: indexPath)
                     }
@@ -196,20 +206,21 @@ class ViewController: UIViewController, UISearchBarDelegate {
             print("Character ilvl: \(decoded.items.averageItemLevelEquipped)")
             tempChar.averageItemLevelEquipped = decoded.items.averageItemLevelEquipped
             
-            if let neck = decoded.items.neck.tooltipParams.enchant {
-                print("Neck enchant: \(neck)")
-                tempChar.neckEnchant = true
-            } else {
-                print("No neck enchant!")
-            }
+//            if let neck = decoded.items.neck.tooltipParams.enchant {
+//                print("Neck enchant: \(neck)")
+//                tempChar.neckEnchant = true
+//            } else {
+//                print("No neck enchant!")
+//            }
             
-            if let back = decoded.items.back.tooltipParams.enchant {
-                print("Back enchant: \(back)")
-                tempChar.backEnchant = true
-            } else {
-                print("No back enchant!")
-            }
+//            if let back = decoded.items.back.tooltipParams.enchant {
+//                print("Back enchant: \(back)")
+//                tempChar.backEnchant = true
+//            } else {
+//                print("No back enchant!")
+//            }
             
+            tempChar.finger1Enchant = false
             if let finger1 = decoded.items.finger1.tooltipParams.enchant {
                 print("Ring1 enchant: \(finger1)")
                 tempChar.finger1Enchant = true
@@ -217,6 +228,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
                 print("No Ring1 enchant!")
             }
             
+            tempChar.finger2Enchant = false
             if let finger2 = decoded.items.finger2.tooltipParams.enchant {
                 print("Ring2 enchant: \(finger2)")
                 tempChar.finger2Enchant = true
@@ -224,6 +236,20 @@ class ViewController: UIViewController, UISearchBarDelegate {
                 print("No Ring2 enchant!")
             }
             
+            tempChar.mainHandEnchant = false
+            if let mainHand = decoded.items.mainHand.tooltipParams.enchant {
+                print("Main Hand enchant: \(mainHand)")
+                tempChar.mainHandEnchant = true
+            } else {
+                print("No MainHand enchant!")
+            }
+            
+            tempChar.numberOfEnchants = 0
+            if tempChar.finger1Enchant { tempChar.numberOfEnchants += 1 }
+            if tempChar.finger2Enchant { tempChar.numberOfEnchants += 1 }
+            if tempChar.mainHandEnchant { tempChar.numberOfEnchants += 1 }
+            
+            print("Number of enchants: \(tempChar.numberOfEnchants)/3")
             
         } catch {
             print("Failed to decode JSON")
@@ -435,9 +461,19 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, SwipeTable
             let formattedString = NSMutableAttributedString()
             
             formattedString
-                .normal("\(char.charName) - iLevel: ")
+                .normal("\(char.charName) - \(char.charRealm)\n\(classConverter(class: (char.charClass))) - \(char.spec) (\(char.role))\niLevel: ")
                 .bold("\(char.averageItemLevelEquipped)")
-                .normal("\n\(classConverter(class: (char.charClass))) - \(char.spec) (\(char.role))\nMissing gems: \(char.emptySockets)\nEnchants: \(char.backEnchant)")
+                .normal(" - Neck: ")
+                .bold("16")
+                .normal("\nMissing Gems: ")
+                .bold("\(char.emptySockets)")
+                .normal("\nEnchants: ")
+                .bold("\(char.numberOfEnchants)/3")
+            
+//            formattedString
+//                .normal("\(char.charName) - iLevel: ")
+//                .bold("\(char.averageItemLevelEquipped)")
+//                .normal("\n\(classConverter(class: (char.charClass))) - \(char.spec) (\(char.role))\nMissing gems: \(char.emptySockets)\nEnchants: \(char.backEnchant)")
             
             cell.characterDataLabel.attributedText = formattedString
             
@@ -569,4 +605,5 @@ extension UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+    
 }

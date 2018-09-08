@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14270.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -40,8 +40,11 @@
                                                                 <constraint firstAttribute="width" constant="80" id="d3N-Qi-L6g"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CoM-hO-4jG">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="clip" numberOfLines="0" minimumFontSize="3" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CoM-hO-4jG">
                                                             <rect key="frame" x="12" y="8" width="224" height="80"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="224" id="xCD-8o-HwF"/>
+                                                            </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -49,15 +52,12 @@
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstItem="CoM-hO-4jG" firstAttribute="leading" secondItem="h6v-8K-gb4" secondAttribute="leadingMargin" constant="4" id="I5f-51-mFU"/>
-                                                        <constraint firstItem="DQ2-J5-IE0" firstAttribute="leading" secondItem="CoM-hO-4jG" secondAttribute="trailing" constant="19" id="cYr-vb-Q7x"/>
-                                                        <constraint firstAttribute="bottom" secondItem="CoM-hO-4jG" secondAttribute="bottom" constant="10" id="dMI-zw-18M"/>
-                                                        <constraint firstItem="DQ2-J5-IE0" firstAttribute="leading" secondItem="CoM-hO-4jG" secondAttribute="trailing" constant="17" id="g2Z-e3-g6g"/>
+                                                        <constraint firstItem="CoM-hO-4jG" firstAttribute="top" secondItem="h6v-8K-gb4" secondAttribute="topMargin" id="7Kf-7T-Evo"/>
+                                                        <constraint firstAttribute="bottom" secondItem="CoM-hO-4jG" secondAttribute="bottom" constant="10" id="Fdm-Dv-dVy"/>
+                                                        <constraint firstItem="DQ2-J5-IE0" firstAttribute="leading" secondItem="CoM-hO-4jG" secondAttribute="trailing" constant="19" id="etH-W5-u3Z"/>
                                                         <constraint firstAttribute="trailing" secondItem="DQ2-J5-IE0" secondAttribute="trailing" constant="14" id="hzy-eB-vof"/>
-                                                        <constraint firstItem="CoM-hO-4jG" firstAttribute="top" secondItem="h6v-8K-gb4" secondAttribute="top" constant="8" id="tor-Oz-GBA"/>
+                                                        <constraint firstItem="CoM-hO-4jG" firstAttribute="leading" secondItem="h6v-8K-gb4" secondAttribute="leading" constant="12" id="oZp-cA-y8U"/>
                                                         <constraint firstItem="DQ2-J5-IE0" firstAttribute="centerY" secondItem="h6v-8K-gb4" secondAttribute="centerY" id="uJw-Og-avq"/>
-                                                        <constraint firstItem="CoM-hO-4jG" firstAttribute="centerY" secondItem="h6v-8K-gb4" secondAttribute="centerY" constant="-0.5" id="uOl-HR-gYP"/>
-                                                        <constraint firstItem="DQ2-J5-IE0" firstAttribute="leading" secondItem="CoM-hO-4jG" secondAttribute="trailing" constant="15" id="xql-us-eQv"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
