@@ -18,6 +18,7 @@ class CharacterModelTemp {
     var averageItemLevelEquipped: Int = 0
 //    var neckEnchant: Bool = false
 //    var backEnchant: Bool = false
+    var neckLevel: Int = 0
     var finger1Enchant: Bool = false
     var finger2Enchant: Bool = false
     var mainHandEnchant: Bool = false

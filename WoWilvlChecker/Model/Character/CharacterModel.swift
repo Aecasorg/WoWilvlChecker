@@ -20,6 +20,7 @@ class CharacterModel: Object {
     @objc dynamic var averageItemLevelEquipped: Int = 0
 //    @objc dynamic var neckEnchant: Bool = false
 //    @objc dynamic var backEnchant: Bool = false
+    @objc dynamic var neckLevel: Int = 0
     @objc dynamic var finger1Enchant: Bool = false
     @objc dynamic var finger2Enchant: Bool = false
     @objc dynamic var mainHandEnchant: Bool = false

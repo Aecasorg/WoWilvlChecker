@@ -87,6 +87,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
                         newChar.averageItemLevelEquipped = self.tempChar.averageItemLevelEquipped
 //                        newChar.neckEnchant = self.tempChar.neckEnchant
 //                        newChar.backEnchant = self.tempChar.backEnchant
+                        newChar.neckLevel = self.tempChar.neckLevel
                         newChar.finger1Enchant = self.tempChar.finger1Enchant
                         newChar.finger2Enchant = self.tempChar.finger2Enchant
                         newChar.mainHandEnchant = self.tempChar.mainHandEnchant
@@ -127,6 +128,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
                         newChar.averageItemLevelEquipped = self.tempChar.averageItemLevelEquipped
 //                        newChar.neckEnchant = self.tempChar.neckEnchant
 //                        newChar.backEnchant = self.tempChar.backEnchant
+                        newChar.neckLevel = self.tempChar.neckLevel
                         newChar.finger1Enchant = self.tempChar.finger1Enchant
                         newChar.finger2Enchant = self.tempChar.finger2Enchant
                         newChar.mainHandEnchant = self.tempChar.mainHandEnchant
@@ -219,6 +221,8 @@ class ViewController: UIViewController, UISearchBarDelegate {
 //            } else {
 //                print("No back enchant!")
 //            }
+            
+            tempChar.neckLevel = decoded.items.neck.azeriteItem.azeriteLevel
             
             tempChar.finger1Enchant = false
             if let finger1 = decoded.items.finger1.tooltipParams.enchant {
@@ -464,7 +468,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, SwipeTable
                 .normal("\(char.charName) - \(char.charRealm)\n\(classConverter(class: (char.charClass))) - \(char.spec) (\(char.role))\niLevel: ")
                 .bold("\(char.averageItemLevelEquipped)")
                 .normal(" - Neck: ")
-                .bold("16")
+                .bold("\(char.neckLevel)")
                 .normal("\nMissing Gems: ")
                 .bold("\(char.emptySockets)")
                 .normal("\nEnchants: ")

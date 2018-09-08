@@ -92,6 +92,7 @@ struct Items: Codable {
 
 struct Neck: Codable {
     let tooltipParams: Appearance
+    let azeriteItem: AzeriteItem
 }
 
 struct Back: Codable {
@@ -114,6 +115,10 @@ struct Back: Codable {
 //        case artifactAppearanceID = "artifactAppearanceId"
 //        case artifactTraits, relics, appearance
 //    }
+}
+
+struct AzeriteItem: Codable {
+    let azeriteLevel: Int
 }
 
 struct Appearance: Codable {
