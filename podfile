@@ -9,5 +9,6 @@ target 'WoWilvlChecker' do
     pod 'Alamofire', '~> 4.7'
     pod 'RealmSwift'
     pod 'SwipeCellKit', :git => 'https://github.com/SwipeCellKit/SwipeCellKit.git', :branch => 'swift_4.2'
+    pod "SearchTextField"
 
 end

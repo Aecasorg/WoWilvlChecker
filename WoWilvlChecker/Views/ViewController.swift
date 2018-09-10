@@ -18,18 +18,19 @@ class ViewController: UIViewController, UISearchBarDelegate {
     var apiKey = "pgje56uws25hmdw426agmrkjcz4zbhuc"
     var name = "belangel"
     var charRealm = "azjol-nerub"
+    var charRealmIndex = 0
+    
+    // If true then character data download from Blizzard server has been successful
     var apiCheck = true
     
     var chars: Results<CharacterModel>?
     var tempChar = CharacterModelTemp()
     
-    // used to temporarily store lastModified data field and indexPath on stored character
-//    var existingLastModified = 0
-//    var indexPathToBeUpdated: IndexPath = []
-    
     @IBOutlet weak var charsTableView: UITableView!
     
     @IBOutlet weak var searchInput: UISearchBar!
+    
+    @IBOutlet weak var realmButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,6 +64,25 @@ class ViewController: UIViewController, UISearchBarDelegate {
         }
     }
     
+    @IBAction func realmButton(_ sender: UIButton) {
+        print("realmButton touched!")
+        
+        let sb = UIStoryboard(name: "RealmSelectViewController", bundle: nil)
+        let popup = sb.instantiateInitialViewController()! as! RealmSelectViewController
+        popup.realm = charRealm
+        popup.realmIndex = charRealmIndex
+        present(popup, animated: true)
+        
+        // Callback closure to fetch data from popup
+        popup.onSave = { (data, index) in
+            self.charRealm = data
+            self.charRealmIndex = index
+            print("CharRealm is -\(self.charRealm)-")
+        }
+        
+    }
+    
+    //MARK: - API/JSON data handling
     func downloadChar(charName: String) {
         apiCheck = true
         
@@ -85,8 +105,6 @@ class ViewController: UIViewController, UISearchBarDelegate {
                         newChar.charClass = self.tempChar.charClass
                         newChar.thumbnail = self.tempChar.thumbnail
                         newChar.averageItemLevelEquipped = self.tempChar.averageItemLevelEquipped
-//                        newChar.neckEnchant = self.tempChar.neckEnchant
-//                        newChar.backEnchant = self.tempChar.backEnchant
                         newChar.neckLevel = self.tempChar.neckLevel
                         newChar.finger1Enchant = self.tempChar.finger1Enchant
                         newChar.finger2Enchant = self.tempChar.finger2Enchant
@@ -126,8 +144,6 @@ class ViewController: UIViewController, UISearchBarDelegate {
                         newChar.charClass = self.tempChar.charClass
                         newChar.thumbnail = self.tempChar.thumbnail
                         newChar.averageItemLevelEquipped = self.tempChar.averageItemLevelEquipped
-//                        newChar.neckEnchant = self.tempChar.neckEnchant
-//                        newChar.backEnchant = self.tempChar.backEnchant
                         newChar.neckLevel = self.tempChar.neckLevel
                         newChar.finger1Enchant = self.tempChar.finger1Enchant
                         newChar.finger2Enchant = self.tempChar.finger2Enchant
@@ -207,20 +223,6 @@ class ViewController: UIViewController, UISearchBarDelegate {
             tempChar.thumbnail = decoded.thumbnail
             print("Character ilvl: \(decoded.items.averageItemLevelEquipped)")
             tempChar.averageItemLevelEquipped = decoded.items.averageItemLevelEquipped
-            
-//            if let neck = decoded.items.neck.tooltipParams.enchant {
-//                print("Neck enchant: \(neck)")
-//                tempChar.neckEnchant = true
-//            } else {
-//                print("No neck enchant!")
-//            }
-            
-//            if let back = decoded.items.back.tooltipParams.enchant {
-//                print("Back enchant: \(back)")
-//                tempChar.backEnchant = true
-//            } else {
-//                print("No back enchant!")
-//            }
             
             tempChar.neckLevel = decoded.items.neck.azeriteItem.azeriteLevel
             
@@ -429,7 +431,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
         }
         
 //        self.charsTableView.reloadRows(at: [indexPath], with: .automatic)
-        print("Rows after upadte: \(chars?.count)")
+        print("Rows after update: \(String(describing: chars?.count))")
         charsTableView.reloadData()
         
     }
@@ -473,11 +475,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, SwipeTable
                 .bold("\(char.emptySockets)")
                 .normal("\nEnchants: ")
                 .bold("\(char.numberOfEnchants)/3")
-            
-//            formattedString
-//                .normal("\(char.charName) - iLevel: ")
-//                .bold("\(char.averageItemLevelEquipped)")
-//                .normal("\n\(classConverter(class: (char.charClass))) - \(char.spec) (\(char.role))\nMissing gems: \(char.emptySockets)\nEnchants: \(char.backEnchant)")
             
             cell.characterDataLabel.attributedText = formattedString
             
