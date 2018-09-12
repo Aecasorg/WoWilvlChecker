@@ -46,8 +46,36 @@ struct RealmLibraries {
     ]
     
     var usRealms: [String] = [
+        "Aegwynn",
+        "Aerie Peak",
+        "Agamaggan",
+        "Aggramar",
+        "Akama",
+        "Alexstrasza",
+        "Alleria",
+        "Altar of Storms",
+        "Alterac Montains",
+        "Aman'thul",
+        "Andorhal",
+        "Anetheron",
+        "Antonidas",
+        "Anub'arak",
+        "Anvilmar",
+        "Arathor",
+        "Archimonde",
+        "Area 52",
+        "Argent Dawn",
+        "Arthas",
+        "Arygos",
+        "Auchindoun",
+        "Azgalor",
         "Azjol-Nerub",
-        "Azshara"
+        "Azralon",
+        "Azshara",
+        "Azuremyst",
+        "Baelgun",
+        "Balnazzar",
+        "Quel'Thalas"
     ]
     
 }

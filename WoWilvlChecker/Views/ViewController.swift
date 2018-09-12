@@ -16,8 +16,9 @@ class ViewController: UIViewController, UISearchBarDelegate {
     let realm = try! Realm()
     
     var apiKey = "pgje56uws25hmdw426agmrkjcz4zbhuc"
-    var name = "belangel"
-    var charRealm = "azjol-nerub"
+    var name = "Belangel"
+    var charRealm = "Azjol-Nerub"
+    var region = "eu"
     var charRealmIndex = 0
     
     // If true then character data download from Blizzard server has been successful
@@ -71,13 +72,15 @@ class ViewController: UIViewController, UISearchBarDelegate {
         let popup = sb.instantiateInitialViewController()! as! RealmSelectViewController
         popup.realm = charRealm
         popup.realmIndex = charRealmIndex
+        popup.region = region
         present(popup, animated: true)
         
         // Callback closure to fetch data from popup
-        popup.onSave = { (data, index) in
+        popup.onSave = { (data, index, region) in
             self.charRealm = data
             self.charRealmIndex = index
-            print("CharRealm is -\(self.charRealm)-")
+            self.region = region
+            print("CharRealm is -\(self.charRealm) and region is \(self.region)-")
         }
         
     }
@@ -162,7 +165,8 @@ class ViewController: UIViewController, UISearchBarDelegate {
     
     func urlCreator(name: String, realm: String, fields: String) -> String {
         
-        return "https://eu.api.battle.net/wow/character/\(realm)/\(name)?fields=\(fields)&locale=en_GB&apikey=\(apiKey)"
+        return "https://\(region).api.battle.net/wow/character/\(realm)/\(name)?fields=\(fields)&apikey=\(apiKey)"
+//        return "https://eu.api.battle.net/wow/character/\(realm)/\(name)?fields=\(fields)&locale=en_GB&apikey=\(apiKey)"
         
     }
 
@@ -330,7 +334,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
         
     }
     
-    // MARK: - Helper functions
+    // MARK: - Library functions
     
     func classConverter(class: Int) -> String {
         switch `class` {

@@ -11,23 +11,20 @@ import SearchTextField
 
 class RealmSelectViewController: UIViewController {
 
-    let realms = RealmLibraries().euRealms
-//    let languages = SyntaxLibraries().languages
+    var realms = RealmLibraries().euRealms
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var realmPicker: UIPickerView!
     @IBOutlet weak var saveButton: UIButton!
-//    @IBOutlet weak var searchSyntaxTextField: SearchTextField!
     @IBOutlet weak var searchRealmTextField: SearchTextField!
-    
+    @IBOutlet weak var realmSelector: UISegmentedControl!
     
     var realm: String = ""
     var realmIndex: Int = 0
-//    var syntax: String = ""
-//    var syntaxIndex: Int = 0
+    var region: String = ""
 
     // Function type that can be accessed from Callback VC (ViewController.swift)
-    var onSave: ((_ data: String, _ index: Int) -> ())?
+    var onSave: ((_ data: String, _ index: Int, _ region: String) -> ())?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,12 +36,10 @@ class RealmSelectViewController: UIViewController {
         
         // SearchTextField settings
         searchRealmTextField.filterStrings(realms)
-//        searchSyntaxTextField.theme = SearchTextFieldTheme.darkTheme()
         searchRealmTextField.theme.bgColor = UIColor (red: 160/255, green: 162/255, blue: 164/255, alpha: 0.95)
         searchRealmTextField.theme.fontColor = UIColor.white
         searchRealmTextField.maxNumberOfResults = 5
         searchRealmTextField.maxResultsListHeight = 180
-//        searchSyntaxTextField.highlightAttributes = [kCTBackgroundColorAttributeName: UIColor(red: 181/255, green: 130/255, blue: 79/255, alpha: 1), kCTFontAttributeName: UIFont.boldSystemFont(ofSize: 12)] as [NSAttributedStringKey : AnyObject]
         
         // Handles what happens when user picks an item
         searchRealmTextField.itemSelectionHandler = { item, itemPosition in
@@ -58,12 +53,30 @@ class RealmSelectViewController: UIViewController {
                 self.titleLabel.text = self.realms[self.realmIndex]
             }
         }
+        
+        
+        realmSelector.selectedSegmentIndex = region == "us" ? 0 : 1
+    }
+    
+    @IBAction func realmSelectorTouched(_ sender: UISegmentedControl) {
+        
+        switch realmSelector.selectedSegmentIndex
+        {
+        case 0:
+            realms = RealmLibraries().usRealms
+            region = "us"
+        case 1:
+            realms = RealmLibraries().euRealms
+            region = "eu"
+        default:
+            break;
+        }
     }
     
     // Sends realm choice to main VC and dismisses popup
     @IBAction func saveRealm_TouchUpInside(_ sender: UIButton) {
         
-        onSave?(realm, realmIndex)
+        onSave?(realm, realmIndex, region)
         
         dismiss(animated: true)
     }
@@ -100,6 +113,17 @@ extension RealmSelectViewController: UIPickerViewDelegate, UIPickerViewDataSourc
         let titleData = realms[row]
         let myTitle = NSAttributedString(string: titleData, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15), NSAttributedString.Key.foregroundColor: UIColor.white])
         return myTitle
+    }
+    
+}
+
+@IBDesignable
+class RoundUIView: UIView {
+    
+    @IBInspectable var cornerRadius: CGFloat = 0.0 {
+        didSet {
+            self.layer.cornerRadius = cornerRadius
+        }
     }
     
 }
