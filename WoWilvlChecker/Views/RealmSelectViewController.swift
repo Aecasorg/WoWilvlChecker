@@ -11,7 +11,9 @@ import SearchTextField
 
 class RealmSelectViewController: UIViewController {
 
-    var realms = RealmLibraries().euRealms
+    let realmsEU = RealmLibraries().euRealms
+    let realmsUS = RealmLibraries().usRealms
+    var realms: [String] = []
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var realmPicker: UIPickerView!
@@ -20,6 +22,8 @@ class RealmSelectViewController: UIViewController {
     @IBOutlet weak var realmSelector: UISegmentedControl!
     
     var realm: String = ""
+    var realmIndexEU: Int = 0
+    var realmIndexUS: Int = 0
     var realmIndex: Int = 0
     var region: String = ""
 
@@ -29,6 +33,8 @@ class RealmSelectViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setRegion()
+        
         realmPicker.delegate = self
         realmPicker.dataSource = self
         titleLabel.text = realm
@@ -58,16 +64,34 @@ class RealmSelectViewController: UIViewController {
         realmSelector.selectedSegmentIndex = region == "us" ? 0 : 1
     }
     
+    func setRegion() {
+        if region == "us" {
+            realms = realmsUS
+            realmIndex = realmIndexUS
+            realmPicker.reloadAllComponents()
+        } else if region == "eu" {
+            realms = realmsEU
+            realmIndex = realmIndexEU
+            realmPicker.reloadAllComponents()
+        } else {
+            realms = realmsEU
+            realmIndex = realmIndexEU
+            realmPicker.reloadAllComponents()
+        }
+    }
+    
     @IBAction func realmSelectorTouched(_ sender: UISegmentedControl) {
         
         switch realmSelector.selectedSegmentIndex
         {
         case 0:
-            realms = RealmLibraries().usRealms
             region = "us"
+            setRegion()
+            realmPicker.selectRow(realmIndex, inComponent: 0, animated: true)
         case 1:
-            realms = RealmLibraries().euRealms
             region = "eu"
+            setRegion()
+            realmPicker.selectRow(realmIndex, inComponent: 0, animated: true)
         default:
             break;
         }
@@ -119,6 +143,18 @@ extension RealmSelectViewController: UIPickerViewDelegate, UIPickerViewDataSourc
 
 @IBDesignable
 class RoundUIView: UIView {
+    
+    @IBInspectable var borderColor: UIColor = UIColor.white {
+        didSet {
+            self.layer.borderColor = borderColor.cgColor
+        }
+    }
+    
+    @IBInspectable var borderWidth: CGFloat = 2.0 {
+        didSet {
+            self.layer.borderWidth = borderWidth
+        }
+    }
     
     @IBInspectable var cornerRadius: CGFloat = 0.0 {
         didSet {

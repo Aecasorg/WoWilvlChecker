@@ -11,6 +11,7 @@ import Foundation
 struct RealmLibraries {
     
     var euRealms: [String] = [
+        "EU Realms:",
         "Aegwynn",
         "Aerie Peak",
         "Agamaggan",
@@ -46,6 +47,7 @@ struct RealmLibraries {
     ]
     
     var usRealms: [String] = [
+        "US Realms:",
         "Aegwynn",
         "Aerie Peak",
         "Agamaggan",
