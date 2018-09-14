@@ -60,7 +60,6 @@ class RealmSelectViewController: UIViewController {
             }
         }
         
-        
         realmSelector.selectedSegmentIndex = region == "us" ? 0 : 1
     }
     

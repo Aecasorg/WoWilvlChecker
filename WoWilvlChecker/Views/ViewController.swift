@@ -17,8 +17,8 @@ class ViewController: UIViewController, UISearchBarDelegate {
     
     var apiKey = "pgje56uws25hmdw426agmrkjcz4zbhuc"
     var name = "Belangel"
-    var charRealm = "Azjol-Nerub"
-    var region = "eu"
+    var charRealm = ""
+    var region = ""
     var charRealmIndex = 0
     
     // If true then character data download from Blizzard server has been successful
@@ -43,6 +43,20 @@ class ViewController: UIViewController, UISearchBarDelegate {
         charsTableView.dataSource = self
         
         self.hideKeyboardWhenTappedAround()
+        
+        if (UserDefaults.standard.string(forKey: "region") == nil) {
+            UserDefaults.standard.set("eu", forKey: "region")
+        }
+        
+        if (UserDefaults.standard.string(forKey: "realm") == nil) {
+            UserDefaults.standard.set("Aegwynn", forKey: "realm")
+        }
+        
+        region = UserDefaults.standard.string(forKey: "region") ?? "eu"
+        charRealm = UserDefaults.standard.string(forKey: "realm") ?? "Aegwynn"
+        
+        print(region)
+        print(charRealm)
         
     }
     
@@ -81,6 +95,8 @@ class ViewController: UIViewController, UISearchBarDelegate {
             self.charRealmIndex = index
             self.region = region
             print("CharRealm is -\(self.charRealm) and region is \(self.region)-")
+            UserDefaults.standard.set(region, forKey: "region")
+            UserDefaults.standard.set(data, forKey: "realm")
         }
         
     }
