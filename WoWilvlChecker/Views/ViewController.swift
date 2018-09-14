@@ -140,17 +140,17 @@ class ViewController: UIViewController, UISearchBarDelegate {
         }
     }
     
-    func updateChar(charName: String, charID: String, indexPath: IndexPath) {
+    func updateChar(charName: String, charID: String, charRealm: String, indexPath: IndexPath) {
         apiCheck = true
         print("**** Updating: \(charName) at \(indexPath) ****")
         
         var blizzardURL = urlCreator(name: charName, realm: charRealm, fields: "items")
         getCharacterData(url: blizzardURL, dataChoice: 0) {(success) -> Void in
             
-            blizzardURL = self.urlCreator(name: charName, realm: self.charRealm, fields: "talents")
+            blizzardURL = self.urlCreator(name: charName, realm: charRealm, fields: "talents")
             self.getCharacterData(url: blizzardURL, dataChoice: 1) {(success) -> Void in
                 
-                blizzardURL = self.urlCreator(name: charName, realm: self.charRealm, fields: "audit")
+                blizzardURL = self.urlCreator(name: charName, realm: charRealm, fields: "audit")
                 self.getCharacterData(url: blizzardURL, dataChoice: 2, completion: {(success) -> Void in
                     
                     if self.apiCheck {
@@ -527,7 +527,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, SwipeTable
         // Update character (swipe from left)
         let updateAction = SwipeAction(style: .destructive, title: "Refresh") { action, indexPath in
             
-            self.updateChar(charName: self.chars!.reversed()[indexPath.row].charName, charID: self.chars!.reversed()[indexPath.row].charID, indexPath: indexPath)
+            self.updateChar(charName: self.chars!.reversed()[indexPath.row].charName, charID: self.chars!.reversed()[indexPath.row].charID, charRealm: self.chars!.reversed()[indexPath.row].charRealm, indexPath: indexPath)
         }
 
         updateAction.image = UIImage(named: "reload-icon")
