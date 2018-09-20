@@ -92,7 +92,7 @@ struct Items: Codable {
 
 struct Neck: Codable {
     let tooltipParams: Appearance
-    let azeriteItem: AzeriteItem
+    let azeriteItem: AzeriteItem?
 }
 
 struct Back: Codable {
