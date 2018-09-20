@@ -251,7 +251,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
             print("Character ilvl: \(decoded.items.averageItemLevelEquipped)")
             tempChar.averageItemLevelEquipped = decoded.items.averageItemLevelEquipped
             
-            tempChar.neckLevel = decoded.items.neck.azeriteItem.azeriteLevel
+            tempChar.neckLevel = decoded.items.neck.azeriteItem?.azeriteLevel ?? 0
             
             tempChar.finger1Enchant = false
             if let finger1 = decoded.items.finger1.tooltipParams.enchant {
@@ -285,7 +285,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
             print("Number of enchants: \(tempChar.numberOfEnchants)/3")
             
         } catch {
-            print("Failed to decode JSON")
+            print("Failed to decode JSON: \(error)")
             apiCheck = false
         }
         
