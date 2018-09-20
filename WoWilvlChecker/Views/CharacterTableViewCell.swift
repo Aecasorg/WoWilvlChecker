@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 import SwipeCellKit
 
 class CharacterTableViewCell: SwipeTableViewCell {
@@ -15,14 +16,20 @@ class CharacterTableViewCell: SwipeTableViewCell {
     @IBOutlet weak var characterThumbnail: UIImageView!
     @IBOutlet weak var characterBackground: UIView!
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         
         delegate = self as? SwipeTableViewCellDelegate
         
-        characterBackground.layer.cornerRadius = 20
+        
+        
+//        DispatchQueue.main.async {
+//            self.characterThumbnail.layer.cornerRadius = 15
+//            self.characterThumbnail.layer.masksToBounds = true
+//        }
+        
+        
         
     }
 
@@ -31,5 +38,22 @@ class CharacterTableViewCell: SwipeTableViewCell {
 //
 //        // Configure the view for the selected state
 //    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        
+        // Configure the view for the selected state
+    }
+    
+    func setupCell() {
+        
+        characterBackground.layer.cornerRadius = 20
+        
+        characterThumbnail.sizeToFit()
+        characterThumbnail.layer.cornerRadius = 20
+        characterThumbnail.clipsToBounds = true
+        characterThumbnail.layer.masksToBounds = true
+        
+    }
 
 }
