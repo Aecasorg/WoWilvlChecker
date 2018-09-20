@@ -47,10 +47,10 @@ class CharacterTableViewCell: SwipeTableViewCell {
     
     func setupCell() {
         
-        characterBackground.layer.cornerRadius = 20
+        characterBackground.layer.cornerRadius = 5.0
         
         characterThumbnail.sizeToFit()
-        characterThumbnail.layer.cornerRadius = 20
+        characterThumbnail.layer.cornerRadius = 5.0
         characterThumbnail.clipsToBounds = true
         characterThumbnail.layer.masksToBounds = true
         
