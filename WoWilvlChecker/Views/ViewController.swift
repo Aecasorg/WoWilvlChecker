@@ -49,24 +49,16 @@ class ViewController: UIViewController, UISearchBarDelegate {
         }
         
         if (UserDefaults.standard.string(forKey: "realm") == nil) {
-            UserDefaults.standard.set("Aegwynn", forKey: "realm")
+            UserDefaults.standard.set("Azjol-Nerub", forKey: "realm")
         }
         
         region = UserDefaults.standard.string(forKey: "region") ?? "eu"
-        charRealm = UserDefaults.standard.string(forKey: "realm") ?? "Aegwynn"
+        charRealm = UserDefaults.standard.string(forKey: "realm") ?? "Azjol-Nerub"
         
         print(region)
         print(charRealm)
         
     }
-    
-//    var didLayout = false
-//    override func viewDidLayoutSubviews() {
-//        if !self.didLayout {
-//            self.didLayout = true // only need to do this once
-//            self.charsTableView.reloadData()
-//        }
-//    }
     
     // MARK: - Buttons
     
@@ -505,38 +497,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, SwipeTable
 
             cell.characterDataLabel.attributedText = formattedString
 
-//            cell.layoutIfNeeded()
-//            cell.characterThumbnail.layer.cornerRadius = 15
-
-//            cell.characterThumbnail.clipsToBounds = true
-//            cell.characterThumbnail.layer.cornerRadius = 15
-//            cell.characterThumbnail.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
-
-//            cell.characterThumbnail.translatesAutoresizingMaskIntoConstraints = false
-            
-            cell.characterThumbnail.sizeToFit()
-            cell.characterThumbnail.clipsToBounds = true
-            cell.characterThumbnail.layer.masksToBounds = true
-            cell.characterThumbnail.layer.cornerRadius = 15
-//
-//            cell.characterThumbnail.downloadedFrom(link: "http://render-eu.worldofwarcraft.com/character/\(char.thumbnail)")
-            
-            cell.characterThumbnail.image = UIImage(data: try! Data(contentsOf: URL(string:"http://render-eu.worldofwarcraft.com/character/\(char.thumbnail)")!))!
-            
-//            let profilePicture = UIImage(data: try! Data(contentsOf: URL(string:"http://render-eu.worldofwarcraft.com/character/\(char.thumbnail)")!))!
-////
-//            cell.characterThumbnail.image = profilePicture.rounded(with: .red, width: 0)
-            
-//            cell.characterThumbnail
-
-
-//            let rectShape = CAShapeLayer()
-//            rectShape.bounds = cell.characterThumbnail.frame
-//            rectShape.position = cell.characterThumbnail.center
-//            rectShape.path = UIBezierPath(roundedRect: cell.characterThumbnail.bounds, byRoundingCorners: [.allCorners], cornerRadii: CGSize(width: 15, height: 20)).cgPath
-//            cell.characterThumbnail.layer.mask = rectShape
-
-
+            cell.characterThumbnail.downloadedFrom(link: "http://render-eu.worldofwarcraft.com/character/\(char.thumbnail)")
 
             cell.characterBackground.backgroundColor = UIColor(hex: classColor(class: char.charClass))
             
@@ -578,41 +539,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, SwipeTable
         return options
     }
     
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//
-//        if let myCell = cell as? CharacterTableViewCell {
-//
-//            if let char = chars?.reversed()[indexPath.row] {
-//
-//                let formattedString = NSMutableAttributedString()
-//
-//                formattedString
-//                    .normal("\(char.charName) - \(char.charRealm)\n\(classConverter(class: (char.charClass))) - \(char.spec) (\(char.role))\niLevel: ")
-//                    .bold("\(char.averageItemLevelEquipped)")
-//                    .normal(" - Neck: ")
-//                    .bold("\(char.neckLevel)")
-//                    .normal("\nMissing Gems: ")
-//                    .bold("\(char.emptySockets)")
-//                    .normal("\nEnchants: ")
-//                    .bold("\(char.numberOfEnchants)/3")
-//
-//                myCell.characterDataLabel.attributedText = formattedString
-//
-//                myCell.characterThumbnail.downloadedFrom(link: "http://render-eu.worldofwarcraft.com/character/\(char.thumbnail)")
-//
-////                myCell.characterThumbnail.layer.cornerRadius = 15
-////                myCell.characterThumbnail.clipsToBounds = true
-////                myCell.characterThumbnail.layer.masksToBounds = true
-//
-//                myCell.characterBackground.backgroundColor = UIColor(hex: classColor(class: char.charClass))
-//
-//
-//            }
-//
-//        }
-////        tableView.reloadData()
-//    }
-    
     // Delete character when swiping
     func deleteCharacter(at indexPath: IndexPath) {
         // Update our data model
@@ -653,51 +579,6 @@ extension UIImageView {
     }
     
 }
-
-//extension UIImage {
-//    func roundedWithBorder(width: CGFloat, color: UIColor) -> UIImage? {
-//        let square = CGSize(width: min(size.width, size.height) + width * 2, height: min(size.width, size.height) + width * 2)
-//        let imageView = UIImageView(frame: CGRect(origin: .zero, size: square))
-//        imageView.contentMode = .center
-//        imageView.image = self
-//        imageView.layer.cornerRadius = 15
-//        imageView.layer.masksToBounds = true
-//        imageView.layer.borderWidth = width
-//        imageView.layer.borderColor = color.cgColor
-//        UIGraphicsBeginImageContextWithOptions(imageView.bounds.size, false, scale)
-//        defer { UIGraphicsEndImageContext() }
-//        guard let context = UIGraphicsGetCurrentContext() else { return nil }
-//        imageView.layer.render(in: context)
-//        return UIGraphicsGetImageFromCurrentImageContext()
-//    }
-//}
-
-//extension UIImage {
-//    var isPortrait:  Bool    { return size.height > size.width }
-//    var isLandscape: Bool    { return size.width > size.height }
-//    var breadth:     CGFloat { return min(size.width, size.height) }
-//    var breadthSize: CGSize  { return CGSize(width: breadth, height: breadth) }
-//    var breadthRect: CGRect  { return CGRect(origin: .zero, size: breadthSize) }
-//    func rounded(with color: UIColor, width: CGFloat) -> UIImage? {
-//        let bleed = breadthRect.insetBy(dx: -width, dy: -width)
-//        UIGraphicsBeginImageContextWithOptions(bleed.size, false, scale)
-//        defer { UIGraphicsEndImageContext() }
-//        guard let cgImage = cgImage?.cropping(to: CGRect(origin: CGPoint(
-//            x: isLandscape ? ((size.width-size.height)/2).rounded(.down) : 0,
-//            y: isPortrait  ? ((size.height-size.width)/2).rounded(.down) : 0),
-//                                                         size: breadthSize))
-//            else { return nil }
-//        UIBezierPath(ovalIn: CGRect(origin: .zero, size: bleed.size)).addClip()
-//        var strokeRect =  breadthRect.insetBy(dx: -width/2, dy: -width/2)
-//        strokeRect.origin = CGPoint(x: width/2, y: width/2)
-//        UIImage(cgImage: cgImage, scale: 1, orientation: imageOrientation).draw(in: strokeRect.insetBy(dx: width/2, dy: width/2))
-//        color.set()
-//        let line = UIBezierPath(ovalIn: strokeRect)
-//        line.lineWidth = width
-//        line.stroke()
-//        return UIGraphicsGetImageFromCurrentImageContext()
-//    }
-//}
 
 // Deals with converting hex colours for character class backgrounds
 extension UIColor {

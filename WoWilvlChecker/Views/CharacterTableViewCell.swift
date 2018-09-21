@@ -22,35 +22,14 @@ class CharacterTableViewCell: SwipeTableViewCell {
         
         delegate = self as? SwipeTableViewCellDelegate
         
-        
-        
-//        DispatchQueue.main.async {
-//            self.characterThumbnail.layer.cornerRadius = 15
-//            self.characterThumbnail.layer.masksToBounds = true
-//        }
-        
-        
-        
-    }
-
-//    override func setSelected(_ selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: animated)
-//
-//        // Configure the view for the selected state
-//    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
     }
     
     func setupCell() {
         
-        characterBackground.layer.cornerRadius = 5.0
+        characterBackground.layer.cornerRadius = 20.0
         
         characterThumbnail.sizeToFit()
-        characterThumbnail.layer.cornerRadius = 5.0
+        characterThumbnail.layer.cornerRadius = 15.0
         characterThumbnail.clipsToBounds = true
         characterThumbnail.layer.masksToBounds = true
         

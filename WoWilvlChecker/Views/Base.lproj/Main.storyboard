@@ -34,12 +34,12 @@
                                                     <rect key="frame" x="12" y="11" width="351" height="98"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="3" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CoM-hO-4jG">
-                                                            <rect key="frame" x="12" y="40" width="37.5" height="18"/>
+                                                            <rect key="frame" x="12" y="40" width="225" height="18"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DQ2-J5-IE0">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DQ2-J5-IE0">
                                                             <rect key="frame" x="252" y="7" width="84" height="84"/>
                                                             <accessibility key="accessibilityConfiguration">
                                                                 <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
@@ -52,7 +52,7 @@
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstItem="DQ2-J5-IE0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="CoM-hO-4jG" secondAttribute="trailing" priority="900" constant="15" id="HCO-NC-1L6"/>
+                                                        <constraint firstItem="DQ2-J5-IE0" firstAttribute="leading" secondItem="CoM-hO-4jG" secondAttribute="trailing" priority="900" constant="15" id="HCO-NC-1L6"/>
                                                         <constraint firstItem="CoM-hO-4jG" firstAttribute="leading" secondItem="h6v-8K-gb4" secondAttribute="leading" constant="12" id="d4U-md-lZt"/>
                                                         <constraint firstAttribute="trailing" secondItem="DQ2-J5-IE0" secondAttribute="trailing" constant="15" id="f2w-hw-Gfe"/>
                                                         <constraint firstItem="DQ2-J5-IE0" firstAttribute="centerY" secondItem="CoM-hO-4jG" secondAttribute="centerY" id="yiX-hu-zl3"/>
