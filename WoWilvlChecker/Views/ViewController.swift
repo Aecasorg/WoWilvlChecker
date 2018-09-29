@@ -41,6 +41,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
         loadChars()
         
         charsTableView.dataSource = self
+        charsTableView.delegate = self
         
         self.hideKeyboardWhenTappedAround()
         
@@ -539,6 +540,25 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, SwipeTable
         return options
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        guard var url = URL(string: "https://worldofwarcraft.com") else {
+            print("Not able to assign URL to url var")
+            return //be safe
+        }
+        if let char = chars?.reversed()[indexPath.row] {
+            
+            let editedCharRealm = char.charRealm.replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "'", with: "")
+            
+            let urlString = "https://worldofwarcraft.com/en-gb/character/\(editedCharRealm)/\(char.charName)".lowercased()
+            
+            url = URL(string: urlString )!
+        }
+        UIApplication.shared.open(url, options: [:])
+        print(url)
+        
+    }
+    
     // Delete character when swiping
     func deleteCharacter(at indexPath: IndexPath) {
         // Update our data model
@@ -618,11 +638,12 @@ extension UIViewController {
     func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
-        
+        tap.cancelsTouchesInView = false
+
     }
-    
+
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
-    
+
 }
