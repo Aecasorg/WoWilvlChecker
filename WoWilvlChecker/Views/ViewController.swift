@@ -59,6 +59,11 @@ class ViewController: UIViewController, UISearchBarDelegate {
         print(region)
         print(charRealm)
         
+        // Enables character lookup in Safari if character cell is long pressed
+        let longPressGesture:UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(ViewController.longPress(_:)))
+        longPressGesture.minimumPressDuration = 1.2 // 1 second press
+        charsTableView.addGestureRecognizer(longPressGesture)
+        
     }
     
     // MARK: - Buttons
@@ -100,6 +105,32 @@ class ViewController: UIViewController, UISearchBarDelegate {
             UserDefaults.standard.set(data, forKey: "realm")
         }
         
+    }
+    
+    @objc func longPress(_ longPressGestureRecognizer: UILongPressGestureRecognizer) {
+        
+        if longPressGestureRecognizer.state == UIGestureRecognizer.State.began {
+            
+            let touchPoint = longPressGestureRecognizer.location(in: self.charsTableView)
+            if let indexPath = charsTableView.indexPathForRow(at: touchPoint) {
+                
+                    guard var url = URL(string: "https://worldofwarcraft.com") else {
+                        print("Not able to assign URL to url var")
+                        return //be safe
+                    }
+                    if let char = chars?.reversed()[indexPath.row] {
+            
+                        let editedCharRealm = char.charRealm.replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "'", with: "")
+            
+                        let urlString = "https://worldofwarcraft.com/en-gb/character/\(editedCharRealm)/\(char.charName)".lowercased()
+            
+                        url = URL(string: urlString )!
+                    }
+                    UIApplication.shared.open(url, options: [:])
+                    print(url)
+                
+            }
+        }
     }
     
     //MARK: - API/JSON data handling
@@ -538,25 +569,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, SwipeTable
         var options = SwipeOptions()
         options.expansionStyle = .destructive(automaticallyDelete: false)
         return options
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        guard var url = URL(string: "https://worldofwarcraft.com") else {
-            print("Not able to assign URL to url var")
-            return //be safe
-        }
-        if let char = chars?.reversed()[indexPath.row] {
-            
-            let editedCharRealm = char.charRealm.replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "'", with: "")
-            
-            let urlString = "https://worldofwarcraft.com/en-gb/character/\(editedCharRealm)/\(char.charName)".lowercased()
-            
-            url = URL(string: urlString )!
-        }
-        UIApplication.shared.open(url, options: [:])
-        print(url)
-        
     }
     
     // Delete character when swiping
