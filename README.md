@@ -18,11 +18,11 @@ I would like an app that does the following:
 * Pick out only relevant information from extracted data which has a large historical debt (14 years) where many parameters are not relevant any more to the current version of the game and are sometimes even inaccurate (e.g. enchants in audit).
 
 ## Prototype
-Early prototype.
+Early prototype (Adobe XD).
 
 <img src="https://i.imgur.com/1SsAbat.jpg">
 
-Current version.
+Current version (iPhone 8).
 
 <img src="https://i.imgur.com/SDlsF4i.jpg?1">
 
