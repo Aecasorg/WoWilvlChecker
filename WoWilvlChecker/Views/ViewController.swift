@@ -9,13 +9,13 @@
 import UIKit
 import RealmSwift
 import Alamofire
-import SwipeCellKit
 
 class ViewController: UIViewController, UISearchBarDelegate {
 
     let realm = try! Realm()
     
-    var apiKey = "pgje56uws25hmdw426agmrkjcz4zbhuc"
+    let apiKey = "pgje56uws25hmdw426agmrkjcz4zbhuc" // Mashable API Blizz key
+//    let apiKey = "751d86982dee46548bf65e76104c5755" // New Blizz API key
     var name = "Belangel"
     var charRealm = ""
     var region = ""
@@ -43,7 +43,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
         charsTableView.dataSource = self
         charsTableView.delegate = self
         
-        self.hideKeyboardWhenTappedAround()
+        hideKeyboardWhenTappedAround()
         
         if (UserDefaults.standard.string(forKey: "region") == nil) {
             UserDefaults.standard.set("eu", forKey: "region")
@@ -213,7 +213,8 @@ class ViewController: UIViewController, UISearchBarDelegate {
     
     func urlCreator(name: String, realm: String, fields: String) -> String {
         
-        return "https://\(region).api.battle.net/wow/character/\(realm)/\(name)?fields=\(fields)&apikey=\(apiKey)"
+        return "https://\(region).api.battle.net/wow/character/\(realm)/\(name)?fields=\(fields)&apikey=\(apiKey)" // Mashable Blizzard API
+//        return "https://\(region).api.battle.com/wow/character/\(realm)/\(name)?fields=\(fields)&apikey=\(apiKey)" // New Blizzard API
         
     }
 
@@ -491,7 +492,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
 
 // MARK: - Extensions
 
-extension ViewController: UITableViewDataSource, UITableViewDelegate, SwipeTableViewCellDelegate {
+extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
     //MARK: - TableView Datasource Methods
     
@@ -510,8 +511,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, SwipeTable
         
 //        let cell = super.tableView(tableView, cellForRowAt: indexPath)
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CharacterTableViewCell
-        
-        cell.delegate = self
         
         if let char = chars?.reversed()[indexPath.row] {
 
@@ -542,33 +541,31 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, SwipeTable
     
     //MARK: - TableView Delegate Methods
     
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
-//        guard orientation == .right else { return nil }
-
-        // Delete character (swipe from right)
-        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
-            
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let delete = UIContextualAction(style: .destructive, title: "Delete") { (contextualAction, view, actionedPerformed: (Bool) -> Void) in
             self.deleteCharacter(at: indexPath)
-            action.fulfill(with: .delete)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            actionedPerformed(true) // Makes swipe disappear after action
         }
         
-        deleteAction.image = UIImage(named: "delete-icon")
+        delete.image = UIImage(named: "delete-icon")
         
-        // Update character (swipe from left)
-        let updateAction = SwipeAction(style: .destructive, title: "Refresh") { action, indexPath in
-            
-            self.updateChar(charName: self.chars!.reversed()[indexPath.row].charName, charID: self.chars!.reversed()[indexPath.row].charID, charRealm: self.chars!.reversed()[indexPath.row].charRealm, indexPath: indexPath)
-        }
-
-        updateAction.image = UIImage(named: "reload-icon")
-
-        return orientation == .right ? [deleteAction] : [updateAction]
+        return UISwipeActionsConfiguration(actions: [delete])
     }
     
-    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
-        var options = SwipeOptions()
-        options.expansionStyle = .destructive(automaticallyDelete: false)
-        return options
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let refresh = UIContextualAction(style: .normal, title: "Refresh") { (contextualAction, view, actionedPerformed: (Bool) -> Void) in
+            self.updateChar(charName: self.chars!.reversed()[indexPath.row].charName, charID: self.chars!.reversed()[indexPath.row].charID, charRealm: self.chars!.reversed()[indexPath.row].charRealm, indexPath: indexPath)
+            actionedPerformed(true) // Makes swipe disappear after action
+        }
+        
+        refresh.image = UIImage(named: "reload-icon")
+        refresh.backgroundColor = #colorLiteral(red: 0.3006752524, green: 0.461567281, blue: 1, alpha: 1)
+        
+        return UISwipeActionsConfiguration(actions: [refresh])
+        
     }
     
     // Delete character when swiping
@@ -589,73 +586,4 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, SwipeTable
     }
 }
 
-// Deals with downloading thumbnail image
-extension UIImageView {
-    func downloadedFrom(url: URL, contentMode mode: UIView.ContentMode = .scaleAspectFit) {
-        contentMode = mode
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            guard
-                let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
-                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
-                let data = data, error == nil,
-                let image = UIImage(data: data)
-                else { return }
-            DispatchQueue.main.async() {
-                self.image = image
-            }
-            }.resume()
-    }
-    func downloadedFrom(link: String, contentMode mode: UIView.ContentMode = .scaleAspectFit) {
-        guard let url = URL(string: link) else { return }
-        downloadedFrom(url: url, contentMode: mode)
-    }
-    
-}
 
-// Deals with converting hex colours for character class backgrounds
-extension UIColor {
-    
-    convenience init(hex: Int) {
-        let components = (
-            R: CGFloat((hex >> 16) & 0xff) / 255,
-            G: CGFloat((hex >> 08) & 0xff) / 255,
-            B: CGFloat((hex >> 00) & 0xff) / 255
-        )
-        
-        self.init(red: components.R, green: components.G, blue: components.B, alpha: 1)
-    }
-    
-}
-
-// Deals with including bold text with within label text
-extension NSMutableAttributedString {
-    @discardableResult func bold(_ text: String) -> NSMutableAttributedString {
-        let attrs: [NSAttributedString.Key: Any] = [.font: UIFont.boldSystemFont(ofSize: 15)]
-        let boldString = NSMutableAttributedString(string:text, attributes: attrs)
-        append(boldString)
-        
-        return self
-    }
-    
-    @discardableResult func normal(_ text: String) -> NSMutableAttributedString {
-        let normal = NSAttributedString(string: text)
-        append(normal)
-        
-        return self
-    }
-}
-
-// Dismisses keyboard when tapped anywhere else on screen
-extension UIViewController {
-    func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
-        view.addGestureRecognizer(tap)
-        tap.cancelsTouchesInView = false
-
-    }
-
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
-    }
-
-}

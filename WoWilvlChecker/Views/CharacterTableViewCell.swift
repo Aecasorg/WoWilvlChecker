@@ -8,9 +8,8 @@
 
 import UIKit
 import Alamofire
-import SwipeCellKit
 
-class CharacterTableViewCell: SwipeTableViewCell {
+class CharacterTableViewCell: UITableViewCell {
 
     @IBOutlet weak var characterDataLabel: UILabel!
     @IBOutlet weak var characterThumbnail: UIImageView!
@@ -19,8 +18,6 @@ class CharacterTableViewCell: SwipeTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
-        delegate = self as? SwipeTableViewCellDelegate
         
     }
     

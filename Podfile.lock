@@ -6,13 +6,11 @@ PODS:
   - RealmSwift (3.10.0):
     - Realm (= 3.10.0)
   - SearchTextField (1.2.1)
-  - SwipeCellKit (2.5.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
   - RealmSwift
   - SearchTextField
-  - SwipeCellKit
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -20,15 +18,13 @@ SPEC REPOS:
     - Realm
     - RealmSwift
     - SearchTextField
-    - SwipeCellKit
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   Realm: 85ab9e4f779d66f6e9ffeb118dc25b7f130c96ac
   RealmSwift: 69121c8b86d0ae005fb779efdb10e606732e1c74
   SearchTextField: 261b0febd49194492f29555fff3c5c0019ca84d2
-  SwipeCellKit: d8f2617538ce3021cb0a11d1b93856a06a2f2e20
 
-PODFILE CHECKSUM: bc8d37d15ece7e1a98b74ee4d8207d6d9f16b1ff
+PODFILE CHECKSUM: 509db288959f32509231160e5106a4cb9b1e0dd3
 
 COCOAPODS: 1.5.3

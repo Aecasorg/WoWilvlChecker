@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AF1493A520D64A4E001EA714 /* CharacterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1493A420D64A4E001EA714 /* CharacterModel.swift */; };
+		AF2FAC1B216DC89400FED05B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2FAC1A216DC89400FED05B /* Extensions.swift */; };
 		AF3AE3152144F7D20091E6F2 /* RealmLibraries.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3AE3142144F7D20091E6F2 /* RealmLibraries.swift */; };
 		AF402B7F20D1595700DD18D7 /* CharacterModelTalents.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF402B7E20D1595700DD18D7 /* CharacterModelTalents.swift */; };
 		AF402B8120D15ADC00DD18D7 /* CharacterModelAudit.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF402B8020D15ADC00DD18D7 /* CharacterModelAudit.swift */; };
@@ -30,6 +31,7 @@
 		487315FA012EE7A10B07F1D4 /* Pods_WoWilvlChecker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WoWilvlChecker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CF4F053930675D2FD8913F3 /* Pods-WoWilvlChecker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WoWilvlChecker.release.xcconfig"; path = "Pods/Target Support Files/Pods-WoWilvlChecker/Pods-WoWilvlChecker.release.xcconfig"; sourceTree = "<group>"; };
 		AF1493A420D64A4E001EA714 /* CharacterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterModel.swift; sourceTree = "<group>"; };
+		AF2FAC1A216DC89400FED05B /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		AF3AE3142144F7D20091E6F2 /* RealmLibraries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmLibraries.swift; sourceTree = "<group>"; };
 		AF402B7E20D1595700DD18D7 /* CharacterModelTalents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterModelTalents.swift; sourceTree = "<group>"; };
 		AF402B8020D15ADC00DD18D7 /* CharacterModelAudit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterModelAudit.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 				AF8318D720C50DEA00539567 /* Assets.xcassets */,
 				AF8318D920C50DEA00539567 /* LaunchScreen.storyboard */,
 				AF3AE3142144F7D20091E6F2 /* RealmLibraries.swift */,
+				AF2FAC1A216DC89400FED05B /* Extensions.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -232,7 +235,6 @@
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SearchTextField/SearchTextField.framework",
-				"${BUILT_PRODUCTS_DIR}/SwipeCellKit/SwipeCellKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -240,7 +242,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SearchTextField.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeCellKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -279,6 +280,7 @@
 				AF3AE3152144F7D20091E6F2 /* RealmLibraries.swift in Sources */,
 				AF402B7F20D1595700DD18D7 /* CharacterModelTalents.swift in Sources */,
 				AF1493A520D64A4E001EA714 /* CharacterModel.swift in Sources */,
+				AF2FAC1B216DC89400FED05B /* Extensions.swift in Sources */,
 				AFFA835020E0C6FF00922717 /* CharacterModelTemp.swift in Sources */,
 				AF584EC220DE21B200AD1FA2 /* CharacterTableViewCell.swift in Sources */,
 				AF8318D120C50DE700539567 /* AppDelegate.swift in Sources */,
