@@ -2,13 +2,13 @@
 A fast way for WoW raid leaders to check characters' ilvl and enchants/gems
 
 ## Why?
-As a raid leader and guild leader I sometimes wanted to check up on guild members' ilvl on their characters that they want to join the raids with (main or alt runs). I could look up on WoW's homepage, however that site is seriously slow with all the graphics that needs to load. I just wanted something that that's ideally fast to look up a character and give me just the essential information so I have an idea of what players I will have for a raid. 
+As a raid leader and guild leader I sometimes wanted to check up on guild members' ilvl on their characters that they want to join the raids with (main or alt runs). I could look up on WoW's homepage, however, that site is very slow with all the graphics that needs to load and constantly alt-tabbing whilst setting up for raid is just not ideal. I just wanted something that that's ideally fast to look up a character and give me just the essential information so I have an idea of what players I will have for a raid. 
 
 ## What I need
 I would like an app that does the following:
 * Easy to look up characters (the smartphone keyboard is ideal to look up weird character names with)
 * Shows just the relevant information that I want (Name, Class, ilvl, Role/Spec, Gemmed?, Enchanted?)
-* Easy to read
+* Easy and quick to read
 * Possibly setting a filter that warns if there's something lacking, i.e. low ilvl, no gems or enchants.
 * Stored characters so that their progress can be followed. 
 * Fast lookup and refresh
@@ -23,7 +23,7 @@ Early prototype (Adobe XD).
 
 <img src="https://i.imgur.com/1SsAbat.jpg">
 
-Current version (iPhone 8).
+Current version (as of Oct 2018 on an iPhone 8).
 
 <img src="https://i.imgur.com/SDlsF4i.jpg?1">
 
