@@ -14,7 +14,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
 
     let realm = try! Realm()
     
-    let apiKey = "pgje56uws25hmdw426agmrkjcz4zbhuc" // Mashable API Blizz key
+    let apiKey = "pgje56uws25hmdw426agmrkjcz4zbhuc" // Mashery API Blizz key
 //    let apiKey = "751d86982dee46548bf65e76104c5755" // New Blizz API key
     var name = "Belangel"
     var charRealm = ""
@@ -22,7 +22,8 @@ class ViewController: UIViewController, UISearchBarDelegate {
     var charRealmIndex = 0
     
     // If true then character data download from Blizzard server has been successful
-    var apiCheck = true
+    var apiCheckSuccessful = true
+    var validationCheckSuccessful = true
     
     var chars: Results<CharacterModel>?
     var tempChar = CharacterModelTemp()
@@ -135,7 +136,8 @@ class ViewController: UIViewController, UISearchBarDelegate {
     
     //MARK: - API/JSON data handling
     func downloadChar(charName: String) {
-        apiCheck = true
+        apiCheckSuccessful = true
+        validationCheckSuccessful = true
         
         var blizzardURL = urlCreator(name: charName, realm: charRealm, fields: "items")
         getCharacterData(url: blizzardURL, dataChoice: 0) {(success) -> Void in
@@ -146,7 +148,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
                 blizzardURL = self.urlCreator(name: charName, realm: self.charRealm, fields: "audit")
                 self.getCharacterData(url: blizzardURL, dataChoice: 2, completion: {(success) -> Void in
                     
-                    if self.apiCheck {
+                    if self.apiCheckSuccessful && self.validationCheckSuccessful {
                         let newChar = CharacterModel()
                         
                         
@@ -173,7 +175,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
     }
     
     func updateChar(charName: String, charID: String, charRealm: String, indexPath: IndexPath) {
-        apiCheck = true
+        apiCheckSuccessful = true
         print("**** Updating: \(charName) at \(indexPath) ****")
         
         var blizzardURL = urlCreator(name: charName, realm: charRealm, fields: "items")
@@ -185,7 +187,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
                 blizzardURL = self.urlCreator(name: charName, realm: charRealm, fields: "audit")
                 self.getCharacterData(url: blizzardURL, dataChoice: 2, completion: {(success) -> Void in
                     
-                    if self.apiCheck {
+                    if self.apiCheckSuccessful {
                         let newChar = CharacterModel()
                         
                         newChar.charID = charID
@@ -213,7 +215,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
     
     func urlCreator(name: String, realm: String, fields: String) -> String {
         
-        return "https://\(region).api.battle.net/wow/character/\(realm)/\(name)?fields=\(fields)&apikey=\(apiKey)" // Mashable Blizzard API
+        return "https://\(region).api.battle.net/wow/character/\(realm)/\(name)?fields=\(fields)&apikey=\(apiKey)" // Mashery Blizzard API
 //        return "https://\(region).api.battle.com/wow/character/\(realm)/\(name)?fields=\(fields)&apikey=\(apiKey)" // New Blizzard API
         
     }
@@ -223,14 +225,19 @@ class ViewController: UIViewController, UISearchBarDelegate {
     func getCharacterData(url: String, dataChoice: Int, completion: @escaping (_ success: Bool) -> Void) {
 
         // Passing the data collected from the character search we use Alamofire to get the JSON data
-        Alamofire.request(url).responseJSON { response in
-            if response.result.isSuccess {
+        Alamofire.request(url).validate().responseJSON { response in
+//            print("Request: \(String(describing: response.request))")   // original url request
+//            print("Response: \(String(describing: response.response))") // http url response
+//            print("Result: \(response.result)")
+            
+            switch response.result {
+            case .success:
                 
-                print("---- Success in getting data! ----")
-                
+                print("---- Validation Successful! ----")
+
                 if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
 //                    print("Data: \(utf8Text)") // original server data as UTF8 string
-                    
+
                     if dataChoice == 0 {
                         self.printData(data: data)
                     } else if dataChoice == 1 {
@@ -238,14 +245,23 @@ class ViewController: UIViewController, UISearchBarDelegate {
                     } else {
                         self.printDataAudit(data: data)
                     }
-                    
+
                 }
-                
+
                 completion(true)
                 
-            } else {
-                print("Error \(String(describing: response.result.error))")
+            case .failure(let error):
+                
+                print("Error: \(error)")
+                
+                let alert = UIAlertController(title: "Character not found!", message: "Make sure you have the correct spelling and/or realm", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+                self.present(alert, animated: true)
+                
+                self.validationCheckSuccessful = false
+                
                 completion(false)
+                
             }
 
         }
@@ -311,7 +327,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
             
         } catch {
             print("Failed to decode JSON: \(error)")
-            apiCheck = false
+            apiCheckSuccessful = false
         }
         
     }
@@ -354,7 +370,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
             
         } catch {
             print("Failed to decode JSON")
-            apiCheck = false
+            apiCheckSuccessful = false
         }
         
     }
@@ -377,7 +393,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
 //            print("Character unenchanted items: \(decoded.audit.unenchantedItems)")
         } catch {
             print("Failed to decode JSON")
-            apiCheck = false
+            apiCheckSuccessful = false
         }
         
     }

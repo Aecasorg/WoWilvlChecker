@@ -37,10 +37,11 @@ Current version (as of Oct 2018 on an iPhone 8).
 * Introduce filters? E.g. Order list by role, or ilvl, or alphabetically etc.
 * Replace realm button with a settings button (cog wheel) and move realm button to inside search field. 
 * Set up a warning sign on characters so that if something's lacking that shows up. Maybe red text/number when something's too low, such as the ilvl or gems. Alternatively highlight name as a way to draw attention to that character. 
-* Alert when search can’t find character. 
-* Move over to Blizzard's own new API service (hopefully faster lookups).
+* Move over to Blizzard's own new API service (hopefully faster lookups) from Mashery.
+* Create app icon.
+* [DONE] Alert when search can’t find character. 
 * [DONE] Search will need to be improved. I.e. to include realm choice.  
-* [DONE] Update character/s button. Swipe right to update chosen character, left to delete?
+* [DONE] Update character/s cells. Swipe right to update chosen character, left to delete?
 
 ### Pods used:
 * Alamofire
