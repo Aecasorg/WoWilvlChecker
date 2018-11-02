@@ -33,12 +33,12 @@ Current version (as of Oct 2018 on an iPhone 8).
 * On refresh, indicate which data was updated?
 * Implement pull-down to refresh all characters
 * Speed up JSON data pull to extract all 3 sets of JSON data simultaneously rather than after each other, however, it should only work if all 3 sets of data pulls were successful. (Will this affect data extraction limit by x3?)
-* Gem check to check all items that could possibly have it and show data as e.g. 2/4, like enchants. (Needs to check all items that can have gems and ignore those that can't as a summary is not provided by the API)
-* Introduce filters? E.g. Order list by role, or ilvl, or alphabetically etc.
+* Introduce sort filters? E.g. Sort list by role, ilvl, or alphabetically etc.
 * Replace realm button with a settings button (cog wheel) and move realm button to inside search field. 
 * Set up a warning sign on characters so that if something's lacking that shows up. Maybe red text/number when something's too low, such as the ilvl or gems. Alternatively highlight name as a way to draw attention to that character. 
 * Move over to Blizzard's own new API service (hopefully faster lookups) from Mashery.
 * Create app icon.
+* [DONE] Gem check to check all items that could possibly have it and show data as e.g. 2/4, like enchants. (Needs to check all items that can have gems and ignore those that can't as a summary is not provided by the API)
 * [DONE] Alert when search can’t find character. 
 * [DONE] Search will need to be improved. I.e. to include realm choice.  
 * [DONE] Update character/s cells. Swipe right to update chosen character, left to delete?

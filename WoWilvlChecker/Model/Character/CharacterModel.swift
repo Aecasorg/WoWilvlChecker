@@ -26,6 +26,7 @@ class CharacterModel: Object {
     @objc dynamic var role: String = ""
     @objc dynamic var emptySockets: Int = 0
     @objc dynamic var numberOfEnchants: Int = 0
+    @objc dynamic var numberOfGems: Int = 0
     
     override static func primaryKey() -> String? {
         return "charID"

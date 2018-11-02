@@ -104,25 +104,3 @@ struct ItemSource: Codable {
     }
 }
 
-//struct ItemSpell: Codable {
-//    let spellID: Int
-//    let spell: Spell
-//    let nCharges: Int
-//    let consumable: Bool
-//    let categoryID: Int
-//    let trigger: String
-//
-//    enum CodingKeys: String, CodingKey {
-//        case spellID = "spellId"
-//        case spell, nCharges, consumable
-//        case categoryID = "categoryId"
-//        case trigger
-//    }
-//}
-//
-//struct Spell: Codable {
-//    let id: Int
-//    let name, icon, description: String
-//    let castTime: String
-//}
-

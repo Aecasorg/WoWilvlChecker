@@ -165,6 +165,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
                         newChar.spec = self.tempChar.spec
                         newChar.role = self.tempChar.role
                         newChar.emptySockets = self.tempChar.emptySockets
+                        newChar.numberOfGems = self.tempChar.numberOfGems
                         newChar.numberOfEnchants = self.tempChar.numberOfEnchants
                         
                         self.save(character: newChar)
@@ -204,6 +205,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
                         newChar.spec = self.tempChar.spec
                         newChar.role = self.tempChar.role
                         newChar.emptySockets = self.tempChar.emptySockets
+                        newChar.numberOfGems = self.tempChar.numberOfGems
                         newChar.numberOfEnchants = self.tempChar.numberOfEnchants
                         
                         self.update(character: newChar, indexPath: indexPath)
@@ -239,7 +241,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
 //                    print("Data: \(utf8Text)") // original server data as UTF8 string
 
                     if dataChoice == 0 {
-                        self.printData(data: data)
+                        self.printDataItems(data: data)
                     } else if dataChoice == 1 {
                         self.printDataTalents(data: data)
                     } else {
@@ -270,7 +272,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
     
     // MARK: - Data extraction
     
-    func printData(data: Data) {
+    func printDataItems(data: Data) {
         
         let decoder = JSONDecoder()
         
@@ -324,6 +326,24 @@ class ViewController: UIViewController, UISearchBarDelegate {
             if tempChar.mainHandEnchant { tempChar.numberOfEnchants += 1 }
             
             print("Number of enchants: \(tempChar.numberOfEnchants)/3")
+            
+            var numberOfGems: Int = 0
+            
+            numberOfGems += decoded.items.back.tooltipParams.gem0 != nil ? 1 : 0
+            numberOfGems += decoded.items.wrist.tooltipParams.gem0 != nil ? 1 : 0
+            numberOfGems += decoded.items.hands.tooltipParams.gem0 != nil ? 1 : 0
+            numberOfGems += decoded.items.waist.tooltipParams.gem0 != nil ? 1 : 0
+            numberOfGems += decoded.items.legs.tooltipParams.gem0 != nil ? 1 : 0
+            numberOfGems += decoded.items.feet.tooltipParams.gem0 != nil ? 1 : 0
+            numberOfGems += decoded.items.finger1.tooltipParams.gem0 != nil ? 1 : 0
+            numberOfGems += decoded.items.finger2.tooltipParams.gem0 != nil ? 1 : 0
+            numberOfGems += decoded.items.trinket1.tooltipParams.gem0 != nil ? 1 : 0
+            numberOfGems += decoded.items.trinket2.tooltipParams.gem0 != nil ? 1 : 0
+            numberOfGems += decoded.items.mainHand.tooltipParams.gem0 != nil ? 1 : 0
+            numberOfGems += decoded.items.offHand?.tooltipParams.gem0 != nil ? 1 : 0
+            
+            tempChar.numberOfGems = numberOfGems
+            print("Number of gems: \(tempChar.numberOfGems)")
             
         } catch {
             print("Failed to decode JSON: \(error)")
@@ -537,8 +557,8 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
                 .bold("\(char.averageItemLevelEquipped)")
                 .normal(" - Neck: ")
                 .bold("\(char.neckLevel)")
-                .normal("\nMissing Gems: ")
-                .bold("\(char.emptySockets)")
+                .normal("\nGems: ")
+                .bold("\((char.numberOfGems + char.emptySockets) - char.emptySockets)/\(char.numberOfGems + char.emptySockets)")
                 .normal("\nEnchants: ")
                 .bold("\(char.numberOfEnchants)/3")
 

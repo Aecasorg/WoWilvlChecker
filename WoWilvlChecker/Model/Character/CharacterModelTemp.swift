@@ -24,5 +24,6 @@ class CharacterModelTemp {
     var role: String = ""
     var emptySockets: Int = 0
     var numberOfEnchants: Int = 0
+    var numberOfGems: Int = 0
 
 }
