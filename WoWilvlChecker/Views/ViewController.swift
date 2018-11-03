@@ -159,14 +159,15 @@ class ViewController: UIViewController, UISearchBarDelegate {
                         newChar.thumbnail = self.tempChar.thumbnail
                         newChar.averageItemLevelEquipped = self.tempChar.averageItemLevelEquipped
                         newChar.neckLevel = self.tempChar.neckLevel
-                        newChar.finger1Enchant = self.tempChar.finger1Enchant
-                        newChar.finger2Enchant = self.tempChar.finger2Enchant
-                        newChar.mainHandEnchant = self.tempChar.mainHandEnchant
+//                        newChar.finger1Enchant = self.tempChar.finger1Enchant
+//                        newChar.finger2Enchant = self.tempChar.finger2Enchant
+//                        newChar.mainHandEnchant = self.tempChar.mainHandEnchant
                         newChar.spec = self.tempChar.spec
                         newChar.role = self.tempChar.role
                         newChar.emptySockets = self.tempChar.emptySockets
                         newChar.numberOfGems = self.tempChar.numberOfGems
                         newChar.numberOfEnchants = self.tempChar.numberOfEnchants
+                        newChar.totalNumberOfEnchants = self.tempChar.totalNumberOfEnchants
                         
                         self.save(character: newChar)
                     }
@@ -199,14 +200,15 @@ class ViewController: UIViewController, UISearchBarDelegate {
                         newChar.thumbnail = self.tempChar.thumbnail
                         newChar.averageItemLevelEquipped = self.tempChar.averageItemLevelEquipped
                         newChar.neckLevel = self.tempChar.neckLevel
-                        newChar.finger1Enchant = self.tempChar.finger1Enchant
-                        newChar.finger2Enchant = self.tempChar.finger2Enchant
-                        newChar.mainHandEnchant = self.tempChar.mainHandEnchant
+//                        newChar.finger1Enchant = self.tempChar.finger1Enchant
+//                        newChar.finger2Enchant = self.tempChar.finger2Enchant
+//                        newChar.mainHandEnchant = self.tempChar.mainHandEnchant
                         newChar.spec = self.tempChar.spec
                         newChar.role = self.tempChar.role
                         newChar.emptySockets = self.tempChar.emptySockets
                         newChar.numberOfGems = self.tempChar.numberOfGems
                         newChar.numberOfEnchants = self.tempChar.numberOfEnchants
+                        newChar.totalNumberOfEnchants = self.tempChar.totalNumberOfEnchants
                         
                         self.update(character: newChar, indexPath: indexPath)
                     }
@@ -296,36 +298,23 @@ class ViewController: UIViewController, UISearchBarDelegate {
             
             tempChar.neckLevel = decoded.items.neck.azeriteItem?.azeriteLevel ?? 0
             
-            tempChar.finger1Enchant = false
-            if let finger1 = decoded.items.finger1.tooltipParams.enchant {
-                print("Ring1 enchant: \(finger1)")
-                tempChar.finger1Enchant = true
-            } else {
-                print("No Ring1 enchant!")
+            var numberOfEnchants: Int = 0
+            var totalNumberOfEnchants: Int = 3
+            
+            numberOfEnchants += decoded.items.finger1.tooltipParams.enchant != nil ? 1 : 0
+            numberOfEnchants += decoded.items.finger2.tooltipParams.enchant != nil ? 1 : 0
+            numberOfEnchants += decoded.items.mainHand.tooltipParams.enchant != nil ? 1 : 0
+            
+            if decoded.items.offHand?.tooltipParams.enchant != nil {
+                numberOfEnchants += 1
+                totalNumberOfEnchants += 1
+            } else if decoded.items.offHand?.weaponInfo != nil {
+                totalNumberOfEnchants += 1
             }
             
-            tempChar.finger2Enchant = false
-            if let finger2 = decoded.items.finger2.tooltipParams.enchant {
-                print("Ring2 enchant: \(finger2)")
-                tempChar.finger2Enchant = true
-            } else {
-                print("No Ring2 enchant!")
-            }
-            
-            tempChar.mainHandEnchant = false
-            if let mainHand = decoded.items.mainHand.tooltipParams.enchant {
-                print("Main Hand enchant: \(mainHand)")
-                tempChar.mainHandEnchant = true
-            } else {
-                print("No MainHand enchant!")
-            }
-            
-            tempChar.numberOfEnchants = 0
-            if tempChar.finger1Enchant { tempChar.numberOfEnchants += 1 }
-            if tempChar.finger2Enchant { tempChar.numberOfEnchants += 1 }
-            if tempChar.mainHandEnchant { tempChar.numberOfEnchants += 1 }
-            
-            print("Number of enchants: \(tempChar.numberOfEnchants)/3")
+            tempChar.numberOfEnchants = numberOfEnchants
+            tempChar.totalNumberOfEnchants = totalNumberOfEnchants
+            print("Enchants: \(numberOfEnchants)/\(totalNumberOfEnchants)")
             
             var numberOfGems: Int = 0
             
@@ -560,7 +549,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
                 .normal("\nGems: ")
                 .bold("\((char.numberOfGems + char.emptySockets) - char.emptySockets)/\(char.numberOfGems + char.emptySockets)")
                 .normal("\nEnchants: ")
-                .bold("\(char.numberOfEnchants)/3")
+                .bold("\(char.numberOfEnchants)/\(char.totalNumberOfEnchants)")
 
             cell.characterDataLabel.attributedText = formattedString
 

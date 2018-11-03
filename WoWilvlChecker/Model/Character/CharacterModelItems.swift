@@ -88,11 +88,15 @@ struct MainHandTooltipParams: Codable {
 
 struct OffHand: Codable {
     let tooltipParams: OffHandTooltipParams
+    let weaponInfo: OffHandWeaponInfo?
 }
 
 struct OffHandTooltipParams: Codable {
+    let enchant: Int?
     let gem0: Int?
 }
+
+struct OffHandWeaponInfo: Codable {}
 
 struct Trinket1: Codable {
     let tooltipParams: Trinket1TooltipParams

@@ -17,13 +17,11 @@ class CharacterModelTemp {
     var thumbnail: String = ""
     var averageItemLevelEquipped: Int = 0
     var neckLevel: Int = 0
-    var finger1Enchant: Bool = false
-    var finger2Enchant: Bool = false
-    var mainHandEnchant: Bool = false
     var spec: String = ""
     var role: String = ""
     var emptySockets: Int = 0
     var numberOfEnchants: Int = 0
     var numberOfGems: Int = 0
+    var totalNumberOfEnchants: Int = 0
 
 }

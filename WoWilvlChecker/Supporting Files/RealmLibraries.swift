@@ -10,6 +10,7 @@ import Foundation
 
 struct RealmLibraries {
     
+    // Only a fraction of realms included so far
     var euRealms: [String] = [
         "EU Realms:",
         "Aegwynn",
