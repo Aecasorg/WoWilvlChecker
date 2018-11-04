@@ -57,6 +57,8 @@ class ViewController: UIViewController, UISearchBarDelegate {
         region = UserDefaults.standard.string(forKey: "region") ?? "eu"
         charRealm = UserDefaults.standard.string(forKey: "realm") ?? "Azjol-Nerub"
         
+        searchInput.placeholder = "Search on \(charRealm)"
+        
         print(region)
         print(charRealm)
         
@@ -104,6 +106,8 @@ class ViewController: UIViewController, UISearchBarDelegate {
             print("CharRealm is -\(self.charRealm) and region is \(self.region)-")
             UserDefaults.standard.set(region, forKey: "region")
             UserDefaults.standard.set(data, forKey: "realm")
+            
+            self.searchInput.placeholder = "Search on \(self.charRealm)"
         }
         
     }
@@ -159,9 +163,6 @@ class ViewController: UIViewController, UISearchBarDelegate {
                         newChar.thumbnail = self.tempChar.thumbnail
                         newChar.averageItemLevelEquipped = self.tempChar.averageItemLevelEquipped
                         newChar.neckLevel = self.tempChar.neckLevel
-//                        newChar.finger1Enchant = self.tempChar.finger1Enchant
-//                        newChar.finger2Enchant = self.tempChar.finger2Enchant
-//                        newChar.mainHandEnchant = self.tempChar.mainHandEnchant
                         newChar.spec = self.tempChar.spec
                         newChar.role = self.tempChar.role
                         newChar.emptySockets = self.tempChar.emptySockets
@@ -200,9 +201,6 @@ class ViewController: UIViewController, UISearchBarDelegate {
                         newChar.thumbnail = self.tempChar.thumbnail
                         newChar.averageItemLevelEquipped = self.tempChar.averageItemLevelEquipped
                         newChar.neckLevel = self.tempChar.neckLevel
-//                        newChar.finger1Enchant = self.tempChar.finger1Enchant
-//                        newChar.finger2Enchant = self.tempChar.finger2Enchant
-//                        newChar.mainHandEnchant = self.tempChar.mainHandEnchant
                         newChar.spec = self.tempChar.spec
                         newChar.role = self.tempChar.role
                         newChar.emptySockets = self.tempChar.emptySockets
@@ -282,7 +280,6 @@ class ViewController: UIViewController, UISearchBarDelegate {
             let decoded = try decoder.decode(CharacterModelItems.self, from: data)
 //            print(decoded)
             
-           
             tempChar.charName = decoded.name
             tempChar.charRealm = decoded.realm
             print("Character Name: " + decoded.name)
