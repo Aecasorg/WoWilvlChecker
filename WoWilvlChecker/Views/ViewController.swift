@@ -14,8 +14,8 @@ class ViewController: UIViewController, UISearchBarDelegate {
 
     let realm = try! Realm()
     
-    let apiKey = "pgje56uws25hmdw426agmrkjcz4zbhuc" // Mashery API Blizz key
-//    let apiKey = "751d86982dee46548bf65e76104c5755" // New Blizz API key
+//    let apiKey = "pgje56uws25hmdw426agmrkjcz4zbhuc" // Mashery API Blizz key
+    let apiKey = "USE8hDFB6jhwuHQtjc85LH40tFxqeVRz6w" // New Blizz API key
     var name = "Belangel"
     var charRealm = ""
     var region = ""
@@ -217,8 +217,8 @@ class ViewController: UIViewController, UISearchBarDelegate {
     
     func urlCreator(name: String, realm: String, fields: String) -> String {
         
-        return "https://\(region).api.battle.net/wow/character/\(realm)/\(name)?fields=\(fields)&apikey=\(apiKey)" // Mashery Blizzard API
-//        return "https://\(region).api.battle.com/wow/character/\(realm)/\(name)?fields=\(fields)&apikey=\(apiKey)" // New Blizzard API
+//        return "https://\(region).api.battle.net/wow/character/\(realm)/\(name)?fields=\(fields)&apikey=\(apiKey)" // Mashery Blizzard API
+        return "https://eu.api.blizzard.com/wow/character/\(realm)/\(name)?fields=\(fields)&locale=en_US&access_token=\(apiKey)" // New Blizzard API
         
     }
 
