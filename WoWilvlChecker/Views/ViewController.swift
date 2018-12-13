@@ -15,7 +15,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
     let realm = try! Realm()
     
     let apiKey = "pgje56uws25hmdw426agmrkjcz4zbhuc" // Mashery API Blizz key
-//    let apiToken = "USxRPkl7xFRWdb7H7BIUyuBm8IF7oLc4Ag" // New Blizz API key
+//    let apiToken = "USxRPkl7xFRWdb7H7BIUyuBm8IF7oLc4Ag" // New Blizz API key - needs to be updated every 24h
     var name = "Belangel"
     var charRealm = ""
     var region = ""
@@ -215,8 +215,9 @@ class ViewController: UIViewController, UISearchBarDelegate {
     
     func urlCreator(name: String, realm: String, fields: String) -> String {
         
-        return "https://\(region).api.battle.net/wow/character/\(realm)/\(name)?fields=\(fields)&apikey=\(apiKey)" // Mashery Blizzard API
+//        return "https://\(region).api.battle.net/wow/character/\(realm)/\(name)?fields=\(fields)&apikey=\(apiKey)" // Mashery Blizzard API
 //        return "https://\(region).api.blizzard.com/wow/character/\(realm)/\(name)?fields=\(fields)&access_token=\(apiToken)" // New Blizzard API
+        return "https://bnetapiproxy.herokuapp.com/https://\(region).api.blizzard.com/wow/character/\(realm)/\(name)?fields=\(fields)" // Dawg6's proxy server to avoid Blizz OAuth
         
     }
 
@@ -226,9 +227,9 @@ class ViewController: UIViewController, UISearchBarDelegate {
 
         // Passing the data collected from the character search we use Alamofire to get the JSON data
         Alamofire.request(url).validate().responseJSON { response in
-//            print("Request: \(String(describing: response.request))")   // original url request
-//            print("Response: \(String(describing: response.response))") // http url response
-//            print("Result: \(response.result)")
+            print("Request: \(String(describing: response.request))")   // original url request
+            print("Response: \(String(describing: response.response))") // http url response
+            print("Result: \(response.result)")
             
             switch response.result {
             case .success:
