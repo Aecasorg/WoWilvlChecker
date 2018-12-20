@@ -9,5 +9,6 @@ target 'WoWilvlChecker' do
     pod 'Alamofire', '~> 4.7'
     pod 'RealmSwift'
     pod 'SearchTextField'
+    pod 'ObjectBox'
 
 end
