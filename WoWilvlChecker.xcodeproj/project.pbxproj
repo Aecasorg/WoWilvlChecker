@@ -24,6 +24,7 @@
 		AFD33A8B20C6623300D5D6EC /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD33A8A20C6623300D5D6EC /* DataModel.swift */; };
 		AFFA835020E0C6FF00922717 /* CharacterModelTemp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFA834F20E0C6FF00922717 /* CharacterModelTemp.swift */; };
 		CC1645D8DB3D74BD921B6186 /* Pods_WoWilvlChecker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 487315FA012EE7A10B07F1D4 /* Pods_WoWilvlChecker.framework */; };
+		CD3E294B17992FA839112344 /* EntityInfo.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9ADA870E141FC1003C78151 /* EntityInfo.generated.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		AF8318E220C5189300539567 /* CharacterModelItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterModelItems.swift; sourceTree = "<group>"; };
 		AFD33A8A20C6623300D5D6EC /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		AFFA834F20E0C6FF00922717 /* CharacterModelTemp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterModelTemp.swift; sourceTree = "<group>"; };
+		D9ADA870E141FC1003C78151 /* EntityInfo.generated.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EntityInfo.generated.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,10 +81,20 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		95F30BB8BE04D09C6BF4998A /* generated */ = {
+			isa = PBXGroup;
+			children = (
+				D9ADA870E141FC1003C78151 /* EntityInfo.generated.swift */,
+			);
+			name = generated;
+			path = generated;
+			sourceTree = "<group>";
+		};
 		AF8318C420C50DE700539567 = {
 			isa = PBXGroup;
 			children = (
 				AF8318CF20C50DE700539567 /* WoWilvlChecker */,
+				95F30BB8BE04D09C6BF4998A /* generated */,
 				AF8318CE20C50DE700539567 /* Products */,
 				2DBB76CEF18FBD4534C0249F /* Pods */,
 				7B631EBA86B958C3D665A0DF /* Frameworks */,
@@ -161,6 +173,7 @@
 			buildConfigurationList = AF8318DF20C50DEA00539567 /* Build configuration list for PBXNativeTarget "WoWilvlChecker" */;
 			buildPhases = (
 				401248295C4F59EB60BE772F /* [CP] Check Pods Manifest.lock */,
+				94BEA60C776E323AF679495B /* [OBX] Update Sourcery Generated Files */,
 				AF8318C920C50DE700539567 /* Sources */,
 				AF8318CA20C50DE700539567 /* Frameworks */,
 				AF8318CB20C50DE700539567 /* Resources */,
@@ -268,6 +281,25 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		94BEA60C776E323AF679495B /* [OBX] Update Sourcery Generated Files */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "[OBX] Update Sourcery Generated Files";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$PODS_ROOT/ObjectBox/generate_sources.sh\"";
+			showEnvVarsInLog = 1;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -287,6 +319,7 @@
 				AF584EC220DE21B200AD1FA2 /* CharacterTableViewCell.swift in Sources */,
 				AF8318D120C50DE700539567 /* AppDelegate.swift in Sources */,
 				AFD33A8B20C6623300D5D6EC /* DataModel.swift in Sources */,
+				CD3E294B17992FA839112344 /* EntityInfo.generated.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

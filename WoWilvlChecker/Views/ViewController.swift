@@ -7,14 +7,18 @@
 //
 
 import UIKit
-import RealmSwift
+//import RealmSwift
+import ObjectBox
 import Alamofire
 
 class ViewController: UIViewController, UISearchBarDelegate {
 
-    let realm = try! Realm()
+    let urlString = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].path
+    lazy var store = try! Store(directoryPath: urlString)
     
-    let apiKey = "pgje56uws25hmdw426agmrkjcz4zbhuc" // Mashery API Blizz key
+    //    let realm = try! Realm()
+    
+//    let apiKey = "pgje56uws25hmdw426agmrkjcz4zbhuc" // Mashery API Blizz key
 //    let apiToken = "USxRPkl7xFRWdb7H7BIUyuBm8IF7oLc4Ag" // New Blizz API key - needs to be updated every 24h
     var name = "Belangel"
     var charRealm = ""
@@ -25,8 +29,10 @@ class ViewController: UIViewController, UISearchBarDelegate {
     var apiCheckSuccessful = true
     var validationCheckSuccessful = true
     
-    var chars: Results<CharacterModel>?
+    var chars: Box<CharacterModel>?
+//    var chars: Results<CharacterModel>?
     var tempChar = CharacterModelTemp()
+    
     
     @IBOutlet weak var charsTableView: UITableView!
     @IBOutlet weak var searchInput: UISearchBar!
@@ -121,7 +127,8 @@ class ViewController: UIViewController, UISearchBarDelegate {
                         print("Not able to assign URL to url var")
                         return //be safe
                     }
-                    if let char = chars?.reversed()[indexPath.row] {
+                if let char = chars?.all().reversed()[indexPath.row] {
+//                    if let char = chars?.reversed()[indexPath.row] {
             
                         let editedCharRealm = char.charRealm.replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "'", with: "")
             
@@ -175,7 +182,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
         }
     }
     
-    func updateChar(charName: String, charID: String, charRealm: String, indexPath: IndexPath) {
+    func updateChar(charName: String, charID: Id<CharacterModel>, charRealm: String, indexPath: IndexPath) {
         apiCheckSuccessful = true
         print("**** Updating: \(charName) at \(indexPath) ****")
         
@@ -227,9 +234,9 @@ class ViewController: UIViewController, UISearchBarDelegate {
 
         // Passing the data collected from the character search we use Alamofire to get the JSON data
         Alamofire.request(url).validate().responseJSON { response in
-            print("Request: \(String(describing: response.request))")   // original url request
-            print("Response: \(String(describing: response.response))") // http url response
-            print("Result: \(response.result)")
+//            print("Request: \(String(describing: response.request))")   // original url request
+//            print("Response: \(String(describing: response.response))") // http url response
+//            print("Result: \(response.result)")
             
             switch response.result {
             case .success:
@@ -471,14 +478,23 @@ class ViewController: UIViewController, UISearchBarDelegate {
     
     func save(character: CharacterModel) {
         
+        // ObjectBox methods
         do {
-            
-            try realm.write {
-                realm.add(character)
-            }
+            try chars?.put(character)
         } catch {
             print("Error saving character \(error)")
         }
+        
+        
+        // Realm methods
+//        do {
+//
+//            try realm.write {
+//                realm.add(character)
+//            }
+//        } catch {
+//            print("Error saving character \(error)")
+//        }
         
         self.charsTableView.reloadData()
         
@@ -486,7 +502,11 @@ class ViewController: UIViewController, UISearchBarDelegate {
     
     func loadChars() {
         
-        chars = realm.objects(CharacterModel.self)
+        // ObjectBox methods
+         chars = store.box(for: CharacterModel.self)
+        
+        // Realm methods
+//        chars = realm.objects(CharacterModel.self)
         
         charsTableView.reloadData()
         
@@ -494,14 +514,22 @@ class ViewController: UIViewController, UISearchBarDelegate {
     
     func update(character: CharacterModel, indexPath: IndexPath) {
         
+        // ObjectBox methods
         do {
-            
-            try realm.write {
-                realm.add(character, update: true)
-            }
+            try chars?.put(character)
         } catch {
-            print("Error updating character \(error)")
+            print("Error saving character \(error)")
         }
+        
+        // Realm methods
+//        do {
+//
+//            try realm.write {
+//                realm.add(character, update: true)
+//            }
+//        } catch {
+//            print("Error updating character \(error)")
+//        }
         
 //        self.charsTableView.reloadRows(at: [indexPath], with: .automatic)
         print("Rows after update: \(String(describing: chars?.count))")
@@ -533,7 +561,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
 //        let cell = super.tableView(tableView, cellForRowAt: indexPath)
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CharacterTableViewCell
         
-        if let char = chars?.reversed()[indexPath.row] {
+        if let char = chars?.all().reversed()[indexPath.row] {
 
             let formattedString = NSMutableAttributedString()
 
@@ -578,7 +606,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let refresh = UIContextualAction(style: .normal, title: "Refresh") { (contextualAction, view, actionedPerformed: (Bool) -> Void) in
-            self.updateChar(charName: self.chars!.reversed()[indexPath.row].charName, charID: self.chars!.reversed()[indexPath.row].charID, charRealm: self.chars!.reversed()[indexPath.row].charRealm, indexPath: indexPath)
+            self.updateChar(charName: self.chars!.all().reversed()[indexPath.row].charName, charID: self.chars!.all().reversed()[indexPath.row].charID, charRealm: self.chars!.all().reversed()[indexPath.row].charRealm, indexPath: indexPath)
             actionedPerformed(true) // Makes swipe disappear after action
         }
         
@@ -594,16 +622,27 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         // Update our data model
         print("Deleting index...")
         
-        if let charForDeletion = self.chars?.reversed()[indexPath.row] {
+        // ObjectBox methods
+        if let charForDeletion = self.chars?.all().reversed()[indexPath.row] {
             print("**** Deleting: \(charForDeletion.charName)")
             do {
-                try self.realm.write {
-                    self.realm.delete(charForDeletion)
-                }
+                try chars?.remove(charForDeletion)
             } catch {
                 print("Error deleting category \(error)")
             }
         }
+        
+        // Realm methods
+//        if let charForDeletion = self.chars?.all().reversed()[indexPath.row] {
+//            print("**** Deleting: \(charForDeletion.charName)")
+//            do {
+//                try self.realm.write {
+//                    self.realm.delete(charForDeletion)
+//                }
+//            } catch {
+//                print("Error deleting category \(error)")
+//            }
+//        }
     }
 }
 
