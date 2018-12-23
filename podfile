@@ -7,7 +7,6 @@ target 'WoWilvlChecker' do
 
   # Pods for WoWilvlChecker
     pod 'Alamofire', '~> 4.7'
-    pod 'RealmSwift'
     pod 'SearchTextField'
     pod 'ObjectBox'
 

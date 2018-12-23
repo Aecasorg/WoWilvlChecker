@@ -7,7 +7,6 @@
 //
 
 import Foundation
-//import RealmSwift
 import ObjectBox
 
 class CharacterModel: Entity {
@@ -32,26 +31,3 @@ class CharacterModel: Entity {
     var totalNumberOfEnchants: Int = 0
     
 }
-
-//class CharacterModel: Object {
-//
-//    @objc dynamic var charID = UUID().uuidString
-//    @objc dynamic var lastModified: Int = 0
-//    @objc dynamic var charName: String = ""
-//    @objc dynamic var charRealm: String = ""
-//    @objc dynamic var charClass: Int = 0
-//    @objc dynamic var thumbnail: String = ""
-//    @objc dynamic var averageItemLevelEquipped: Int = 0
-//    @objc dynamic var neckLevel: Int = 0
-//    @objc dynamic var spec: String = ""
-//    @objc dynamic var role: String = ""
-//    @objc dynamic var emptySockets: Int = 0
-//    @objc dynamic var numberOfEnchants: Int = 0
-//    @objc dynamic var numberOfGems: Int = 0
-//    @objc dynamic var totalNumberOfEnchants: Int = 0
-//
-//    override static func primaryKey() -> String? {
-//        return "charID"
-//    }
-//
-//}

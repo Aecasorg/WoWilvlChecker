@@ -28,7 +28,7 @@ Current version (as of Oct 2018 on an iPhone 8).
 
 <img src="https://i.imgur.com/SDlsF4i.jpg?1">
 
-### Changes needed (To Do):
+### Changes needed/done (To Do):
 * Introduce a help screen to explain swipes and long press.
 * Animate and delay refresh swipe so it indicates if character data was refreshed.
 * On refresh, indicate which data was updated?
@@ -38,8 +38,8 @@ Current version (as of Oct 2018 on an iPhone 8).
 * Replace realm button with a settings button (cog wheel) and move realm button to inside search field. 
 * Set up a warning sign on characters so that if something's lacking that shows up. Maybe red text/number when something's too low, such as the ilvl or gems. Alternatively highlight name as a way to draw attention to that character. 
 * Create app icon.
-* Change database from Realm to ObjectBox. ObjectBox has the distinct advantage that I can modify the structure of the database without having to write migration code. ObjectBox for Swift is currently in Beta development so this is somewhat experimental.
 * Improve character lookup speed when using proxy. Instead of getting all JSON data via proxy, just the OAuth Token needed. 
+* [DONE] Change database from Realm to ObjectBox. ObjectBox has the distinct advantage that I can modify the structure of the database without having to write migration code. Note: ObjectBox for Swift is currently in Beta development so this is somewhat experimental.
 * [DONE VIA PROXY] Migrate over to Blizzard's own new API service (faster lookups) from Mashery.
 * [DONE] Gem check to check all items that could possibly have it and show data as e.g. 2/4, like enchants. (Needs to check all items that can have gems and ignore those that can't as a summary is not provided by the API)
 * [DONE] Alert when search can’t find character. 
@@ -48,10 +48,10 @@ Current version (as of Oct 2018 on an iPhone 8).
 
 ### Pods used:
 * Alamofire
-* Realm
+* Realm (Removed)
 * SearchTextField
 * SwipeCellKit (Removed)
-* ObjectBox (to replace Realm as database)
+* ObjectBox (Replaced Realm as database)
  
 
 ## Credits

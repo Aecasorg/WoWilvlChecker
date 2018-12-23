@@ -7,7 +7,6 @@
 //
 
 import UIKit
-//import RealmSwift
 import ObjectBox
 import Alamofire
 
@@ -15,8 +14,6 @@ class ViewController: UIViewController, UISearchBarDelegate {
 
     let urlString = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].path
     lazy var store = try! Store(directoryPath: urlString)
-    
-    //    let realm = try! Realm()
     
 //    let apiKey = "pgje56uws25hmdw426agmrkjcz4zbhuc" // Mashery API Blizz key
 //    let apiToken = "USxRPkl7xFRWdb7H7BIUyuBm8IF7oLc4Ag" // New Blizz API key - needs to be updated every 24h
@@ -30,7 +27,6 @@ class ViewController: UIViewController, UISearchBarDelegate {
     var validationCheckSuccessful = true
     
     var chars: Box<CharacterModel>?
-//    var chars: Results<CharacterModel>?
     var tempChar = CharacterModelTemp()
     
     
@@ -485,17 +481,6 @@ class ViewController: UIViewController, UISearchBarDelegate {
             print("Error saving character \(error)")
         }
         
-        
-        // Realm methods
-//        do {
-//
-//            try realm.write {
-//                realm.add(character)
-//            }
-//        } catch {
-//            print("Error saving character \(error)")
-//        }
-        
         self.charsTableView.reloadData()
         
     }
@@ -504,9 +489,6 @@ class ViewController: UIViewController, UISearchBarDelegate {
         
         // ObjectBox methods
          chars = store.box(for: CharacterModel.self)
-        
-        // Realm methods
-//        chars = realm.objects(CharacterModel.self)
         
         charsTableView.reloadData()
         
@@ -520,16 +502,6 @@ class ViewController: UIViewController, UISearchBarDelegate {
         } catch {
             print("Error saving character \(error)")
         }
-        
-        // Realm methods
-//        do {
-//
-//            try realm.write {
-//                realm.add(character, update: true)
-//            }
-//        } catch {
-//            print("Error updating character \(error)")
-//        }
         
 //        self.charsTableView.reloadRows(at: [indexPath], with: .automatic)
         print("Rows after update: \(String(describing: chars?.count))")
@@ -631,18 +603,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
                 print("Error deleting category \(error)")
             }
         }
-        
-        // Realm methods
-//        if let charForDeletion = self.chars?.all().reversed()[indexPath.row] {
-//            print("**** Deleting: \(charForDeletion.charName)")
-//            do {
-//                try self.realm.write {
-//                    self.realm.delete(charForDeletion)
-//                }
-//            } catch {
-//                print("Error deleting category \(error)")
-//            }
-//        }
     }
 }
 

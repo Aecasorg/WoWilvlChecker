@@ -1,34 +1,24 @@
 PODS:
   - Alamofire (4.8.0)
   - ObjectBox (0.6.0)
-  - Realm (3.12.0):
-    - Realm/Headers (= 3.12.0)
-  - Realm/Headers (3.12.0)
-  - RealmSwift (3.12.0):
-    - Realm (= 3.12.0)
   - SearchTextField (1.2.2)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
   - ObjectBox
-  - RealmSwift
   - SearchTextField
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - ObjectBox
-    - Realm
-    - RealmSwift
     - SearchTextField
 
 SPEC CHECKSUMS:
   Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
   ObjectBox: dbd8622c8315e0801faac488977e2f7c7d10532d
-  Realm: cdaef23c4ddb36ab1ddffed23f5a7f3332fc5585
-  RealmSwift: 5576324033f0aa5ef1e0a839a3da2281dff47a7f
   SearchTextField: a0992739d4b05dcbb40fb3a5cc6526bd991bdd23
 
-PODFILE CHECKSUM: dc8b8b3b7cce6665294ae2cc81c34c359d057d0d
+PODFILE CHECKSUM: a63bffa47dacff9a8a2107a4330eb8e00c93aa6f
 
 COCOAPODS: 1.5.3
