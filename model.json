@@ -1,0 +1,92 @@
+{
+  "_note1" : "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2" : "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3" : "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities" : [
+    {
+      "id" : "1:5905092803156374016",
+      "lastPropertyId" : "14:6027126920822183424",
+      "name" : "CharacterModel",
+      "properties" : [
+        {
+          "id" : "1:9134226283351851520",
+          "name" : "charID"
+        },
+        {
+          "id" : "2:5152638289463886080",
+          "name" : "lastModified"
+        },
+        {
+          "id" : "3:3289053187525970688",
+          "name" : "charName"
+        },
+        {
+          "id" : "4:5648907594982223104",
+          "name" : "charRealm"
+        },
+        {
+          "id" : "5:6517561911256570112",
+          "name" : "charClass"
+        },
+        {
+          "id" : "6:4488853940917986816",
+          "name" : "thumbnail"
+        },
+        {
+          "id" : "7:8299555330624907008",
+          "name" : "averageItemLevelEquipped"
+        },
+        {
+          "id" : "8:2845837873127346176",
+          "name" : "neckLevel"
+        },
+        {
+          "id" : "9:2270644472030007040",
+          "name" : "spec"
+        },
+        {
+          "id" : "10:8826691302563832832",
+          "name" : "role"
+        },
+        {
+          "id" : "11:9113308859289085184",
+          "name" : "emptySockets"
+        },
+        {
+          "id" : "12:6808239956283755520",
+          "name" : "numberOfEnchants"
+        },
+        {
+          "id" : "13:8130444594972320512",
+          "name" : "numberOfGems"
+        },
+        {
+          "id" : "14:6027126920822183424",
+          "name" : "totalNumberOfEnchants"
+        }
+      ],
+      "relations" : [
+
+      ]
+    }
+  ],
+  "lastEntityId" : "1:5905092803156374016",
+  "lastIndexId" : "0:0",
+  "lastRelationId" : "0:0",
+  "lastSequenceId" : "0:0",
+  "modelVersion" : 4,
+  "modelVersionParserMinimum" : 4,
+  "retiredEntityUids" : [
+
+  ],
+  "retiredIndexUids" : [
+
+  ],
+  "retiredPropertyUids" : [
+
+  ],
+  "retiredRelationUids" : [
+
+  ],
+  "version" : 1
+}
